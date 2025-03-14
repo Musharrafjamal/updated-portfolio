@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
-import { Mail } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 import { Textarea } from "../../textarea";
 import { GradientText } from "../../gradient-text";
 
@@ -34,11 +34,11 @@ export function ContactPopover() {
           </GradientText> */}
           <div className="text-xl font-medium">Wanna Chat?</div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="email">Email</Label>
+            {/* <Label htmlFor="email" className="font-moonWalk">Email</Label> */}
             <Input id="email" placeholder="Email" />
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="message">Message</Label>
+            {/* <Label htmlFor="message" className="font-moonWalk">Message</Label> */}
             <Textarea
               id="message"
               placeholder="Message"
@@ -46,6 +46,7 @@ export function ContactPopover() {
               className="resize-none"
             />
           </div>
+          <Button className="w-full">Send <Send size={18} /></Button>
         </div>
       </MorphingPopoverContent>
     </MorphingPopover>

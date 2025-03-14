@@ -6,6 +6,7 @@ import { ProjectsShowcase } from "@/components/home/ProjectsShowcase";
 import { SkillsSection } from "@/components/home/SkillsSection";
 import { ContactForm } from "@/components/home/ContactForm";
 import { AuroraBackground } from "@/components/ui/aceternity/AuroraBackground";
+import Work from "@/components/work/Work";
 
 export default function Home() {
   return (
@@ -29,6 +30,7 @@ export default function Home() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
+        <Work />
         <ProjectsShowcase />
         <SkillsSection />
         <ContactForm />

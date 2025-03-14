@@ -87,6 +87,7 @@ const config: Config = {
       fontFamily: {
         satisfy: ["var(--font-satisfy)"],
         merienda: ["var(--font-merienda)"],
+        moonWalk: ["var(--font-moon-walk)"],
       },
     },
   },

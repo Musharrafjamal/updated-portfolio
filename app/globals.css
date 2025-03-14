@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  cursor: none;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -84,5 +85,17 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Hide default cursor when custom cursor is active */
+.cursor-none {
+  cursor: none;
+}
+
+/* Show default cursor when custom cursor is not available (mobile) */
+@media (pointer: coarse) {
+  .cursor-none {
+    cursor: auto;
   }
 }

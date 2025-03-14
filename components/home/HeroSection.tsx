@@ -6,19 +6,20 @@ import { FlipWords } from "../ui/aceternity/FlipWords";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { InteractiveHoverButton } from "../ui/interactive-hover-button";
+import { GradientText } from "../ui/gradient-text";
+import { useCursorEffect } from "@/hooks/useCursorEffect";
 
 export function HeroSection() {
   const [isHovering, setIsHovering] = useState(false);
-  const words = ["Full Stack Developer", "Ui/Ux Designer", "Product Manager"];
+  const words = ["Team Lead", "Full Stack Developer", "Ui/Ux Designer"];
   const nameRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLSpanElement>) => {
-    setMousePosition({
-      x: e.clientX,
-      y: e.clientY,
-    });
-  };
+  useCursorEffect({
+    targetRef: nameRef,
+    variant: "image-text",
+    image: "/images/me.jpg",
+    text: "About Me",
+  });
 
   return (
     <section className="h-screen flex items-center justify-center">
@@ -27,65 +28,34 @@ export function HeroSection() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
           ref={nameRef}
-          onMouseMove={handleMouseMove}
-          className="text-4xl md:text-6xl font-bold mb-4 relative text-neutral-700 dark:text-white cursor-alias"
+          className="text-4xl md:text-6xl font-bold mb-4 relative text-neutral-700 dark:text-white"
         >
-          Hi
-          {/* <span className="absolute top-[0.78rem] left-[2px] w-3.5 h-3.5 bg-purple-500 rounded-full" /> */}
-          , I'm{" "}
-          <span>
+          Hi , I'm{" "}
+          <GradientText
+            colors={["#E52020", "#FFA725", "#EC7FA9", "#A294F9"]}
+            className="font-moonWalk inline cursor-none"
+            animationSpeed={8}
+          >
             Musharraf
-            <motion.div
-              className="pointer-events-none fixed"
-              animate={{
-                x: mousePosition.x - 450,
-                y: mousePosition.y - 400,
-                scale: isHovering ? 1 : 0,
-                opacity: isHovering ? 1 : 0,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 150,
-                damping: 15,
-                mass: 0.1,
-              }}
-            >
-              <Image
-                width={80}
-                height={80}
-                src="/images/me.jpg"
-                alt="Profile"
-                className="rounded-full object-cover"
-                priority
-              />
-            </motion.div>
-          </span>
+          </GradientText>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl md:text-3xl mb-8 text-purple-500 font-merienda"
+          className="text-xl md:text-3xl mb-8 text-violet-500 font-merienda font-bold"
         >
           <FlipWords words={words} /> <br />
         </motion.div>
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
           className="flex gap-4"
         >
-          <InteractiveHoverButton
-            className="w-full"
-            text="View Work"
-          />
-          {/* <Button size="lg" variant="outline" className="w-full">
-            Contact Me
-          </Button> */}
-        </motion.div>
+          <InteractiveHoverButton className="w-full" text="View Work" />
+        </motion.div> */}
       </div>
     </section>
   );
