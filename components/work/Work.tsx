@@ -6,21 +6,36 @@ import WorkCard from "./WorkCard";
 const Work = () => {
   const work = [
     {
-      image: "https://i.pinimg.com/736x/fd/bc/cb/fdbccb89069cf44acb5ccb8194f073e1.jpg",
-      title: "Work 1",
-      description: "Work 1 description",
-      link: "https://www.google.com",
+      image: "/mockups/dozit.png",
+      title: "Dozit",
+      description: "Provider market place!",
+      link: "https://dozit.in",
+      color: "#FFE569",
+    },
+    {
+      image: "/mockups/ridhi-suman-fabrics.png",
+      title: "Ridhi Suman Fabrics",
+      description: "E-commerce store",
+      link: "https://www.ridhisumanfabrics.com",
+      color: "#AEEA94",
+    },
+    {
+      image: "/mockups/chatfolio.png",
+      title: "Chatfolio",
+      description: "Ai chat saver chrome extension",
+      link: "https://chatfolio-livid.vercel.app",
+      color: "#C5BAFF",
     },
   ];
   return (
     <FadeIn direction="down">
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen gap-10">
         <h2 className="text-4xl font-bold text-center mt-10 font-moonWalk flex items-center justify-center gap-2">
           <BicepsFlexed size={30} />
           Work
           <BicepsFlexed size={30} style={{ transform: "scaleX(-1)" }} />
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-10">
           {work.map((item) => (
             <WorkCard key={item.title} {...item} />
           ))}

@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion";
 import { HeroSection } from "@/components/home/HeroSection";
-import { ProjectsShowcase } from "@/components/home/ProjectsShowcase";
+import Tools from "@/components/home/Tools";
 import { SkillsSection } from "@/components/home/SkillsSection";
 import { ContactForm } from "@/components/home/ContactForm";
 import { AuroraBackground } from "@/components/ui/aceternity/AuroraBackground";
 import Work from "@/components/work/Work";
+import CircularToolSelection from "@/components/test";
 
 export default function Home() {
   return (
@@ -31,7 +32,9 @@ export default function Home() {
         transition={{ duration: 0.5 }}
       >
         <Work />
-        <ProjectsShowcase />
+
+        {/* <CircularToolSelection /> */}
+        <Tools />
         <SkillsSection />
         <ContactForm />
       </motion.div>
