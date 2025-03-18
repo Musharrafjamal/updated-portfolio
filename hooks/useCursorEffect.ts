@@ -10,6 +10,7 @@ interface UseCursorEffectOptions {
   icon?: React.ReactNode | null;
   image?: string | null;
   resetVariant?: CursorVariant;
+  useEffectDependencies?: any[];
 }
 
 export const useCursorEffect = ({
@@ -19,6 +20,7 @@ export const useCursorEffect = ({
   icon = null,
   image = null,
   resetVariant = "default",
+  useEffectDependencies = [],
 }: UseCursorEffectOptions) => {
   const { setVariant, setText, setIcon, setImage } = useCursor();
 
@@ -47,5 +49,5 @@ export const useCursorEffect = ({
       element.removeEventListener("mouseenter", handleMouseEnter);
       element.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [targetRef, variant, text, icon, image, resetVariant, setVariant, setText, setIcon, setImage]);
+  }, [targetRef, variant, text, icon, image, resetVariant, setVariant, setText, setIcon, setImage, ...useEffectDependencies]);
 }; 

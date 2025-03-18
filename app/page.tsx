@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { HeroSection } from "@/components/home/HeroSection";
 import Tools from "@/components/home/Tools";
-import { SkillsSection } from "@/components/home/SkillsSection";
+import About from "@/components/home/About";
 import { ContactForm } from "@/components/home/ContactForm";
 import { AuroraBackground } from "@/components/ui/aceternity/AuroraBackground";
 import Work from "@/components/work/Work";
@@ -35,7 +35,7 @@ export default function Home() {
 
         {/* <CircularToolSelection /> */}
         <Tools />
-        <SkillsSection />
+        <About />
         <ContactForm />
       </motion.div>
     </div>

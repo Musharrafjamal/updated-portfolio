@@ -61,7 +61,16 @@ import {
   WebRTC,
 } from "developer-icons";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 import { ReactNode } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
+import { GradientText } from "../ui/gradient-text";
+import { Brush, DraftingCompass, Scissors, Swords } from "lucide-react";
 
 // Define types for our tool objects
 interface Tool {
@@ -75,7 +84,7 @@ interface Tool {
 
 const Tools = () => {
   const { theme } = useTheme();
-  
+
   // Frontend tools
   const frontendTools: Tool[] = [
     {
@@ -310,7 +319,8 @@ const Tools = () => {
     {
       id: "github",
       title: "GitHub",
-      description: "Code hosting platform for version control and collaboration",
+      description:
+        "Code hosting platform for version control and collaboration",
       link: "https://github.com/",
       icon: theme === "dark" ? GitHubLight : GitHubDark,
     },
@@ -324,7 +334,8 @@ const Tools = () => {
     {
       id: "docker",
       title: "Docker",
-      description: "Platform for developing, shipping, and running applications",
+      description:
+        "Platform for developing, shipping, and running applications",
       link: "https://www.docker.com/",
       icon: Docker,
     },
@@ -507,11 +518,11 @@ const Tools = () => {
   // Helper function to render icon with proper dark/light mode handling
   const renderIcon = (tool: Tool) => {
     const Icon = tool.icon;
-    
+
     if (theme === "dark" && tool.needsLightBg) {
       return <Icon className="bg-white rounded-lg p-2" />;
     }
-    
+
     return <Icon />;
   };
 
@@ -521,19 +532,48 @@ const Tools = () => {
 
   return (
     <div className="flex flex-col space-y-10 px-10 mt-10">
+      <h2 className="text-4xl font-bold text-center mt-10 font-moonWalk flex items-center justify-center gap-2">
+        <Swords size={30} style={{ transform: "scaleX(-1)" }} />
+        Tools
+        <Swords size={30} />
+      </h2>
       <InfiniteSlider speed={50} gap={32} speedOnHover={20}>
         {firstSliderTools.map((tool) => (
-          <div key={tool.id} title={`${tool.title}: ${tool.description}`}>
-            {renderIcon(tool)}
-          </div>
+          <TooltipProvider>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Link key={tool.id} href={tool.link} className="cursor-none">
+                  {renderIcon(tool)}
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent className="bg-zinc-100/50 p-4 rounded-lg backdrop-blur-md border-zinc-200 text-black">
+                <div className="bg-transparent text-lg font-bold font-moonWalk text-zinc-700">
+                  {tool.title}
+                </div>
+                <p className="text-sm">{tool.description}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         ))}
       </InfiniteSlider>
-      
+
       <InfiniteSlider speed={50} gap={32} speedOnHover={20} reverse>
         {secondSliderTools.map((tool) => (
-          <div key={tool.id} title={`${tool.title}: ${tool.description}`}>
-            {renderIcon(tool)}
-          </div>
+          <TooltipProvider>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Link key={tool.id} href={tool.link} className="cursor-none">
+                  {renderIcon(tool)}
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent className="bg-zinc-100/50 p-4 rounded-lg backdrop-blur-md border-zinc-200 text-black">
+                <div className="bg-transparent text-lg font-bold font-moonWalk text-zinc-700">
+                  {tool.title}
+                </div>
+                <p className="text-sm">{tool.description}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         ))}
       </InfiniteSlider>
     </div>
