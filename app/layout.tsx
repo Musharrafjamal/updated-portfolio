@@ -1,7 +1,6 @@
 import { Poppins, Satisfy, Merienda } from "next/font/google";
 import { ThemeProvider } from "@/provider/ThemeProvider";
 import { Footer } from "@/components/universal/footer/Footer";
-import { Navbar } from "@/components/universal/navbar/Navbar";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { DefaultTabs } from "@/components/ui/others/tabs/tabs";

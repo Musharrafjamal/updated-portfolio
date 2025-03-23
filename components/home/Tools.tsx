@@ -71,6 +71,7 @@ import {
 } from "../ui/tooltip";
 import { GradientText } from "../ui/gradient-text";
 import { Brush, DraftingCompass, Scissors, Swords } from "lucide-react";
+import WaveText from "../ui/others/wave-text";
 
 // Define types for our tool objects
 interface Tool {
@@ -470,9 +471,9 @@ const Tools = () => {
     },
     {
       id: "android",
-      title: "Android",
-      description: "Mobile operating system",
-      link: "https://www.android.com/",
+      title: "Android Studio",
+      description: "Mobile development studio",
+      link: "https://developer.android.com/",
       icon: Android,
     },
     {
@@ -534,7 +535,7 @@ const Tools = () => {
     <div className="flex flex-col space-y-10 px-10 mt-10">
       <h2 className="text-4xl font-bold text-center mt-10 font-moonWalk flex items-center justify-center gap-2">
         <Swords size={30} style={{ transform: "scaleX(-1)" }} />
-        Tools
+        <WaveText text="Tools" />
         <Swords size={30} />
       </h2>
       <InfiniteSlider speed={50} gap={32} speedOnHover={20}>
@@ -546,7 +547,7 @@ const Tools = () => {
                   {renderIcon(tool)}
                 </Link>
               </TooltipTrigger>
-              <TooltipContent className="bg-zinc-100/50 p-4 rounded-lg backdrop-blur-md border-zinc-200 text-black">
+              <TooltipContent className="bg-zinc-100/50 p-4 rounded-lg backdrop-blur-md text-black border-2 border-zinc-200">
                 <div className="bg-transparent text-lg font-bold font-moonWalk text-zinc-700">
                   {tool.title}
                 </div>
