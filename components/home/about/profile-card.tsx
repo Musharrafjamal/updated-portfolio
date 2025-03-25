@@ -19,13 +19,13 @@ const socialLinks = [
         shape-rendering="geometricPrecision"
         text-rendering="geometricPrecision"
         image-rendering="optimizeQuality"
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         viewBox="0 0 512 462.799"
         className="w-5 h-5 text-[#1DA1F2] group-hover:text-white transition-colors"
       >
         <path
-          fill-rule="nonzero"
+          fillRule="nonzero"
           d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"
         />
       </svg>
@@ -205,7 +205,7 @@ export default function ProfileCard() {
 
   return (
     <motion.div
-      className="w-full col-span-4 min-h-full"
+      className="w-full col-span-1 min-h-full"
       variants={cardVariants}
       initial="initial"
       animate="animate"
@@ -283,7 +283,7 @@ export default function ProfileCard() {
                   />
                 </span>
               </motion.div>
-              <div className="text-xs mt-4">
+              <div className="mt-4">
                 Senior Full Stack Developer with 1.5+ years of experience
                 building scalable web applications and leading development
                 teams. Expertise in Next.js, TypeScript, Figma, and Expo with a

@@ -23,47 +23,12 @@ import {
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import WaveText from "../ui/others/wave-text";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import ProfileCard from "./about/profile-card";
 
 const About = () => {
   const [activeTab, setActiveTab] = useState("skill");
-
-  const socialLinks = [
-    {
-      icon: (
-        <div className="size-4 dark:fill-white group-hover:fill-orange-500">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            shape-rendering="geometricPrecision"
-            text-rendering="geometricPrecision"
-            image-rendering="optimizeQuality"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            viewBox="0 0 512 462.799"
-          >
-            <path
-              fill-rule="nonzero"
-              d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"
-            />
-          </svg>
-        </div>
-      ),
-      label: "X",
-      link: "https://twitter.com/yourusername",
-    },
-    {
-      icon: <Github className="group-hover:text-purple-500" size={18} />,
-      label: "Github",
-      link: "https://github.com/yourusername",
-    },
-    {
-      icon: <Linkedin className="group-hover:text-blue-600" size={18} />,
-      label: "LinkedIn",
-      link: "https://linkedin.com/in/yourusername",
-    },
-  ];
 
   const tabs = [
     { id: "skill", label: "Skills" },
@@ -77,7 +42,7 @@ const About = () => {
         {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 dark:from-blue-500/5 dark:to-purple-500/5"
+            className="absolute rounded-full bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 dark:from-indigo-500/5 dark:to-purple-500/5"
             style={{
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
@@ -100,21 +65,81 @@ const About = () => {
 
       <div className="px-4 sm:px-6 lg:px-10">
         <h2 className="text-4xl font-bold text-center mb-16 font-moonWalk flex items-center justify-center gap-2">
-          <SmilePlus className="text-blue-500" size={30} />
+          <div className="size-8">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                {" "}
+                <path
+                  d="M19.6471 15.5357H4.35294M19.6471 15.5357V8C19.6471 6.11438 19.6471 5.17157 19.0613 4.58579C18.4755 4 17.5327 4 15.6471 4H8.35294C6.46732 4 5.52451 4 4.93873 4.58579C4.35294 5.17157 4.35294 6.11438 4.35294 8V15.5357M19.6471 15.5357L21.3911 17.3358C21.4356 17.3818 21.4579 17.4048 21.4787 17.4276C21.7998 17.7802 21.9843 18.2358 21.999 18.7124C22 18.7433 22 18.7753 22 18.8393C22 18.9885 22 19.0631 21.996 19.1261C21.9325 20.1314 21.1314 20.9325 20.1261 20.996C20.0631 21 19.9885 21 19.8393 21H4.16068C4.01148 21 3.93688 21 3.87388 20.996C2.86865 20.9325 2.06749 20.1314 2.00398 19.1261C2 19.0631 2 18.9885 2 18.8393C2 18.7753 2 18.7433 2.00096 18.7124C2.01569 18.2358 2.20022 17.7802 2.52127 17.4276C2.54208 17.4048 2.56438 17.3818 2.60888 17.3358L4.35294 15.5357"
+                  stroke="#1C274C"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>{" "}
+                <path
+                  d="M9.5 18.5H14.5"
+                  stroke="#1C274C"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>{" "}
+                <path
+                  d="M12.75 6.75C12.75 7.16421 12.4142 7.5 12 7.5C11.5858 7.5 11.25 7.16421 11.25 6.75C11.25 6.33579 11.5858 6 12 6C12.4142 6 12.75 6.33579 12.75 6.75Z"
+                  fill="#1C274C"
+                ></path>{" "}
+              </g>
+            </svg>
+          </div>
           <WaveText text="About Me" />
-          <SmilePlus
-            className="text-blue-500"
-            size={30}
-            style={{ transform: "scaleX(-1)" }}
-          />
+          <div className="size-8">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                {" "}
+                <path
+                  d="M19.6471 15.5357H4.35294M19.6471 15.5357V8C19.6471 6.11438 19.6471 5.17157 19.0613 4.58579C18.4755 4 17.5327 4 15.6471 4H8.35294C6.46732 4 5.52451 4 4.93873 4.58579C4.35294 5.17157 4.35294 6.11438 4.35294 8V15.5357M19.6471 15.5357L21.3911 17.3358C21.4356 17.3818 21.4579 17.4048 21.4787 17.4276C21.7998 17.7802 21.9843 18.2358 21.999 18.7124C22 18.7433 22 18.7753 22 18.8393C22 18.9885 22 19.0631 21.996 19.1261C21.9325 20.1314 21.1314 20.9325 20.1261 20.996C20.0631 21 19.9885 21 19.8393 21H4.16068C4.01148 21 3.93688 21 3.87388 20.996C2.86865 20.9325 2.06749 20.1314 2.00398 19.1261C2 19.0631 2 18.9885 2 18.8393C2 18.7753 2 18.7433 2.00096 18.7124C2.01569 18.2358 2.20022 17.7802 2.52127 17.4276C2.54208 17.4048 2.56438 17.3818 2.60888 17.3358L4.35294 15.5357"
+                  stroke="#1C274C"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>{" "}
+                <path
+                  d="M9.5 18.5H14.5"
+                  stroke="#1C274C"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>{" "}
+                <path
+                  d="M12.75 6.75C12.75 7.16421 12.4142 7.5 12 7.5C11.5858 7.5 11.25 7.16421 11.25 6.75C11.25 6.33579 11.5858 6 12 6C12.4142 6 12.75 6.33579 12.75 6.75Z"
+                  fill="#1C274C"
+                ></path>{" "}
+              </g>
+            </svg>
+          </div>
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <ProfileCard />
 
           {/* Content Column */}
           <motion.div
-            className="lg:col-span-8"
+            className="col-span-1"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -172,17 +197,14 @@ const About = () => {
             </div>
 
             {/* Tab Content Container */}
-            <DynamicCard
-              intensity={8}
-              className="relative overflow-hidden rounded-2xl bg-white dark:bg-zinc-800 border "
-            >
+            <DynamicCard className="relative overflow-hidden rounded-2xl bg-white dark:bg-zinc-800 border">
               <div className="p-6 md:p-8">
                 {/* Bubble Background */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                   {[...Array(5)].map((_, i) => (
                     <motion.div
                       key={i}
-                      className="absolute rounded-full bg-gradient-to-b from-blue-500/5 to-purple-500/5 dark:from-blue-500/10 dark:to-purple-500/10"
+                      className="absolute rounded-full bg-gradient-to-b from-indigo-500/5 to-purple-500/5 dark:from-indigo-500/10 dark:to-purple-500/10"
                       style={{
                         bottom: `-${20 + i * 10}%`,
                         left: `${10 + i * 20}%`,
@@ -219,7 +241,7 @@ const About = () => {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.2 }}
                         >
-                          <h4 className="text-lg font-semibold mb-4">
+                          <h4 className="text-xl mb-4 font-moonWalk">
                             Technical Skills
                           </h4>
 
@@ -227,7 +249,7 @@ const About = () => {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <SkillCategory
                               icon={
-                                <Code size={18} className="text-blue-500" />
+                                <Code size={18} className="text-indigo-500" />
                               }
                               title="Frontend"
                               skills={[
@@ -319,8 +341,8 @@ const About = () => {
                       transition={{ duration: 0.5 }}
                     >
                       <h3 className="text-xl font-bold mb-8 flex items-center gap-2">
-                        <Briefcase className="text-blue-600" size={20} />
-                        <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                        <Briefcase className="text-indigo-600" size={20} />
+                        <span className="bg-gradient-to-r from-indigo-600 to-indigo-600 bg-clip-text text-transparent">
                           Professional Journey
                         </span>
                       </h3>
@@ -354,34 +376,38 @@ const SkillCategory = ({
   return (
     <motion.div
       ref={ref}
-      className="space-y-3 bg-zinc-50 dark:bg-zinc-800/80 p-4 rounded-xl border border-zinc-100 dark:border-zinc-700"
+      className="space-y-3 bg-indigo-500 dark:bg-indigo-800/80 p-4 rounded-xl border border-indigo-100 dark:border-indigo-700"
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
+      whileHover={{ y: -5, boxShadow: "0 10px 15px -2px #C7D2FE" }}
       transition={{ duration: 0.4 }}
     >
       <div className="flex items-center gap-2">
         <div className="w-8 h-8 rounded-lg bg-white dark:bg-zinc-700 flex items-center justify-center shadow-sm">
           {icon}
         </div>
-        <h5 className="font-medium text-blue-700 dark:text-blue-400">
+        <div className="text-xl text-white font-moonWalk">
           {title}
-        </h5>
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
         {skills.map((skill, index) => (
           <motion.span
             key={index}
-            className="px-3 py-1 bg-white dark:bg-zinc-700 text-blue-700 dark:text-blue-300 rounded-full text-xs shadow-sm"
+            className="px-3 py-1 bg-white dark:bg-zinc-700 text-indigo-700 dark:text-indigo-300 rounded-full text-sm"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={
               isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
             }
             transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-            whileHover={{
+            style={{
               y: -2,
-              boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+              boxShadow: "0 4px 10px -1px #A5B4FC",
+            }}
+            whileHover={{
+              y: 0,
+              boxShadow: "0 0 0 1px #A5B4FC",
             }}
           >
             {skill}
@@ -399,16 +425,28 @@ const DynamicCard = ({
 }: {
   children: React.ReactNode;
   className?: string;
-  intensity?: number;
 }) => {
   const cardRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+
+  const rotateX = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [25, 0, -25]
+  );
 
   return (
     <motion.div
       ref={cardRef}
-      className={`perspective-1000 ${className} mx-10`}
+      className={`perspective-1000 ${className}`}
       style={{
-        transform: `perspective(1000px) rotateX(8deg) rotateY(-5deg)`,
+        transformStyle: "preserve-3d",
+        transformOrigin: "center center",
+        transform: `perspective(1000px)`,
+        rotateX,
       }}
     >
       {children}
@@ -443,7 +481,7 @@ const ExperienceTimelineSection = () => {
       title: "Full Stack Developer",
       company: "Ghosting Tech",
       period: "April 2024 - January 2025",
-      color: "bg-blue-500",
+      color: "bg-indigo-500",
       icon: <Code size={18} />,
       responsibilities: [
         "Engineered responsive dashboard applications using Next.js, React and Node.js",
@@ -475,7 +513,7 @@ const ExperienceTimelineSection = () => {
         initial={{ height: 0 }}
         animate={isInView ? { height: "100%" } : { height: 0 }}
         transition={{ duration: 1.2 }}
-        className="absolute left-[calc(50%-1px)] top-0 w-0.5 bg-gradient-to-b from-blue-600 via-indigo-500 to-purple-600 z-0"
+        className="absolute left-[calc(50%-1px)] top-0 w-0.5 bg-gradient-to-b from-indigo-600 via-indigo-500 to-purple-600 z-0"
       />
 
       <div className="space-y-12 relative z-10">
@@ -512,7 +550,7 @@ const ExperienceTimelineSection = () => {
                       onClick={() =>
                         setSelectedExp(selectedExp === exp.id ? null : exp.id)
                       }
-                      className="mt-2 text-sm text-blue-600 dark:text-blue-400 flex items-center justify-end gap-1 group"
+                      className="mt-2 text-sm text-indigo-600 dark:text-indigo-400 flex items-center justify-end gap-1 group"
                     >
                       {selectedExp === exp.id ? "Hide details" : "View details"}
                       <motion.span
@@ -570,7 +608,7 @@ const ExperienceTimelineSection = () => {
                       onClick={() =>
                         setSelectedExp(selectedExp === exp.id ? null : exp.id)
                       }
-                      className="mt-2 text-sm text-blue-600 dark:text-blue-400 flex items-center gap-1 group"
+                      className="mt-2 text-sm text-indigo-600 dark:text-indigo-400 flex items-center gap-1 group"
                     >
                       {selectedExp === exp.id ? "Hide details" : "View details"}
                       <motion.span
@@ -618,7 +656,7 @@ const ExperienceTimelineSection = () => {
                         >
                           <ArrowRight
                             size={16}
-                            className="text-blue-500 mt-1 flex-shrink-0"
+                            className="text-indigo-500 mt-1 flex-shrink-0"
                           />
                           <span>{item}</span>
                         </motion.li>
@@ -631,232 +669,6 @@ const ExperienceTimelineSection = () => {
           </div>
         ))}
       </div>
-    </div>
-  );
-};
-
-// Education Cards
-const EducationSection = () => {
-  const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: false });
-
-  const education = [
-    {
-      degree: "BCA Bachelor's in Computer Application",
-      institution: "MMHAPU",
-      year: "2025",
-      color: "from-blue-500 to-indigo-600",
-    },
-    {
-      degree: "I.Sc Intermediate in Science",
-      institution: "F • N • S Academy",
-      year: "2022",
-      color: "from-purple-500 to-pink-600",
-    },
-  ];
-
-  return (
-    <div ref={containerRef} className="py-6">
-      <div className="grid grid-cols-1 gap-8">
-        {education.map((edu, index) => (
-          <motion.div
-            key={index}
-            className="relative"
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{
-              duration: 0.6,
-              delay: index * 0.2,
-              type: "spring",
-              stiffness: 100,
-            }}
-          >
-            <DynamicCard className="overflow-hidden rounded-xl bg-white dark:bg-zinc-800 shadow-xl">
-              <div className="relative p-6">
-                <div className="absolute top-0 right-0 h-24 w-24 opacity-10">
-                  <GraduationCap className="h-full w-full" />
-                </div>
-
-                <div className="flex justify-between">
-                  <div>
-                    <h4 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                      {edu.degree}
-                    </h4>
-                    <p className="text-zinc-600 dark:text-zinc-400">
-                      {edu.institution}
-                    </p>
-                  </div>
-                  <div>
-                    <span
-                      className={`inline-block px-3 py-1 text-sm font-medium text-white rounded-full bg-gradient-to-r ${edu.color}`}
-                    >
-                      {edu.year}
-                    </span>
-                  </div>
-                </div>
-
-                <motion.div
-                  className="w-full h-1 mt-4 bg-gradient-to-r from-transparent via-zinc-200 dark:via-zinc-700 to-transparent"
-                  initial={{ scaleX: 0 }}
-                  animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 + 0.4 }}
-                />
-              </div>
-            </DynamicCard>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// Language proficiency with interactive bars
-const LanguageSection = () => {
-  const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: false });
-
-  const languages = [
-    {
-      language: "Hindi",
-      proficiency: "Native",
-      percentage: 100,
-      color: "from-green-400 to-emerald-600",
-    },
-    {
-      language: "English",
-      proficiency: "Fluent",
-      percentage: 90,
-      color: "from-blue-400 to-indigo-600",
-    },
-  ];
-
-  return (
-    <div ref={containerRef} className="py-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {languages.map((lang, index) => (
-          <motion.div
-            key={index}
-            className="relative"
-            initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-            animate={
-              isInView
-                ? { opacity: 1, x: 0 }
-                : { opacity: 0, x: index % 2 === 0 ? -30 : 30 }
-            }
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-          >
-            <DynamicCard
-              intensity={8}
-              className="overflow-hidden rounded-xl bg-white dark:bg-zinc-800 shadow-lg border border-zinc-100 dark:border-zinc-700"
-            >
-              <div className="p-5">
-                <div className="flex justify-between items-center mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-400 to-indigo-600 flex items-center justify-center text-white">
-                      {lang.language.charAt(0)}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-zinc-800 dark:text-zinc-200">
-                        {lang.language}
-                      </h4>
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                        {lang.proficiency}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-xl font-bold text-zinc-800 dark:text-zinc-200">
-                    {lang.percentage}%
-                  </div>
-                </div>
-
-                <div className="relative h-4 w-full bg-zinc-100 dark:bg-zinc-700 rounded-full overflow-hidden">
-                  <motion.div
-                    className={`absolute top-0 left-0 h-full bg-gradient-to-r ${lang.color}`}
-                    initial={{ width: "0%" }}
-                    animate={
-                      isInView
-                        ? { width: `${lang.percentage}%` }
-                        : { width: "0%" }
-                    }
-                    transition={{
-                      duration: 1.5,
-                      ease: "easeOut",
-                      delay: index * 0.3,
-                    }}
-                  />
-
-                  {/* Animated dots on the bar */}
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute top-0 h-full w-1 bg-white/30 dark:bg-black/20"
-                      style={{ left: `${(i + 1) * 20}%` }}
-                      initial={{ scaleY: 0 }}
-                      animate={
-                        isInView
-                          ? {
-                              scaleY: [0, 1, 0],
-                              transition: {
-                                repeat: Infinity,
-                                duration: 2,
-                                delay: i * 0.4,
-                              },
-                            }
-                          : {}
-                      }
-                    />
-                  ))}
-                </div>
-              </div>
-            </DynamicCard>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// Social Links with Floating Animation
-const FloatingSocialLinks = ({
-  links,
-}: {
-  links: { icon: React.ReactNode; label: string; link: string }[];
-}) => {
-  return (
-    <div className="flex items-center justify-center gap-3 mt-6">
-      {links.map((social, index) => (
-        <motion.a
-          key={index}
-          href={social.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative group"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          aria-label={social.label}
-        >
-          <motion.div
-            className="absolute -inset-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 blur-md"
-            animate={{ scale: [1, 1.1, 1], opacity: [0, 0.7, 0] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          />
-          <motion.div
-            className="relative flex items-center justify-center w-12 h-12 bg-white dark:bg-zinc-800 rounded-full shadow-lg z-10"
-            whileHover={{ y: -5, rotate: [0, -10, 10, 0] }}
-            transition={{ duration: 0.5 }}
-          >
-            {social.icon}
-          </motion.div>
-          <motion.span
-            className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 text-xs font-medium text-zinc-600 dark:text-zinc-400 opacity-0 group-hover:opacity-100"
-            initial={{ y: 10 }}
-            whileHover={{ y: 0 }}
-          >
-            {social.label}
-          </motion.span>
-        </motion.a>
-      ))}
     </div>
   );
 };

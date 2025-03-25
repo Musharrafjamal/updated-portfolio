@@ -31,9 +31,12 @@ const moonWalk = localFont({ src: '../public/fonts/moon-walk.otf', variable: '--
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Musharraf's Portfolio",
+  title: "Musharraf",
   description:
-    "A stunning portfolio showcasing the skills of a 20-year-old developer",
+    "Team Lead, Developer, and Designer",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

@@ -30,7 +30,7 @@ const Work = () => {
   ];
   return (
     <FadeIn direction="down">
-      <div className="flex flex-col min-h-screen gap-10">
+      <div className="flex flex-col gap-10">
         <h2 className="text-4xl font-bold text-center mt-10 font-moonWalk flex items-center justify-center gap-2">
           <BicepsFlexed size={30} />
           <WaveText text="Work" />

@@ -532,7 +532,7 @@ const Tools = () => {
   const secondSliderTools = allTools.slice(Math.ceil(allTools.length / 2));
 
   return (
-    <div className="flex flex-col space-y-10 px-10 mt-10">
+    <div className="flex flex-col space-y-10 px-10 mt-">
       <h2 className="text-4xl font-bold text-center mt-10 font-moonWalk flex items-center justify-center gap-2">
         <Swords size={30} style={{ transform: "scaleX(-1)" }} />
         <WaveText text="Tools" />
@@ -540,7 +540,7 @@ const Tools = () => {
       </h2>
       <InfiniteSlider speed={50} gap={32} speedOnHover={20}>
         {firstSliderTools.map((tool) => (
-          <TooltipProvider>
+          <TooltipProvider key={tool.id}>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
                 <Link key={tool.id} href={tool.link} className="cursor-none">
@@ -560,7 +560,7 @@ const Tools = () => {
 
       <InfiniteSlider speed={50} gap={32} speedOnHover={20} reverse>
         {secondSliderTools.map((tool) => (
-          <TooltipProvider>
+          <TooltipProvider key={tool.id}>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
                 <Link key={tool.id} href={tool.link} className="cursor-none">
