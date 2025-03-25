@@ -18,19 +18,38 @@ import {
   ChevronUp,
   ChevronDown,
   ArrowRight,
+  X,
 } from "lucide-react";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import WaveText from "../ui/others/wave-text";
 import { motion, useInView } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
+import ProfileCard from "./about/profile-card";
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState("about");
+  const [activeTab, setActiveTab] = useState("skill");
 
   const socialLinks = [
     {
-      icon: <Twitter className="group-hover:text-blue-400" size={18} />,
+      icon: (
+        <div className="size-4 dark:fill-white group-hover:fill-orange-500">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            shape-rendering="geometricPrecision"
+            text-rendering="geometricPrecision"
+            image-rendering="optimizeQuality"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            viewBox="0 0 512 462.799"
+          >
+            <path
+              fill-rule="nonzero"
+              d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"
+            />
+          </svg>
+        </div>
+      ),
       label: "X",
       link: "https://twitter.com/yourusername",
     },
@@ -44,22 +63,15 @@ const About = () => {
       label: "LinkedIn",
       link: "https://linkedin.com/in/yourusername",
     },
-    {
-      icon: <ExternalLink className="group-hover:text-green-500" size={18} />,
-      label: "Portfolio",
-      link: "https://yourportfolio.com",
-    },
   ];
 
   const tabs = [
-    { id: "about", label: "About" },
+    { id: "skill", label: "Skills" },
     { id: "experience", label: "Experience" },
-    { id: "education", label: "Education" },
-    { id: "languages", label: "Languages" },
   ];
 
   return (
-    <section className="py-24 overflow-hidden bg-gradient-to-b from-transparent to-slate-50/10 dark:to-slate-900/10 relative">
+    <section className="pt-16 pb-10 overflow-hidden bg-gradient-to-b from-transparent to-slate-50/10 dark:to-slate-900/10 relative">
       {/* Background animated elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(10)].map((_, i) => (
@@ -86,7 +98,7 @@ const About = () => {
         ))}
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="px-4 sm:px-6 lg:px-10">
         <h2 className="text-4xl font-bold text-center mb-16 font-moonWalk flex items-center justify-center gap-2">
           <SmilePlus className="text-blue-500" size={30} />
           <WaveText text="About Me" />
@@ -98,72 +110,7 @@ const About = () => {
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Profile Column */}
-          <motion.div
-            className="lg:col-span-4 flex flex-col items-center space-y-6"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="group relative w-48 h-48 lg:w-64 lg:h-64 overflow-hidden rounded-full border-4 border-white dark:border-gray-800 shadow-xl">
-              <Image
-                src="/images/my-image.png"
-                alt="Musharraf Jamal"
-                width={1000}
-                height={1000}
-                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                <h3 className="text-white font-medium">Musharraf Jamal</h3>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Musharraf Jamal
-              </h3>
-              <div className="text-gray-600 dark:text-gray-400 mt-1 font-medium">
-                Team Lead | Developer | Designer
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-3 w-full">
-              <motion.div
-                className="flex items-center gap-2 text-sm"
-                whileHover={{ x: 5 }}
-              >
-                <AtSign size={16} className="text-blue-500" />
-                <span className="text-gray-600 dark:text-gray-400">
-                  musharrafjamal08@email.com
-                </span>
-              </motion.div>
-              <motion.div
-                className="flex items-center gap-2 text-sm"
-                whileHover={{ x: 5 }}
-              >
-                <Phone size={16} className="text-blue-500" />
-                <span className="text-gray-600 dark:text-gray-400">
-                  +91 9334079373
-                </span>
-              </motion.div>
-            </div>
-
-            <div className="flex gap-3 mt-4">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300"
-                  whileHover={{ y: -5 }}
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
+          <ProfileCard />
 
           {/* Content Column */}
           <motion.div
@@ -173,75 +120,61 @@ const About = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             {/* Interactive Tab Navigation */}
-            <div className="mb-8 overflow-hidden relative">
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5 dark:from-blue-600/10 dark:to-purple-600/10 rounded-lg -z-10"
-                animate={{
-                  background: [
-                    "linear-gradient(to right, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05))",
-                    "linear-gradient(to right, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05))",
-                    "linear-gradient(to right, rgba(236, 72, 153, 0.05), rgba(59, 130, 246, 0.05))",
-                  ],
-                }}
-                transition={{ duration: 6, repeat: Infinity }}
-              />
+            <div className="p-2 flex gap-2 border w-fit rounded-full">
+              {tabs.map((tab, index) => (
+                <motion.button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 overflow-hidden cursor-none`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {/* Active/inactive tab styling */}
+                  <motion.div
+                    className={`absolute inset-0 ${
+                      activeTab === tab.id
+                        ? "bg-gradient-to-r from-indigo-500 to-violet-500"
+                        : "bg-transparent"
+                    }`}
+                    layoutId="activeTabBackground"
+                    transition={{
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 20,
+                    }}
+                  />
 
-              <div className="p-1 flex flex-wrap gap-2">
-                {tabs.map((tab, index) => (
-                  <motion.button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`relative px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 overflow-hidden`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {/* Active/inactive tab styling */}
+                  {/* Tab indicator dot */}
+                  {activeTab === tab.id && (
                     <motion.div
-                      className={`absolute inset-0 ${
-                        activeTab === tab.id
-                          ? "bg-gradient-to-r from-blue-600 to-indigo-600"
-                          : "bg-white dark:bg-gray-800"
-                      }`}
-                      layoutId="activeTabBackground"
-                      transition={{
-                        type: "spring",
-                        stiffness: 200,
-                        damping: 20,
-                      }}
+                      className="absolute right-2.5 top-2.5 w-1.5 h-1.5 rounded-full bg-white"
+                      layoutId="activeTabDot"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.2 }}
                     />
+                  )}
 
-                    {/* Tab indicator dot */}
-                    {activeTab === tab.id && (
-                      <motion.div
-                        className="absolute right-2 top-2 w-1.5 h-1.5 rounded-full bg-white"
-                        layoutId="activeTabDot"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.2 }}
-                      />
-                    )}
-
-                    <span
-                      className={`relative z-10 ${
-                        activeTab === tab.id
-                          ? "text-white"
-                          : "text-gray-700 dark:text-gray-300"
-                      }`}
-                    >
-                      {tab.label}
-                    </span>
-                  </motion.button>
-                ))}
-              </div>
+                  <span
+                    className={`relative z-10 ${
+                      activeTab === tab.id
+                        ? "text-white"
+                        : "text-zinc-700 dark:text-zinc-300"
+                    }`}
+                  >
+                    {tab.label}
+                  </span>
+                </motion.button>
+              ))}
             </div>
 
             {/* Tab Content Container */}
             <DynamicCard
               intensity={8}
-              className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-xl min-h-[560px]"
+              className="relative overflow-hidden rounded-2xl bg-white dark:bg-zinc-800 border "
             >
               <div className="p-6 md:p-8">
                 {/* Bubble Background */}
@@ -272,44 +205,16 @@ const About = () => {
 
                 {/* About Tab Content */}
                 <AnimatePresence mode="wait">
-                  {activeTab === "about" && (
+                  {activeTab === "skill" && (
                     <motion.div
-                      key="about"
+                      key="skill"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.5 }}
-                      className="space-y-6"
                     >
                       <div className="space-y-4">
                         <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.1 }}
-                        >
-                          <h3 className="text-xl font-bold flex items-center">
-                            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                              Professional Summary
-                            </span>
-                            <motion.div
-                              className="ml-3 h-px bg-gradient-to-r from-blue-500 to-transparent flex-grow"
-                              initial={{ width: 0 }}
-                              animate={{ width: "100%" }}
-                              transition={{ duration: 1, delay: 0.3 }}
-                            />
-                          </h3>
-                          <p className="mt-3 text-gray-700 dark:text-gray-300 leading-relaxed">
-                            Senior Full Stack Developer with 1.5+ years of
-                            experience building scalable web applications and
-                            leading development teams. Expertise in Next.js,
-                            TypeScript, Figma, and Expo with a proven track
-                            record of delivering complex projects while
-                            mentoring junior developers.
-                          </p>
-                        </motion.div>
-
-                        <motion.div
-                          className="mt-8"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.2 }}
@@ -423,46 +328,6 @@ const About = () => {
                       <ExperienceTimelineSection />
                     </motion.div>
                   )}
-
-                  {/* Education Tab Content */}
-                  {activeTab === "education" && (
-                    <motion.div
-                      key="education"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <h3 className="text-xl font-bold mb-8 flex items-center gap-2">
-                        <GraduationCap className="text-blue-600" size={20} />
-                        <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                          Academic Background
-                        </span>
-                      </h3>
-
-                      <EducationSection />
-                    </motion.div>
-                  )}
-
-                  {/* Languages Tab Content */}
-                  {activeTab === "languages" && (
-                    <motion.div
-                      key="languages"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <h3 className="text-xl font-bold mb-8 flex items-center gap-2">
-                        <Languages className="text-blue-600" size={20} />
-                        <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                          Language Proficiency
-                        </span>
-                      </h3>
-
-                      <LanguageSection />
-                    </motion.div>
-                  )}
                 </AnimatePresence>
               </div>
             </DynamicCard>
@@ -489,14 +354,14 @@ const SkillCategory = ({
   return (
     <motion.div
       ref={ref}
-      className="space-y-3 bg-gray-50 dark:bg-gray-800/80 p-4 rounded-xl border border-gray-100 dark:border-gray-700"
+      className="space-y-3 bg-zinc-50 dark:bg-zinc-800/80 p-4 rounded-xl border border-zinc-100 dark:border-zinc-700"
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
       transition={{ duration: 0.4 }}
     >
       <div className="flex items-center gap-2">
-        <div className="w-8 h-8 rounded-lg bg-white dark:bg-gray-700 flex items-center justify-center shadow-sm">
+        <div className="w-8 h-8 rounded-lg bg-white dark:bg-zinc-700 flex items-center justify-center shadow-sm">
           {icon}
         </div>
         <h5 className="font-medium text-blue-700 dark:text-blue-400">
@@ -508,7 +373,7 @@ const SkillCategory = ({
         {skills.map((skill, index) => (
           <motion.span
             key={index}
-            className="px-3 py-1 bg-white dark:bg-gray-700 text-blue-700 dark:text-blue-300 rounded-full text-xs shadow-sm"
+            className="px-3 py-1 bg-white dark:bg-zinc-700 text-blue-700 dark:text-blue-300 rounded-full text-xs shadow-sm"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={
               isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
@@ -531,92 +396,25 @@ const SkillCategory = ({
 const DynamicCard = ({
   children,
   className = "",
-  intensity = 15,
 }: {
   children: React.ReactNode;
   className?: string;
   intensity?: number;
 }) => {
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-  const [mouseOver, setMouseOver] = useState(false);
   const cardRef = useRef(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const card = cardRef.current as HTMLElement;
-    const rect = card.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const posX = e.clientX - centerX;
-    const posY = e.clientY - centerY;
-
-    // Calculate rotation based on mouse position relative to card center
-    const rotateXValue = (posY / (rect.height / 2)) * -intensity;
-    const rotateYValue = (posX / (rect.width / 2)) * intensity;
-
-    setRotateX(rotateXValue);
-    setRotateY(rotateYValue);
-  };
 
   return (
     <motion.div
       ref={cardRef}
-      className={`perspective-1000 ${className}`}
+      className={`perspective-1000 ${className} mx-10`}
       style={{
-        transform: mouseOver
-          ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
-          : "perspective(1000px) rotateX(0) rotateY(0)",
-        transition: mouseOver ? "none" : "transform 0.5s ease-out",
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setMouseOver(true)}
-      onMouseLeave={() => {
-        setMouseOver(false);
-        setRotateX(0);
-        setRotateY(0);
+        transform: `perspective(1000px) rotateX(8deg) rotateY(-5deg)`,
       }}
     >
       {children}
     </motion.div>
   );
 };
-
-// Parallax skill icon
-// const ParallaxSkillIcon = ({
-//   icon: Icon,
-//   label,
-//   color,
-//   delay = 0,
-// }: {
-//   icon: React.ReactNode;
-//   label: string;
-//   color: string;
-//   delay?: number;
-// }) => {
-//   const ref = useRef(null);
-//   const isInView = useInView(ref, { once: false, margin: "-100px 0px" });
-
-//   return (
-//     <motion.div
-//       ref={ref}
-//       className="flex flex-col items-center justify-center"
-//       initial={{ opacity: 0, y: 20 }}
-//       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-//       transition={{ duration: 0.5, delay }}
-//     >
-//       <motion.div
-//         className={`w-12 h-12 rounded-lg flex items-center justify-center bg-white/90 dark:bg-gray-800/90 shadow-lg`}
-//         whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
-//       >
-//         <Icon size={24} className={color} />
-//       </motion.div>
-//       <span className="mt-2 text-xs font-medium text-gray-600 dark:text-gray-400">
-//         {label}
-//       </span>
-//     </motion.div>
-//   );
-// };
 
 // Experience Timeline
 const ExperienceTimelineSection = () => {
@@ -704,10 +502,10 @@ const ExperienceTimelineSection = () => {
                     transition={{ duration: 0.5, delay: index * 0.2 + 0.2 }}
                   >
                     <h4 className="text-lg font-bold">{exp.title}</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
                       {exp.company}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-500">
+                    <p className="text-xs text-zinc-500 dark:text-zinc-500">
                       {exp.period}
                     </p>
                     <button
@@ -762,10 +560,10 @@ const ExperienceTimelineSection = () => {
                     transition={{ duration: 0.5, delay: index * 0.2 + 0.2 }}
                   >
                     <h4 className="text-lg font-bold">{exp.title}</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
                       {exp.company}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-500">
+                    <p className="text-xs text-zinc-500 dark:text-zinc-500">
                       {exp.period}
                     </p>
                     <button
@@ -806,7 +604,7 @@ const ExperienceTimelineSection = () => {
                   className="mt-4 overflow-hidden"
                 >
                   <div
-                    className={`mx-auto w-3/4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg border-l-4 ${exp.color}`}
+                    className={`mx-auto w-3/4 p-4 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border-l-4 ${exp.color}`}
                   >
                     <h5 className="font-medium mb-2">Key Achievements</h5>
                     <ul className="space-y-2">
@@ -873,7 +671,7 @@ const EducationSection = () => {
               stiffness: 100,
             }}
           >
-            <DynamicCard className="overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-xl">
+            <DynamicCard className="overflow-hidden rounded-xl bg-white dark:bg-zinc-800 shadow-xl">
               <div className="relative p-6">
                 <div className="absolute top-0 right-0 h-24 w-24 opacity-10">
                   <GraduationCap className="h-full w-full" />
@@ -884,7 +682,7 @@ const EducationSection = () => {
                     <h4 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
                       {edu.degree}
                     </h4>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-zinc-600 dark:text-zinc-400">
                       {edu.institution}
                     </p>
                   </div>
@@ -898,7 +696,7 @@ const EducationSection = () => {
                 </div>
 
                 <motion.div
-                  className="w-full h-1 mt-4 bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent"
+                  className="w-full h-1 mt-4 bg-gradient-to-r from-transparent via-zinc-200 dark:via-zinc-700 to-transparent"
                   initial={{ scaleX: 0 }}
                   animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.2 + 0.4 }}
@@ -949,7 +747,7 @@ const LanguageSection = () => {
           >
             <DynamicCard
               intensity={8}
-              className="overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg border border-gray-100 dark:border-gray-700"
+              className="overflow-hidden rounded-xl bg-white dark:bg-zinc-800 shadow-lg border border-zinc-100 dark:border-zinc-700"
             >
               <div className="p-5">
                 <div className="flex justify-between items-center mb-4">
@@ -958,20 +756,20 @@ const LanguageSection = () => {
                       {lang.language.charAt(0)}
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-800 dark:text-gray-200">
+                      <h4 className="font-bold text-zinc-800 dark:text-zinc-200">
                         {lang.language}
                       </h4>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400">
                         {lang.proficiency}
                       </p>
                     </div>
                   </div>
-                  <div className="text-xl font-bold text-gray-800 dark:text-gray-200">
+                  <div className="text-xl font-bold text-zinc-800 dark:text-zinc-200">
                     {lang.percentage}%
                   </div>
                 </div>
 
-                <div className="relative h-4 w-full bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div className="relative h-4 w-full bg-zinc-100 dark:bg-zinc-700 rounded-full overflow-hidden">
                   <motion.div
                     className={`absolute top-0 left-0 h-full bg-gradient-to-r ${lang.color}`}
                     initial={{ width: "0%" }}
@@ -1044,14 +842,14 @@ const FloatingSocialLinks = ({
             transition={{ duration: 3, repeat: Infinity }}
           />
           <motion.div
-            className="relative flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg z-10"
+            className="relative flex items-center justify-center w-12 h-12 bg-white dark:bg-zinc-800 rounded-full shadow-lg z-10"
             whileHover={{ y: -5, rotate: [0, -10, 10, 0] }}
             transition={{ duration: 0.5 }}
           >
             {social.icon}
           </motion.div>
           <motion.span
-            className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 text-xs font-medium text-gray-600 dark:text-gray-400 opacity-0 group-hover:opacity-100"
+            className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 text-xs font-medium text-zinc-600 dark:text-zinc-400 opacity-0 group-hover:opacity-100"
             initial={{ y: 10 }}
             whileHover={{ y: 0 }}
           >
