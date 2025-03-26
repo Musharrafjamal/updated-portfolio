@@ -16,9 +16,9 @@ const socialLinks = [
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        shape-rendering="geometricPrecision"
-        text-rendering="geometricPrecision"
-        image-rendering="optimizeQuality"
+        shapeRendering="geometricPrecision"
+        textRendering="geometricPrecision"
+        imageRendering="optimizeQuality"
         fillRule="evenodd"
         clipRule="evenodd"
         viewBox="0 0 512 462.799"
@@ -205,7 +205,7 @@ export default function ProfileCard() {
 
   return (
     <motion.div
-      className="w-full col-span-1 min-h-full"
+      className="w-full col-span-2 min-h-full"
       variants={cardVariants}
       initial="initial"
       animate="animate"
@@ -283,7 +283,7 @@ export default function ProfileCard() {
                   />
                 </span>
               </motion.div>
-              <div className="mt-4">
+              <div className="mt-4 text-md">
                 Senior Full Stack Developer with 1.5+ years of experience
                 building scalable web applications and leading development
                 teams. Expertise in Next.js, TypeScript, Figma, and Expo with a
