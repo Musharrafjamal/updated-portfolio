@@ -543,7 +543,7 @@ const Tools = () => {
           <TooltipProvider key={tool.id}>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
-                <Link key={tool.id} href={tool.link} className="cursor-none">
+                <Link key={tool.id} href={tool.link}>
                   {renderIcon(tool)}
                 </Link>
               </TooltipTrigger>
@@ -563,7 +563,7 @@ const Tools = () => {
           <TooltipProvider key={tool.id}>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
-                <Link key={tool.id} href={tool.link} className="cursor-none">
+                <Link key={tool.id} href={tool.link}>
                   {renderIcon(tool)}
                 </Link>
               </TooltipTrigger>

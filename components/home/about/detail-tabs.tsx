@@ -32,7 +32,7 @@ const DetailTabs = () => {
           <motion.button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 overflow-hidden cursor-none`}
+            className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 overflow-hidden`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -82,7 +82,7 @@ const DetailTabs = () => {
       <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-zinc-800 border mt-4">
         <div className="p-6 md:p-6">
           {/* Bubble Background */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 overflow-hidden">
             {[...Array(5)].map((_, i) => (
               <motion.div
                 key={i}

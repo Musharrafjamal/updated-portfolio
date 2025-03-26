@@ -37,7 +37,7 @@ const CursorContext = createContext<CursorContextType>({
 });
 
 export const CursorProvider = ({ children }: { children: ReactNode }) => {
-  const [variant, setVariant] = useState<CursorVariant>("default");
+  const [variant, setVariant] = useState<CursorVariant>("none");
   const [text, setText] = useState<string | null>(null);
   const [icon, setIcon] = useState<React.ReactNode | null>(null);
   const [image, setImage] = useState<string | null>(null);

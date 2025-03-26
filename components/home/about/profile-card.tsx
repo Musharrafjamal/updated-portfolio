@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -8,7 +8,7 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { AtSign, Phone, ExternalLink, Mail } from "lucide-react";
+import { AtSign, Phone, ExternalLink, Mail, Share2 } from "lucide-react";
 import {
   Tooltip,
   TooltipProvider,
@@ -16,6 +16,9 @@ import {
   TooltipContent,
 } from "@/components/ui/tooltip";
 import SocialLinks from "./social-links";
+import { Button } from "@/components/ui/button";
+import { useCursorEffect } from "@/hooks/useCursorEffect";
+import ArrowMessage from "./arrow-message";
 
 // You'll need to define your socialLinks array elsewhere in your code
 const socialLinks = [
@@ -157,22 +160,53 @@ export default function ProfileCard() {
     },
   };
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Musharraf Jamal",
+          text: "Check out Musharraf Jamal's profile - Team Lead, Developer, and Designer",
+          url: window.location.href,
+        });
+      } catch (error) {
+        console.log("Error sharing:", error);
+      }
+    } else {
+      // Fallback for browsers that don't support Web Share API
+      console.log("Web Share API not supported");
+    }
+  };
+
   return (
     <motion.div
-      className="w-full col-span-2 min-h-full"
+      className="w-full col-span-2"
       variants={cardVariants}
       initial="initial"
       animate="animate"
     >
       <motion.div
-        className={`relative overflow-hidden rounded-2xl shadow-xl min-h-full bg-white/90 dark:bg-gray-800/80 backdrop-blur-sm p-8`}
+        className={`relative overflow-hidden rounded-2xl border bg-white/90 dark:bg-zinc-800/80 backdrop-blur-sm p-8`}
       >
         {/* Decorative elements */}
         <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-500/20 blur-2xl" />
         <div className="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-gradient-to-tr from-blue-400/20 to-purple-500/20 blur-2xl" />
 
+        <div
+          className="absolute top-4 right-4 rounded-full bg-white flex items-center justify-center p-2 dark:bg-zinc-800 cursor-pointer"
+          onClick={handleShare}
+        >
+          <TooltipProvider delayDuration={0}>
+            <Tooltip>
+              <TooltipTrigger>
+                <Share2 size={16} />
+              </TooltipTrigger>
+              <TooltipContent>Share Profile</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+
         <div className="relative z-10 flex flex-col items-center">
-          <div className="flex justify-around w-full items-center mb-6 gap-4">
+          <div className="flex justify-around w-full items-center gap-4">
             <div className="relative ">
               <motion.div className="relative w-40  rounded-full overflow-hidden">
                 <motion.div className="w-full h-full" variants={imageVariants}>
@@ -193,12 +227,12 @@ export default function ProfileCard() {
                 initial="initial"
                 animate="animate"
               >
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-600 dark:from-blue-400 to-purple-600 dark:to-purple-400 bg-clip-text text-transparent font-moonWalk">
                   Musharraf Jamal
                 </span>
               </motion.h3>
               <motion.div
-                className="text-gray-600 dark:text-gray-300 mt-1 font-medium"
+                className="text-zinc-600 dark:text-zinc-300 mt-1 font-semibold"
                 variants={titleVariants}
                 initial="initial"
                 animate="animate"
@@ -206,7 +240,7 @@ export default function ProfileCard() {
                 <span className="relative">
                   Team Lead
                   <motion.span
-                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500/30"
+                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500/60 dark:bg-blue-400/60"
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
                     transition={{ delay: 0.8, duration: 0.6 }}
@@ -216,7 +250,7 @@ export default function ProfileCard() {
                 <span className="relative">
                   Developer
                   <motion.span
-                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-purple-500/30"
+                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-purple-500/60 dark:bg-purple-400/60"
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
                     transition={{ delay: 1, duration: 0.6 }}
@@ -226,7 +260,7 @@ export default function ProfileCard() {
                 <span className="relative">
                   Designer
                   <motion.span
-                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-indigo-500/30"
+                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-indigo-500/60 dark:bg-indigo-400/60"
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
                     transition={{ delay: 1.2, duration: 0.6 }}
@@ -242,6 +276,7 @@ export default function ProfileCard() {
           </div>
         </div>
       </motion.div>
+      <ArrowMessage />
     </motion.div>
   );
 }

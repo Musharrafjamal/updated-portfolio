@@ -9,8 +9,8 @@ const socialLinks = [
     icon: <Mail className="w-5 h-5" />,
     link: "mailto:musharrafjamal08@gmail.com",
     label: "musharrafjamal08@gmail.com",
-    gradientFrom: "#FF6B6B",
-    gradientTo: "#E69DB8",
+    gradientFrom: "#EB8317",
+    gradientTo: "#E85C0D",
   },
   {
     icon: (
@@ -54,8 +54,8 @@ const socialLinks = [
     ),
     link: "#",
     label: "musharrafjamal",
-    gradientFrom: "#333",
-    gradientTo: "#000",
+    gradientFrom: "#363062",
+    gradientTo: "#4D4C7D",
   },
   {
     icon: (

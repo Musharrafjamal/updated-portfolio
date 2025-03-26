@@ -89,14 +89,14 @@
 }
 
 /* Hide default cursor when custom cursor is active */
-.cursor-none {
-  cursor: none;
+.cursor-default {
+  cursor: default;
 }
 
 /* Show default cursor when custom cursor is not available (mobile) */
 @media (pointer: coarse) {
-  .cursor-none {
-    cursor: auto;
+  .cursor-default {
+    cursor: default;
   }
 }
 

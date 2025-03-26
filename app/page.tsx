@@ -8,6 +8,7 @@ import { ContactForm } from "@/components/home/ContactForm";
 import { AuroraBackground } from "@/components/ui/aceternity/AuroraBackground";
 import Work from "@/components/work/Work";
 import CircularToolSelection from "@/components/test";
+import Footer from "@/components/home/footer";
 
 export default function Home() {
   return (
@@ -36,7 +37,7 @@ export default function Home() {
         {/* <CircularToolSelection /> */}
         <Tools />
         <About />
-        <ContactForm />
+        <Footer />
       </motion.div>
     </div>
   );

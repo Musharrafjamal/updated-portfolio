@@ -1,4 +1,4 @@
-import { Poppins, Satisfy, Merienda } from "next/font/google";
+import { Poppins, Satisfy, Merienda, Caveat } from "next/font/google";
 import { ThemeProvider } from "@/provider/ThemeProvider";
 import { Footer } from "@/components/universal/footer/Footer";
 import { Toaster } from "sonner";
@@ -8,7 +8,6 @@ import localFont from 'next/font/local'
 import { SmoothScroll } from "@/components/ui/animations/SmoothScroll";
 import { CursorProvider } from "../contexts/CursorContext";
 import { CustomCursor } from "../components/ui/cursor/CustomCursor";
-import { Inter } from "next/font/google";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -20,6 +19,11 @@ const satisfy = Satisfy({
   weight: ["400"],
   variable: "--font-satisfy",
 });
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-caveat",
+});
 
 const merienda = Merienda({
   subsets: ["latin"],
@@ -27,8 +31,6 @@ const merienda = Merienda({
   variable: "--font-merienda",
 });
 const moonWalk = localFont({ src: '../public/fonts/moon-walk.otf', variable: '--font-moon-walk' })
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Musharraf",
@@ -47,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body
-        className={`${poppins.className} ${satisfy.variable} ${merienda.variable} ${moonWalk.variable} relative ${inter.className} cursor-none`}
+        className={`${poppins.className} ${satisfy.variable} ${caveat.variable} ${merienda.variable} ${moonWalk.variable} relative cursor-default`}
       >
         <ThemeProvider
           attribute="class"
