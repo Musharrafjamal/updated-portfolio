@@ -10,7 +10,7 @@ const ArrowMessage = () => {
           viewBox="0 0 160 170"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-28 h-28 text-zinc-600  dark:text-blue-400 absolute -top-20 -right-16"
+          className="w-28 h-28 text-zinc-600  dark:text-zinc-300 absolute -top-20 -right-16"
           style={{
             transform: "rotate(15deg) scaleX(-1)",
           }}
@@ -28,7 +28,7 @@ const ArrowMessage = () => {
             fill="currentColor"
           />
         </svg>
-        <div className="font-caveat text-5xl font-semibold text-indigo-500">
+        <div className="font-caveat text-5xl font-semibold text-indigo-500 dark:text-indigo-400">
           Connect with me
         </div>
       </div>

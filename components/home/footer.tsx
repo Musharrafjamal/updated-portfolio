@@ -29,7 +29,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900 py-24">
+    <footer className="relative overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900 dark:from-zinc-950 dark:to-black py-24">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
