@@ -8,10 +8,23 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { AtSign, Phone, ExternalLink } from "lucide-react";
+import { AtSign, Phone, ExternalLink, Mail } from "lucide-react";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
+import SocialLinks from "./social-links";
 
 // You'll need to define your socialLinks array elsewhere in your code
 const socialLinks = [
+  {
+    icon: <Mail />,
+    link: "mailto:musharrafjamal08@gmail.com",
+    label: "Email",
+    color: "#E69DB8",
+  },
   {
     icon: (
       <svg
@@ -82,37 +95,6 @@ const socialLinks = [
 ];
 
 export default function ProfileCard() {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const controls = useAnimation();
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const rotateX = useTransform(mouseY, [-100, 100], [5, -5]);
-  const rotateY = useTransform(mouseX, [-100, 100], [-5, 5]);
-
-  useEffect(() => {
-    const checkDarkMode = () => {
-      const isDark = document.documentElement.classList.contains("dark");
-      setIsDarkMode(isDark);
-    };
-
-    checkDarkMode();
-    // This would ideally listen to a theme change event
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    mouseX.set(e.clientX - centerX);
-    mouseY.set(e.clientY - centerY);
-  };
-
-  const resetMousePosition = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   const imageVariants = {
     hover: {
       scale: 1.05,
@@ -121,17 +103,6 @@ export default function ProfileCard() {
     rest: {
       scale: 1,
       transition: { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] },
-    },
-  };
-
-  const overlayVariants = {
-    hover: {
-      opacity: 1,
-      transition: { duration: 0.3 },
-    },
-    rest: {
-      opacity: 0,
-      transition: { duration: 0.3, delay: 0.1 },
     },
   };
 
@@ -150,23 +121,6 @@ export default function ProfileCard() {
       opacity: 1,
       y: 0,
       transition: { duration: 0.5, delay: 0.1, ease: "easeOut" },
-    },
-  };
-
-  const contactItemVariants = {
-    initial: { opacity: 0, x: -20 },
-    animate: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.4,
-        delay: 0.2 + i * 0.1,
-        ease: "easeOut",
-      },
-    }),
-    hover: {
-      x: 5,
-      transition: { duration: 0.2, ease: "easeOut" },
     },
   };
 
@@ -211,11 +165,7 @@ export default function ProfileCard() {
       animate="animate"
     >
       <motion.div
-        className={`relative overflow-hidden rounded-2xl shadow-xl min-h-full ${
-          isDarkMode
-            ? "bg-gray-800/80 backdrop-blur-sm"
-            : "bg-white/90 backdrop-blur-sm"
-        } p-8`}
+        className={`relative overflow-hidden rounded-2xl shadow-xl min-h-full bg-white/90 dark:bg-gray-800/80 backdrop-blur-sm p-8`}
       >
         {/* Decorative elements */}
         <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-500/20 blur-2xl" />
@@ -284,96 +234,11 @@ export default function ProfileCard() {
                 </span>
               </motion.div>
               <div className="mt-4 text-md">
-                Senior Full Stack Developer with 1.5+ years of experience
-                building scalable web applications and leading development
-                teams. Expertise in Next.js, TypeScript, Figma, and Expo with a
-                proven track record of delivering complex projects while
-                mentoring junior developers.
+                1.5+ years of experience in building scalable applications and
+                leading development teams.
               </div>
+              <SocialLinks />
             </div>
-          </div>
-
-          {/* Contact Information with micro-interactions */}
-          <div className="w-full mt-8 space-y-3">
-            <motion.a
-              href="mailto:musharrafjamal08@email.com"
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group"
-              variants={contactItemVariants}
-              initial="initial"
-              animate="animate"
-              whileHover="hover"
-              custom={0}
-            >
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
-                <AtSign size={16} />
-              </div>
-              <span className="text-gray-700 dark:text-gray-300 text-sm">
-                musharrafjamal08@email.com
-              </span>
-              <motion.div
-                className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
-                initial={{ x: -5, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.1 }}
-              >
-                <ExternalLink size={14} className="text-gray-400" />
-              </motion.div>
-            </motion.a>
-
-            <motion.a
-              href="tel:+919334079373"
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group"
-              variants={contactItemVariants}
-              initial="initial"
-              animate="animate"
-              whileHover="hover"
-              custom={1}
-            >
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
-                <Phone size={16} />
-              </div>
-              <span className="text-gray-700 dark:text-gray-300 text-sm">
-                +91 9334079373
-              </span>
-              <motion.div
-                className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
-                initial={{ x: -5, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.1 }}
-              >
-                <ExternalLink size={14} className="text-gray-400" />
-              </motion.div>
-            </motion.a>
-          </div>
-
-          {/* Social Links with hover animations */}
-          <div className="flex gap-3 mt-8">
-            {socialLinks.map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`group flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 hover:bg-[${social.color}]`}
-                variants={socialVariants}
-                initial="initial"
-                animate="animate"
-                whileHover="hover"
-                custom={index}
-                aria-label={social.label}
-              >
-                {social.icon}
-                <motion.span
-                  className="absolute -bottom-8 text-xs font-medium text-gray-600 dark:text-gray-400 opacity-0 group-hover:opacity-100 pointer-events-none"
-                  initial={{ y: -5, opacity: 0 }}
-                  animate={{ y: 0, opacity: 0 }}
-                  whileHover={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {social.label}
-                </motion.span>
-              </motion.a>
-            ))}
           </div>
         </div>
       </motion.div>
