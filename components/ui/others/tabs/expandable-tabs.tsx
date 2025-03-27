@@ -7,6 +7,7 @@ import { Download, LucideIcon, Moon, Sun } from "lucide-react";
 import { Button } from "../../button";
 import { useTheme } from "next-themes";
 import { ContactPopover } from "./contact-popover";
+import Link from "next/link";
 
 interface Tab {
   title: string;
@@ -128,9 +129,11 @@ export function ExpandableTabs({
         <Moon className="absolute text-white h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
         <span className="sr-only">Toggle theme</span>
       </Button>
-      <Button variant="ghost" size="default" className="rounded-full gap-1 font-moonWalk">
-        <Download className="mr-1 h-4 w-4" /> Resume
-      </Button>
+      <Link href="https://docs.google.com/document/d/1kAhpCs_0WL15mLLamYSsPfBZD_IMOBhNA_u8EWOQg6Y/edit?usp=sharing" target="_blank">
+        <Button variant="ghost" size="default" className="rounded-full gap-1 font-moonWalk">
+          <Download className="mr-1 h-4 w-4" /> Resume
+        </Button>
+      </Link>
     </div>
   );
 }

@@ -64,7 +64,7 @@ export default function RootLayout({
               <main>{children}</main>
             </SmoothScroll>
             <Footer />
-            <Toaster />
+            <Toaster position="top-center" richColors />
             <CustomCursor />
           </CursorProvider>
         </ThemeProvider>

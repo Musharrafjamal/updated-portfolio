@@ -1,26 +1,6 @@
 "use client";
-import {
-  Bell,
-  Home,
-  HelpCircle,
-  Settings,
-  Shield,
-  Mail,
-  User,
-  FileText,
-  Lock,
-  Briefcase,
-  Folder,
-  Brain,
-  BriefcaseBusiness,
-  Sun,
-  Moon,
-} from "lucide-react";
 import { ExpandableTabs } from "./expandable-tabs";
 import { LucideIcon } from "lucide-react";
-import { Button } from "../../button";
-import { useState } from "react";
-import { useTheme } from "next-themes";
 
 // Define the TabItem type locally
 type Tab = {
@@ -40,11 +20,11 @@ type TabItem = Tab | Separator;
 
 function DefaultTabs() {
   const tabs: TabItem[] = [
-    { title: "Home", icon: Home, href: "/" },
-    { title: "Experience", icon: BriefcaseBusiness, href: "#experience" },
+    // { title: "Home", icon: Home, href: "/" },
+    // { title: "Experience", icon: BriefcaseBusiness, href: "#experience" },
     // { type: "separator" as const },
-    { title: "Projects", icon: Folder, href: "#projects" },
-    { title: "Skills", icon: Brain, href: "#skills" },
+    // { title: "Projects", icon: Folder, href: "#projects" },
+    // { title: "Skills", icon: Brain, href: "#skills" },
     // { title: "Contact", icon: Mail, href: "#contact" },
   ];
 
@@ -54,6 +34,5 @@ function DefaultTabs() {
     </div>
   );
 }
-
 
 export { DefaultTabs };
