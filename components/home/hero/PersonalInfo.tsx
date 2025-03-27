@@ -41,9 +41,9 @@ export function PersonalInfo() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-lg mb-4"
             >
-              I'm Musharraf, a 20-year-old full-stack developer passionate about
-              creating beautiful and functional web applications. With a keen
-              eye for design and a love for clean code, I strive to build
+              I&apos;m Musharraf, a 20-year-old full-stack developer passionate
+              about creating beautiful and functional web applications. With a
+              keen eye for design and a love for clean code, I strive to build
               seamless user experiences.
             </motion.p>
             <motion.ul
@@ -56,7 +56,7 @@ export function PersonalInfo() {
               <li>🌱 Learning: Advanced React patterns and GraphQL</li>
               <li>💬 Ask me about: JavaScript, React, and CSS animations</li>
               <li>
-                ⚡ Fun fact: I can solve a Rubik's cube in under 2 minutes!
+                ⚡ Fun fact: I can solve a Rubik&apos;s cube in under 2 minutes!
               </li>
             </motion.ul>
           </div>

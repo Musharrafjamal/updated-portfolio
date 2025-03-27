@@ -190,7 +190,7 @@ function MorphingPopoverContent({
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [context.isOpen, context.close]);
+  }, [context]);
 
   return (
     <AnimatePresence>

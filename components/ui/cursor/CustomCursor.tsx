@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useCursor } from "../../../contexts/CursorContext";
 import { CursorRing } from "./CursorRing";
 import { CursorButton } from "./CursorButton";
@@ -18,7 +18,7 @@ export const CustomCursor = () => {
     return start + (end - start) * factor;
   };
 
-  const animateTrail = (time: number) => {
+  const animateTrail = useCallback((time: number) => {
     if (previousTimeRef.current === null) {
       previousTimeRef.current = time;
     }
@@ -32,7 +32,7 @@ export const CustomCursor = () => {
     
     previousTimeRef.current = time;
     requestRef.current = requestAnimationFrame(animateTrail);
-  };
+  }, [position]);
 
   useEffect(() => {
     requestRef.current = requestAnimationFrame(animateTrail);
@@ -63,7 +63,7 @@ export const CustomCursor = () => {
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, [position]);
+  }, [position, animateTrail]);
 
   if (typeof window !== "undefined" && "ontouchstart" in window) {
     return null;
