@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import WaveText from "../ui/others/wave-text";
 import { motion } from "framer-motion";

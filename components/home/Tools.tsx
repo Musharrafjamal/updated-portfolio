@@ -1,3 +1,4 @@
+"use client";
 import { InfiniteSlider } from "../ui/others/infinite-slider";
 import {
   React,
@@ -69,8 +70,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { GradientText } from "../ui/gradient-text";
-import { Brush, DraftingCompass, Scissors, Swords } from "lucide-react";
+import { Swords } from "lucide-react";
 import WaveText from "../ui/others/wave-text";
 
 // Define types for our tool objects

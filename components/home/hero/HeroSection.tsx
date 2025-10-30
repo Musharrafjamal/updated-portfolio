@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FlipWords } from "../ui/aceternity/FlipWords";
+import { FlipWords } from "../../ui/aceternity/FlipWords";
 import { useRef } from "react";
-import { GradientText } from "../ui/gradient-text";
+import { GradientText } from "../../ui/gradient-text";
 import { useCursorEffect } from "@/hooks/useCursorEffect";
 
 export function HeroSection() {

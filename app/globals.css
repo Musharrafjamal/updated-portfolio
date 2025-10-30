@@ -218,3 +218,34 @@
     background-size: 200% 100%;
   }
 }
+
+/* Custom theme change transition */
+.theme-transition {
+  --tt-duration: 600ms;
+}
+
+.theme-transition * {
+  transition: background-color var(--tt-duration) ease, color var(--tt-duration) ease,
+    border-color var(--tt-duration) ease, fill var(--tt-duration) ease, stroke var(--tt-duration) ease;
+}
+
+.theme-reveal-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  /* Background set inline to previous theme background color */
+  background: var(--reveal-color, #000);
+  /* Coordinates provided inline via CSS variables */
+  clip-path: circle(150vmax at var(--reveal-x, 50%) var(--reveal-y, 50%));
+  animation: theme-reveal-out var(--tt-duration, 600ms) ease-out forwards;
+}
+
+@keyframes theme-reveal-out {
+  from {
+    clip-path: circle(150vmax at var(--reveal-x, 50%) var(--reveal-y, 50%));
+  }
+  to {
+    clip-path: circle(0 at var(--reveal-x, 50%) var(--reveal-y, 50%));
+  }
+}
