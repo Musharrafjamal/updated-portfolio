@@ -16,7 +16,8 @@ const NewHero = () => {
             <div
               className="absolute inset-0 blur-2xl opacity-30 dark:hidden"
               style={{
-                background: "radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, transparent 70%)",
+                background:
+                  "radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, transparent 70%)",
                 transform: "translateY(10%) scale(1.1)",
               }}
             />
@@ -24,7 +25,8 @@ const NewHero = () => {
             <div
               className="absolute inset-0 blur-3xl opacity-40 hidden dark:block"
               style={{
-                background: "radial-gradient(circle at bottom, rgba(99, 102, 241, 0.6) 0%, rgba(139, 92, 246, 0.4) 1%, transparent 60%)",
+                background:
+                  "radial-gradient(circle at bottom, rgba(99, 102, 241, 0.6) 0%, rgba(139, 92, 246, 0.4) 1%, transparent 60%)",
                 transform: "translateY(10%) scale(1.2)",
               }}
             />
@@ -32,7 +34,8 @@ const NewHero = () => {
             <div
               className="absolute inset-0 blur-2xl opacity-50 hidden dark:block"
               style={{
-                background: "radial-gradient(circle at bottom, rgba(139, 92, 246, 0.7) 0%, rgba(99, 102, 241, 0.5) 1%, transparent 60%)",
+                background:
+                  "radial-gradient(circle at bottom, rgba(139, 92, 246, 0.7) 0%, rgba(99, 102, 241, 0.5) 1%, transparent 60%)",
                 transform: "translateY(10%) scale(1.1)",
               }}
             />
@@ -40,12 +43,13 @@ const NewHero = () => {
             <div
               className="absolute inset-0 blur-xl opacity-60 hidden dark:block"
               style={{
-                background: "radial-gradient(circle at bottom, rgba(167, 139, 250, 0.8) 0%, rgba(139, 92, 246, 0.6) 1%, transparent 60%)",
+                background:
+                  "radial-gradient(circle at bottom, rgba(167, 139, 250, 0.8) 0%, rgba(139, 92, 246, 0.6) 1%, transparent 60%)",
                 transform: "translateY(10%) scale(1.05)",
               }}
             />
             <Image
-              src="/images/generated-me.png"
+              src="/images/new-me.png"
               alt="Musharraf"
               width={1000}
               height={1000}
@@ -55,7 +59,9 @@ const NewHero = () => {
           </div>
         </div>
         <div className="flex flex-col justify-center gap-1 w-full md:w-1/2 h-full px-2 md:px-0 py-4 md:py-0  bg-white md:bg-transparent">
-          <h2 className="text-lg md:text-5xl font-moonWalk font-bold text-center md:text-left">Musharraf Jamal</h2>
+          <h2 className="text-lg md:text-5xl font-moonWalk font-bold text-center md:text-left">
+            Musharraf Jamal
+          </h2>
           <p className="text-sm md:text-base text-zinc-500 dark:text-zinc-400 text-center md:text-left">
             Web Developer | App Developer | UI/UX Designer
           </p>

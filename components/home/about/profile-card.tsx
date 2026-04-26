@@ -207,19 +207,6 @@ export default function ProfileCard() {
 
         <div className="relative z-10 flex flex-col items-center">
           <div className="flex justify-around w-full items-center gap-4">
-            <div className="relative ">
-              <motion.div className="relative w-40  rounded-full overflow-hidden">
-                <motion.div className="w-full h-full" variants={imageVariants}>
-                  <Image
-                    src="/images/my-image.png"
-                    alt="Musharraf Jamal"
-                    width={1000}
-                    height={1000}
-                    className="w-full h-full object-cover"
-                  />
-                </motion.div>
-              </motion.div>
-            </div>
             <div>
               <motion.h3
                 className="text-2xl font-bold"
