@@ -1,119 +1,267 @@
 "use client";
-import React from "react";
-import WaveText from "../ui/others/wave-text";
-import { motion } from "framer-motion";
-import ProfileCard from "./about/profile-card";
-import DetailTabs from "./about/detail-tabs";
+
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Briefcase, Code, Check, Send, Loader2 } from "lucide-react";
+import { MorphingPopover, MorphingPopoverTrigger, MorphingPopoverContent } from "../ui/morphing-popover";
+import { sendEmail } from "@/app/actions/send-email";
+import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 const About = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  };
+
   return (
-    <section className="pt-16 pb-10 overflow-hidden bg-gradient-to-b from-transparent to-slate-50/10 dark:to-slate-900/10 relative">
-      {/* Background animated elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 dark:from-indigo-500/5 dark:to-purple-500/5"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              width: `${Math.random() * 200 + 50}px`,
-              height: `${Math.random() * 200 + 50}px`,
-            }}
-            animate={{
-              x: [0, Math.random() * 100 - 50],
-              y: [0, Math.random() * 100 - 50],
-              opacity: [0.4, 0.7, 0.4],
-            }}
-            transition={{
-              duration: Math.random() * 20 + 20,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          />
-        ))}
+    <section id="about" className="pt-12 pb-24 md:pt-16 md:pb-32 mt-12 md:mt-16 relative overflow-hidden bg-white dark:bg-[#0a0a0a]">
+      {/* Abstract Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/5 dark:bg-indigo-500/10 blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-500/5 dark:bg-purple-500/10 blur-[120px]" />
       </div>
 
-      <div className="px-4 sm:px-6 lg:px-10">
-        <h2 className="text-4xl font-bold text-center mb-16 font-moonWalk flex items-center justify-center gap-2">
-          <div className="size-8 dark:text-white">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                {" "}
-                <path
-                  d="M19.6471 15.5357H4.35294M19.6471 15.5357V8C19.6471 6.11438 19.6471 5.17157 19.0613 4.58579C18.4755 4 17.5327 4 15.6471 4H8.35294C6.46732 4 5.52451 4 4.93873 4.58579C4.35294 5.17157 4.35294 6.11438 4.35294 8V15.5357M19.6471 15.5357L21.3911 17.3358C21.4356 17.3818 21.4579 17.4048 21.4787 17.4276C21.7998 17.7802 21.9843 18.2358 21.999 18.7124C22 18.7433 22 18.7753 22 18.8393C22 18.9885 22 19.0631 21.996 19.1261C21.9325 20.1314 21.1314 20.9325 20.1261 20.996C20.0631 21 19.9885 21 19.8393 21H4.16068C4.01148 21 3.93688 21 3.87388 20.996C2.86865 20.9325 2.06749 20.1314 2.00398 19.1261C2 19.0631 2 18.9885 2 18.8393C2 18.7753 2 18.7433 2.00096 18.7124C2.01569 18.2358 2.20022 17.7802 2.52127 17.4276C2.54208 17.4048 2.56438 17.3818 2.60888 17.3358L4.35294 15.5357"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                ></path>{" "}
-                <path
-                  d="M9.5 18.5H14.5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                ></path>{" "}
-                <path
-                  d="M12.75 6.75C12.75 7.16421 12.4142 7.5 12 7.5C11.5858 7.5 11.25 7.16421 11.25 6.75C11.25 6.33579 11.5858 6 12 6C12.4142 6 12.75 6.33579 12.75 6.75Z"
-                  fill="currentColor"
-                ></path>{" "}
-              </g>
-            </svg>
-          </div>
-          <WaveText text="About Me" />
-          <div className="size-8 dark:text-white">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                {" "}
-                <path
-                  d="M19.6471 15.5357H4.35294M19.6471 15.5357V8C19.6471 6.11438 19.6471 5.17157 19.0613 4.58579C18.4755 4 17.5327 4 15.6471 4H8.35294C6.46732 4 5.52451 4 4.93873 4.58579C4.35294 5.17157 4.35294 6.11438 4.35294 8V15.5357M19.6471 15.5357L21.3911 17.3358C21.4356 17.3818 21.4579 17.4048 21.4787 17.4276C21.7998 17.7802 21.9843 18.2358 21.999 18.7124C22 18.7433 22 18.7753 22 18.8393C22 18.9885 22 19.0631 21.996 19.1261C21.9325 20.1314 21.1314 20.9325 20.1261 20.996C20.0631 21 19.9885 21 19.8393 21H4.16068C4.01148 21 3.93688 21 3.87388 20.996C2.86865 20.9325 2.06749 20.1314 2.00398 19.1261C2 19.0631 2 18.9885 2 18.8393C2 18.7753 2 18.7433 2.00096 18.7124C2.01569 18.2358 2.20022 17.7802 2.52127 17.4276C2.54208 17.4048 2.56438 17.3818 2.60888 17.3358L4.35294 15.5357"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                ></path>{" "}
-                <path
-                  d="M9.5 18.5H14.5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                ></path>{" "}
-                <path
-                  d="M12.75 6.75C12.75 7.16421 12.4142 7.5 12 7.5C11.5858 7.5 11.25 7.16421 11.25 6.75C11.25 6.33579 11.5858 6 12 6C12.4142 6 12.75 6.33579 12.75 6.75Z"
-                  fill="currentColor"
-                ></path>{" "}
-              </g>
-            </svg>
-          </div>
-        </h2>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12"
+        >
+          {/* Header Column */}
+          <div className="lg:col-span-5 flex flex-col justify-start">
+            <motion.div variants={itemVariants} className="flex items-center gap-4 mb-8">
+              <div className="h-[2px] w-10 bg-zinc-800 dark:bg-zinc-200" />
+              <span className="text-sm font-semibold tracking-widest uppercase text-zinc-800 dark:text-zinc-200">
+                About Me
+              </span>
+            </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-          <ProfileCard />
+            <motion.h2 
+              variants={itemVariants} 
+              className="text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.15] tracking-tight text-zinc-900 dark:text-zinc-50 font-moonWalk mb-8"
+            >
+              Crafting digital <br className="hidden lg:block" />
+              experiences with <br className="hidden lg:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500 italic pr-2">
+                purpose & precision.
+              </span>
+            </motion.h2>
+
+            <motion.div variants={itemVariants} className="hidden lg:block mt-4">
+              <MorphingPopover className="w-fit">
+                <MorphingPopoverTrigger asChild>
+                  <button className="group relative inline-flex items-center gap-2 px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-full font-medium overflow-hidden transition-all hover:scale-105 shadow-xl shadow-zinc-900/10 dark:shadow-white/10 outline-none">
+                    <span className="relative z-10 flex items-center gap-2">
+                      Let's Talk <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
+                    <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center gap-2 text-white">
+                      Let's Talk <ArrowUpRight className="w-4 h-4 translate-x-0.5 -translate-y-0.5" />
+                    </span>
+                  </button>
+                </MorphingPopoverTrigger>
+                <MorphingPopoverContent className="w-[400px] p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 bottom-full mb-4">
+                  <WannaChatForm />
+                </MorphingPopoverContent>
+              </MorphingPopover>
+            </motion.div>
+          </div>
 
           {/* Content Column */}
-          <DetailTabs />
-        </div>
+          <div className="lg:col-span-7 flex flex-col gap-12 lg:pl-10">
+            <motion.div variants={itemVariants} className="flex flex-col gap-6">
+              <p className="text-2xl md:text-3xl text-zinc-800 dark:text-zinc-200 leading-snug font-light">
+                Hi, I'm <span className="font-medium text-zinc-900 dark:text-zinc-100">Musharraf Jamal</span>. A Developer, Designer, and Team Lead bridging the gap between design and engineering.
+              </p>
+              <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-light">
+                I thrive on solving complex problems with elegant solutions, ensuring every product is visually stunning, highly performant, and user-centric.
+              </p>
+            </motion.div>
+
+            {/* Experience List */}
+            <motion.div variants={itemVariants} className="flex flex-col gap-4 pt-4">
+              <div className="flex flex-col gap-3">
+                {[
+                  {
+                    title: "Team Lead",
+                    company: "Code Query",
+                    period: "2025 — Present",
+                    icon: Briefcase,
+                    color: "text-indigo-600 dark:text-indigo-400",
+                    bg: "bg-indigo-100 dark:bg-indigo-500/20"
+                  },
+                  {
+                    title: "Full Stack Developer",
+                    company: "Ghosting Tech",
+                    period: "2024 — 2025",
+                    icon: Code,
+                    color: "text-purple-600 dark:text-purple-400",
+                    bg: "bg-purple-100 dark:bg-purple-500/20"
+                  }
+                ].map((exp, i) => (
+                  <div key={i} className="group flex items-center justify-between p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800/50 hover:border-zinc-200 dark:hover:border-zinc-700 transition-colors">
+                    <div className="flex items-center gap-4">
+                       <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 ${exp.bg} ${exp.color}`}>
+                         <exp.icon size={20} />
+                       </div>
+                       <div>
+                         <h4 className="font-semibold text-zinc-900 dark:text-zinc-100">{exp.title}</h4>
+                         <p className="text-sm text-zinc-500 dark:text-zinc-400">{exp.company}</p>
+                       </div>
+                    </div>
+                    <span className="text-sm font-medium text-zinc-400 dark:text-zinc-500">{exp.period}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="grid grid-cols-2 md:grid-cols-3 gap-8 pt-8 border-t border-zinc-200 dark:border-zinc-800/50">
+              <div className="flex flex-col gap-2">
+                <span className="text-4xl md:text-5xl font-light text-zinc-900 dark:text-zinc-100">1.5<span className="text-indigo-500 font-medium">+</span></span>
+                <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-widest">Years Exp.</span>
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="text-4xl md:text-5xl font-light text-zinc-900 dark:text-zinc-100">10<span className="text-purple-500 font-medium">+</span></span>
+                <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-widest">Projects</span>
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="text-4xl md:text-5xl font-light text-zinc-900 dark:text-zinc-100">100<span className="text-indigo-500 font-medium">%</span></span>
+                <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-widest">Commitment</span>
+              </div>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="lg:hidden mt-4">
+              <MorphingPopover className="w-full">
+                <MorphingPopoverTrigger asChild>
+                  <button className="flex items-center justify-center w-full gap-2 px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-full font-medium hover:scale-105 transition-transform outline-none">
+                    Let's Talk <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                </MorphingPopoverTrigger>
+                <MorphingPopoverContent className="w-[calc(100vw-48px)] sm:w-[400px] p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 bottom-full mb-4">
+                  <WannaChatForm />
+                </MorphingPopoverContent>
+              </MorphingPopover>
+            </motion.div>
+            
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 };
 
 export default About;
+
+function WannaChatForm() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [formData, setFormData] = useState({ email: "", message: "" });
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const result = await sendEmail(formData);
+      if (result.success) {
+        setIsSuccess(true);
+        toast.success(result.message);
+        setTimeout(() => {
+          setFormData({ email: "", message: "" });
+          setIsSuccess(false);
+        }, 5000);
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  return (
+    <AnimatePresence mode="wait">
+      {isSuccess ? (
+        <motion.div
+          key="success"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          className="flex flex-col items-center justify-center gap-4 py-8"
+        >
+          <div className="rounded-full bg-green-100 p-4 dark:bg-green-900/30">
+            <Check className="h-8 w-8 text-green-600 dark:text-green-400" />
+          </div>
+          <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">Message Sent!</h3>
+          <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
+            Thank you for reaching out. I'll get back to you soon!
+          </p>
+        </motion.div>
+      ) : (
+        <motion.form
+          key="form"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onSubmit={handleSubmit}
+          className="grid gap-5"
+        >
+          <div className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 font-moonWalk">Wanna Chat?</div>
+          <div className="flex flex-col gap-2">
+            <Input
+              id="email"
+              type="email"
+              placeholder="Your email address"
+              className="bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700 rounded-xl focus-visible:ring-indigo-500"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData((prev: any) => ({ ...prev, email: e.target.value }))
+              }
+              required
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Textarea
+              id="message"
+              placeholder="How can I help you?"
+              rows={4}
+              className="resize-none bg-zinc-50 dark:bg-zinc-800/50 border-zinc-200 dark:border-zinc-700 rounded-xl focus-visible:ring-indigo-500"
+              value={formData.message}
+              onChange={(e) =>
+                setFormData((prev: any) => ({ ...prev, message: e.target.value }))
+              }
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-colors disabled:opacity-70"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Loader2 size={18} className="animate-spin" />
+                Sending...
+              </>
+            ) : (
+              <>
+                Send Message <Send size={16} />
+              </>
+            )}
+          </button>
+        </motion.form>
+      )}
+    </AnimatePresence>
+  );
+}
+
