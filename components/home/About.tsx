@@ -69,7 +69,7 @@ const About = () => {
                     </span>
                   </button>
                 </MorphingPopoverTrigger>
-                <MorphingPopoverContent className="w-[400px] p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 bottom-full mb-4">
+                <MorphingPopoverContent className="w-[400px] p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 bottom-full mb-4 left-0 origin-bottom-left">
                   <WannaChatForm />
                 </MorphingPopoverContent>
               </MorphingPopover>

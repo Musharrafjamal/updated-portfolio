@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, Instagram } from "lucide-react";
+import { Github, Linkedin, Instagram } from "lucide-react";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -17,11 +16,6 @@ const XLogo = ({ className }: { className?: string }) => (
 );
 
 const socialLinks = [
-  {
-    icon: Mail,
-    link: "mailto:musharrafjamal08@gmail.com",
-    label: "Email",
-  },
   {
     icon: XLogo,
     link: "https://x.com/musharrafJamal8",
