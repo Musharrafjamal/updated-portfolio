@@ -21,7 +21,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="pt-12 pb-24 md:pt-16 md:pb-32 mt-12 md:mt-16 relative overflow-hidden bg-white dark:bg-[#0a0a0a]">
+    <section id="about" className="pt-12 pb-24 md:pt-16 md:pb-32 mt-12 md:mt-16 relative bg-white dark:bg-[#0a0a0a]">
       {/* Abstract Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/5 dark:bg-indigo-500/10 blur-[120px]" />
@@ -146,7 +146,7 @@ const About = () => {
                     Let's Talk <ArrowUpRight className="w-4 h-4" />
                   </button>
                 </MorphingPopoverTrigger>
-                <MorphingPopoverContent className="w-[calc(100vw-48px)] sm:w-[400px] p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 bottom-full mb-4">
+                <MorphingPopoverContent className="w-[calc(100%+24px)] -left-3 sm:w-[400px] sm:left-0 sm:right-0 sm:mx-auto p-4 sm:p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 bottom-full mb-4 shadow-xl shadow-zinc-900/10 dark:shadow-black/40">
                   <WannaChatForm />
                 </MorphingPopoverContent>
               </MorphingPopover>

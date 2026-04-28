@@ -29,7 +29,7 @@ function DefaultTabs() {
   ];
 
   return (
-    <div className="flex gap-1 justify-center items-center fixed bottom-12 left-1/2 -translate-x-1/2 z-50">
+    <div className="flex gap-1 justify-center items-center fixed bottom-12 left-0 right-0 mx-auto w-fit z-50">
       <ExpandableTabs tabs={tabs} />
     </div>
   );

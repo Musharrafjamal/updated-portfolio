@@ -21,7 +21,7 @@ export function ContactPopover() {
           <Mail size={20} />
         </Button>
       </MorphingPopoverTrigger>
-      <MorphingPopoverContent className="w-[calc(100vw-48px)] sm:w-[400px] p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 fixed inset-x-0 mx-auto bottom-24 sm:absolute sm:inset-auto sm:bottom-full sm:mb-4 sm:mx-0 z-50">
+      <MorphingPopoverContent className="w-[calc(100vw-32px)] sm:w-[400px] p-4 sm:p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 fixed inset-x-0 mx-auto bottom-24 sm:absolute sm:inset-auto sm:bottom-full sm:mb-4 sm:mx-0 z-50">
         <ContactForm />
       </MorphingPopoverContent>
     </MorphingPopover>
@@ -126,7 +126,7 @@ function ContactForm() {
               </>
             )}
           </button>
-          <SocialLinks size={"sm"} withTitle={true} className="mt-0 pt-4 border-t border-zinc-100 dark:border-zinc-800/50 justify-center gap-3" />
+          <SocialLinks size={"sm"} withTitle={false} className="mt-0 pt-4 border-t border-zinc-100 dark:border-zinc-800/50 justify-center gap-3" />
         </motion.form>
       )}
     </AnimatePresence>
