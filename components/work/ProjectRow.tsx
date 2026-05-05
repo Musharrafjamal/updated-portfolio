@@ -40,21 +40,18 @@ const ProjectRow = ({ project, index, total }: ProjectRowProps) => {
       transition={{ duration: 0.8, ease: EASE }}
       className="border-t border-border py-16 first:border-t-0 first:pt-0 md:py-24"
     >
-      {/* head row: NN/total + role tag */}
-      <div className="flex items-center justify-between gap-4 font-merienda text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
+      {/* head row: per-project dot + NN/total */}
+      <div className="flex items-center gap-3 font-merienda text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
+        <span
+          aria-hidden
+          className="h-2 w-2 shrink-0 rounded-full"
+          style={{
+            background: accent,
+            boxShadow: `0 0 0 4px ${accent}30`,
+          }}
+        />
         <span className="text-foreground">
           {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </span>
-        <span className="flex items-center gap-2 text-right">
-          <span
-            aria-hidden
-            className="h-2 w-2 shrink-0 rounded-full"
-            style={{
-              background: accent,
-              boxShadow: `0 0 0 4px ${accent}30`,
-            }}
-          />
-          {role.split(" · ")[0]} · {status}
         </span>
       </div>
 
@@ -79,8 +76,9 @@ const ProjectRow = ({ project, index, total }: ProjectRowProps) => {
           alt={image.alt}
           width={image.width}
           height={image.height}
+          quality={95}
           priority={index === 0}
-          sizes="(max-width: 1280px) 100vw, 1280px"
+          sizes="(min-width: 1280px) 1216px, 100vw"
           className="block h-auto w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.015]"
         />
       </Link>
