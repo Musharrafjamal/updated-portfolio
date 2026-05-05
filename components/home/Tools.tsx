@@ -532,7 +532,7 @@ const Tools = () => {
   const secondSliderTools = allTools.slice(Math.ceil(allTools.length / 2));
 
   return (
-    <div className="flex flex-col space-y-8 md:space-y-10 px-0 md:px-6 lg:px-10 mt-12 md:mt-16">
+    <div className="flex flex-col space-y-8 md:space-y-10 px-0 md:px-6 lg:px-10">
       <h2 className="text-3xl md:text-4xl font-bold text-center font-moonWalk flex items-center justify-center gap-2">
         <Swords className="h-6 w-6 md:h-[30px] md:w-[30px]" style={{ transform: "scaleX(-1)" }} />
         <WaveText text="Tools" />
