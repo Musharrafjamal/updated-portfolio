@@ -40,8 +40,8 @@ export const projects: Project[] = [
     tagline: "AI ERP Agents That Actually Close the Loop",
     description:
       "Pre-built AI agents — Accounting, HR, Procurement, Communications — wired into Odoo, Tally, Gmail, Outlook, and Calendar. Institutional memory that learns vendors, policies, and approval patterns over time, so the loop actually closes instead of just routing tickets.",
-    role: "Solo founder · architect + full-stack engineer",
-    roleKind: "Founder",
+    role: "Lead engineer · architect + full-stack",
+    roleKind: "Engineering",
     status: "Early Access",
     accent: "#10B981",
     image: { src: "/mockups/greenloom.png", width: 1672, height: 941, alt: "Greenloom" },
@@ -87,7 +87,7 @@ export const projects: Project[] = [
     tagline: "Premium Organic Millet Products",
     description:
       "E-commerce platform for 100% organic millet products — Little, Kodo, Foxtail, and Barnyard millets, flours, ghee, oils, and gift hampers. Farm-to-table sourcing with full ISO and organic certifications for both local and global markets.",
-    role: "Engineering contributor",
+    role: "Sole engineer · full-stack · built end-to-end",
     roleKind: "Engineering",
     status: "Live e-commerce",
     accent: "#84CC16",
