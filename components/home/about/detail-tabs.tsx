@@ -138,7 +138,7 @@ const DetailTabs = () => {
                           "React",
                           "TypeScript",
                           "Tailwind CSS",
-                          "HTML5/CSS3",
+                          "shadcn/ui",
                         ]}
                       />
                       <SkillCategory
@@ -146,15 +146,22 @@ const DetailTabs = () => {
                         title="Backend"
                         skills={[
                           "Node.js",
-                          "Express.js",
-                          "REST API Design",
-                          "Next.js Server Components",
+                          "Express",
+                          "NestJS",
+                          "FastAPI",
+                          "REST APIs",
                         ]}
                       />
                       <SkillCategory
                         icon={<Database size={18} className="text-amber-500" />}
                         title="Data"
-                        skills={["MongoDB", "PostgreSQL", "Redis"]}
+                        skills={[
+                          "MongoDB",
+                          "PostgreSQL",
+                          "Redis",
+                          "Qdrant",
+                          "Neo4j",
+                        ]}
                       />
                       <SkillCategory
                         icon={
@@ -170,6 +177,17 @@ const DetailTabs = () => {
                         ]}
                       />
                       <SkillCategory
+                        icon={<Brain size={18} className="text-indigo-500" />}
+                        title="AI / Agents"
+                        skills={[
+                          "LangGraph",
+                          "LangChain",
+                          "Claude Code",
+                          "AI Integration",
+                          "Agentic Systems",
+                        ]}
+                      />
+                      <SkillCategory
                         icon={
                           <PaintBucket size={18} className="text-pink-500" />
                         }
@@ -179,16 +197,6 @@ const DetailTabs = () => {
                           "UI/UX Principles",
                           "Responsive Design",
                           "Component Libraries",
-                        ]}
-                      />
-                      <SkillCategory
-                        icon={<Brain size={18} className="text-indigo-500" />}
-                        title="Others"
-                        skills={[
-                          "VPS Hosting",
-                          "AI Integration",
-                          "Chrome Extensions",
-                          "Automation",
                         ]}
                       />
                     </div>

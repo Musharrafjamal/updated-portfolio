@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Briefcase, Code, Check, Send, Loader2 } from "lucide-react";
+import { ArrowUpRight, Check, Send, Loader2 } from "lucide-react";
 import { MorphingPopover, MorphingPopoverTrigger, MorphingPopoverContent } from "../ui/morphing-popover";
 import { sendEmail } from "@/app/actions/send-email";
 import { toast } from "sonner";
@@ -21,138 +21,117 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="pt-12 pb-24 md:pt-16 md:pb-32 mt-12 md:mt-16 relative bg-white dark:bg-[#0a0a0a]">
+    <section id="about" className="py-16 md:pt-16 md:pb-32 mt-8 md:my-16 rounded-2xl overflow-hidden relative bg-white dark:bg-[#0a0a0a]">
       {/* Abstract Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/5 dark:bg-indigo-500/10 blur-[120px]" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-500/5 dark:bg-purple-500/10 blur-[120px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-1 sm:px-4 md:px-12 lg:px-24 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12"
+          className="flex flex-col gap-6 md:gap-8"
         >
-          {/* Header Column */}
-          <div className="lg:col-span-5 flex flex-col justify-start">
-            <motion.div variants={itemVariants} className="flex items-center gap-4 mb-8">
-              <div className="h-[2px] w-10 bg-zinc-800 dark:bg-zinc-200" />
-              <span className="text-sm font-semibold tracking-widest uppercase text-zinc-800 dark:text-zinc-200">
-                About Me
-              </span>
-            </motion.div>
+          <motion.div variants={itemVariants} className="flex items-center gap-4">
+            <div className="h-[2px] w-8 bg-zinc-800 dark:bg-zinc-200" />
+            <span className="text-xs font-semibold tracking-[0.22em] uppercase text-zinc-800 dark:text-zinc-200">
+              Experience
+            </span>
+          </motion.div>
 
-            <motion.h2 
-              variants={itemVariants} 
-              className="text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.15] tracking-tight text-zinc-900 dark:text-zinc-50 font-moonWalk mb-8"
-            >
-              Crafting digital <br className="hidden lg:block" />
-              experiences with <br className="hidden lg:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500 italic pr-2">
-                purpose & precision.
-              </span>
-            </motion.h2>
+          {/* Experience List */}
+          <motion.div variants={itemVariants} className="flex flex-col">
+              {[
+                {
+                  title: "Senior Software Engineer",
+                  company: "Greenmint Labs",
+                  period: "2025 — Present",
+                  accent: "from-indigo-500 to-indigo-300 dark:from-indigo-400 dark:to-indigo-600",
+                  hover: "group-hover:text-indigo-600 dark:group-hover:text-indigo-400",
+                  description:
+                    "Engineering scalable, secure full-stack applications with React, Node.js, and Express — owning the MongoDB schemas and APIs that power core business features.",
+                },
+                {
+                  title: "Team Lead",
+                  company: "Code Query",
+                  period: "Feb — Sep 2025",
+                  accent: "from-purple-500 to-purple-300 dark:from-purple-400 dark:to-purple-600",
+                  hover: "group-hover:text-purple-600 dark:group-hover:text-purple-400",
+                  description:
+                    "Led a high-traffic service-provider marketplace to 80% performance gains and 95% reliability while managing a cross-functional team of engineers and designers.",
+                },
+                {
+                  title: "Software Development Engineer",
+                  company: "Ghosting Tech",
+                  period: "2024 — 2025",
+                  accent: "from-pink-500 to-pink-300 dark:from-pink-400 dark:to-pink-600",
+                  hover: "group-hover:text-pink-600 dark:group-hover:text-pink-400",
+                  description:
+                    "Grew from intern to SDE — shipped Next.js apps, drove 45% load-time reductions, and built the team's automated testing framework.",
+                },
+              ].map((exp, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative py-7 md:py-8 border-b border-zinc-200/70 dark:border-zinc-800/60 last:border-b-0"
+                >
+                  {/* Animated accent line */}
+                  <motion.span
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: i * 0.12 + 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className={`absolute left-0 top-0 h-px w-full origin-left bg-gradient-to-r ${exp.accent} opacity-50`}
+                  />
 
-            <motion.div variants={itemVariants} className="hidden lg:block mt-4">
-              <MorphingPopover className="w-fit">
-                <MorphingPopoverTrigger asChild>
-                  <button className="group relative inline-flex items-center gap-2 px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-full font-medium overflow-hidden transition-all hover:scale-105 shadow-xl shadow-zinc-900/10 dark:shadow-white/10 outline-none">
-                    <span className="relative z-10 flex items-center gap-2">
-                      Let's Talk <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  {/* Meta line */}
+                  <div className="flex items-center justify-between gap-4 mb-3">
+                    <span className="text-xs md:text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                      {exp.company}
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
-                    <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center gap-2 text-white">
-                      Let's Talk <ArrowUpRight className="w-4 h-4 translate-x-0.5 -translate-y-0.5" />
+                    <span className="text-[10px] md:text-xs font-semibold tracking-[0.22em] uppercase text-zinc-400 dark:text-zinc-500 whitespace-nowrap">
+                      {exp.period}
                     </span>
-                  </button>
-                </MorphingPopoverTrigger>
-                <MorphingPopoverContent className="w-[400px] p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 bottom-full mb-4 left-0 origin-bottom-left">
-                  <WannaChatForm />
-                </MorphingPopoverContent>
-              </MorphingPopover>
-            </motion.div>
-          </div>
-
-          {/* Content Column */}
-          <div className="lg:col-span-7 flex flex-col gap-12 lg:pl-10">
-            <motion.div variants={itemVariants} className="flex flex-col gap-6">
-              <p className="text-2xl md:text-3xl text-zinc-800 dark:text-zinc-200 leading-snug font-light">
-                Hi, I'm <span className="font-medium text-zinc-900 dark:text-zinc-100">Musharraf Jamal</span>. A Developer, Designer, and Team Lead bridging the gap between design and engineering.
-              </p>
-              <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-light">
-                I thrive on solving complex problems with elegant solutions, ensuring every product is visually stunning, highly performant, and user-centric.
-              </p>
-            </motion.div>
-
-            {/* Experience List */}
-            <motion.div variants={itemVariants} className="flex flex-col gap-4 pt-4">
-              <div className="flex flex-col gap-3">
-                {[
-                  {
-                    title: "Team Lead",
-                    company: "Code Query",
-                    period: "2025 — Present",
-                    icon: Briefcase,
-                    color: "text-indigo-600 dark:text-indigo-400",
-                    bg: "bg-indigo-100 dark:bg-indigo-500/20"
-                  },
-                  {
-                    title: "Full Stack Developer",
-                    company: "Ghosting Tech",
-                    period: "2024 — 2025",
-                    icon: Code,
-                    color: "text-purple-600 dark:text-purple-400",
-                    bg: "bg-purple-100 dark:bg-purple-500/20"
-                  }
-                ].map((exp, i) => (
-                  <div key={i} className="group flex items-center justify-between p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800/50 hover:border-zinc-200 dark:hover:border-zinc-700 transition-colors">
-                    <div className="flex items-center gap-4">
-                       <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 ${exp.bg} ${exp.color}`}>
-                         <exp.icon size={20} />
-                       </div>
-                       <div>
-                         <h4 className="font-semibold text-zinc-900 dark:text-zinc-100">{exp.title}</h4>
-                         <p className="text-sm text-zinc-500 dark:text-zinc-400">{exp.company}</p>
-                       </div>
-                    </div>
-                    <span className="text-sm font-medium text-zinc-400 dark:text-zinc-500">{exp.period}</span>
                   </div>
-                ))}
-              </div>
+
+                  {/* Title */}
+                  <h4 className={`text-2xl md:text-3xl font-medium tracking-tight font-moonWalk text-zinc-900 dark:text-zinc-50 leading-[1.2] mb-4 transition-colors duration-300 ${exp.hover}`}>
+                    {exp.title}
+                  </h4>
+
+                  {/* Short description */}
+                  <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed font-light max-w-2xl">
+                    {exp.description}
+                  </p>
+                </motion.div>
+              ))}
             </motion.div>
 
-            <motion.div variants={itemVariants} className="grid grid-cols-2 md:grid-cols-3 gap-8 pt-8 border-t border-zinc-200 dark:border-zinc-800/50">
-              <div className="flex flex-col gap-2">
-                <span className="text-4xl md:text-5xl font-light text-zinc-900 dark:text-zinc-100">1.5<span className="text-indigo-500 font-medium">+</span></span>
-                <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-widest">Years Exp.</span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className="text-4xl md:text-5xl font-light text-zinc-900 dark:text-zinc-100">10<span className="text-purple-500 font-medium">+</span></span>
-                <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-widest">Projects</span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className="text-4xl md:text-5xl font-light text-zinc-900 dark:text-zinc-100">100<span className="text-indigo-500 font-medium">%</span></span>
-                <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-widest">Commitment</span>
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="lg:hidden mt-4">
-              <MorphingPopover className="w-full">
-                <MorphingPopoverTrigger asChild>
-                  <button className="flex items-center justify-center w-full gap-2 px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-full font-medium hover:scale-105 transition-transform outline-none">
-                    Let's Talk <ArrowUpRight className="w-4 h-4" />
-                  </button>
-                </MorphingPopoverTrigger>
-                <MorphingPopoverContent className="w-[calc(100%+24px)] -left-3 sm:w-[400px] sm:left-0 sm:right-0 sm:mx-auto p-4 sm:p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 bottom-full mb-4 shadow-xl shadow-zinc-900/10 dark:shadow-black/40">
-                  <WannaChatForm />
-                </MorphingPopoverContent>
-              </MorphingPopover>
-            </motion.div>
-            
-          </div>
+          <motion.div variants={itemVariants} className="mt-4 md:mt-8 flex justify-center sm:justify-start">
+            <MorphingPopover className="w-full sm:w-fit">
+              <MorphingPopoverTrigger asChild>
+                <button className="group relative flex sm:inline-flex items-center justify-center w-full sm:w-auto gap-2 px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-full font-medium overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-xl shadow-zinc-900/10 dark:shadow-white/10 outline-none">
+                  <span className="relative z-10 flex items-center gap-2">
+                    Let's Talk <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
+                  <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center gap-2 text-white">
+                    Let's Talk <ArrowUpRight className="w-4 h-4 translate-x-0.5 -translate-y-0.5" />
+                  </span>
+                </button>
+              </MorphingPopoverTrigger>
+              <MorphingPopoverContent className="w-[calc(100%+24px)] -left-3 sm:w-[400px] sm:left-0 p-4 sm:p-6 rounded-3xl !border-zinc-200 dark:!border-zinc-800/50 bottom-full mb-4 origin-bottom-left shadow-xl shadow-zinc-900/10 dark:shadow-black/40">
+                <WannaChatForm />
+              </MorphingPopoverContent>
+            </MorphingPopover>
+          </motion.div>
         </motion.div>
       </div>
     </section>

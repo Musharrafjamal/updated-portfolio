@@ -18,22 +18,22 @@ const XLogo = ({ className }: { className?: string }) => (
 const socialLinks = [
   {
     icon: XLogo,
-    link: "https://x.com/musharrafJamal8",
+    link: "https://x.com/musharraf_jamal",
     label: "X",
   },
   {
     icon: Linkedin,
-    link: "https://www.linkedin.com/in/musharrafjamal8",
+    link: "https://linkedin.com/in/musharrafjamal",
     label: "LinkedIn",
   },
   {
     icon: Github,
-    link: "https://github.com/Musharrafjamal",
+    link: "https://github.com/musharrafjamal",
     label: "GitHub",
   },
   {
     icon: Instagram,
-    link: "https://www.instagram.com/musharraf008/",
+    link: "https://instagram.com/musharrafjamal",
     label: "Instagram",
   },
 ];
@@ -90,7 +90,7 @@ export default function SocialLinks({
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "rounded-full bg-zinc-100 dark:bg-zinc-800/60 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all duration-300 flex items-center gap-2",
+              "rounded-full bg-zinc-100 dark:bg-zinc-800/60 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 active:scale-95 transition-all duration-300 flex items-center gap-2",
               getContainerPadding(size)
             )}
             aria-label={social.label}

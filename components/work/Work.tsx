@@ -8,25 +8,32 @@ import WaveText from "../ui/others/wave-text";
 
 const work = [
   {
-    image: "/mockups/dozit.png",
-    title: "Dozit",
-    description: "Provider market place!",
-    link: "https://dozit.in",
+    image: "/mockups/revizer.png",
+    title: "Revizer",
+    description: "AI learning platform — mobile + web with real-time TTS pipeline",
+    link: "https://revizer.in",
+    color: "#8B5CF6",
+  },
+  {
+    image: "/mockups/greenloom.png",
+    title: "Greenloom",
+    description: "AI layer for ERPs — agentic ops on Odoo, MS D365, Tally",
+    link: "#",
+    color: "#10B981",
+  },
+  {
+    image: "/mockups/rhc.png",
+    title: "RHC",
+    description: "Enterprise IT service management portal for a Riyadh real-estate firm",
+    link: "#",
+    color: "#F59E0B",
+  },
+  {
+    image: "/mockups/sahil-service.png",
+    title: "Sahil Service",
+    description: "Three-panel service-provider marketplace with realtime tracking",
+    link: "https://sahilservice.com",
     color: "#FFE569",
-  },
-  {
-    image: "/mockups/ridhi-suman-fabrics.png",
-    title: "Ridhi Suman Fabrics",
-    description: "E-commerce store",
-    link: "https://www.ridhisumanfabrics.com",
-    color: "#AEEA94",
-  },
-  {
-    image: "/mockups/chatfolio.png",
-    title: "Chatfolio",
-    description: "Ai chat saver chrome extension",
-    link: "https://chatfolio-livid.vercel.app",
-    color: "#C5BAFF",
   },
 ];
 
@@ -52,17 +59,17 @@ const Work = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative left-1/2 my-24 w-screen -translate-x-1/2"
+      className="relative left-1/2 my-12 md:my-24 w-screen -translate-x-1/2"
       id="work"
       style={{ height: `${work.length * 100}vh` }}
     >
       <div className="sticky top-0 h-screen overflow-hidden bg-background">
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-20 mx-auto flex w-5/6 items-center justify-between pt-8 md:pt-12">
-          <h2 className="flex items-center justify-center gap-2 font-moonWalk text-3xl font-bold md:text-5xl">
-            <BicepsFlexed className="h-6 w-6 md:h-8 md:w-8" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-20 mx-auto flex w-[90%] md:w-5/6 items-center justify-between pt-6 md:pt-12">
+          <h2 className="flex items-center justify-center gap-2 font-moonWalk text-2xl font-bold sm:text-3xl md:text-5xl">
+            <BicepsFlexed className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />
             <WaveText text="Work" />
             <BicepsFlexed
-              className="h-6 w-6 md:h-8 md:w-8"
+              className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8"
               style={{ transform: "scaleX(-1)" }}
             />
           </h2>
@@ -83,7 +90,7 @@ const Work = () => {
           ))}
         </motion.div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-10 z-20 mx-auto h-px w-5/6 overflow-hidden bg-foreground/15 md:bottom-12">
+        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 mx-auto h-px w-[90%] md:w-5/6 overflow-hidden bg-foreground/15 md:bottom-12">
           <motion.div
             className="h-full origin-left bg-foreground"
             style={{ width: progressWidth }}

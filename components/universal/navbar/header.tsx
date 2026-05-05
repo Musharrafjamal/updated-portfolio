@@ -5,12 +5,12 @@ import { email } from "@/lib/global-vars";
 
 const Header = () => {
   return (
-    <nav className="flex items-center gap-2 justify-between py-4 px-0 md:px-4">
+    <nav className="flex items-center gap-2 justify-between py-4 px-1 md:px-4">
       <div className="flex items-center gap-2 justify-center">
-        <div className="p-2 rounded-lg bg-zinc-700 dark:bg-white flex items-center justify-center text-white dark:text-zinc-800 font-semibold text-xs md:text-md transition-all duration-300">
+        <div className="p-1.5 md:p-2 rounded-lg bg-zinc-700 dark:bg-white flex items-center justify-center text-white dark:text-zinc-800 font-semibold text-[11px] md:text-md transition-all duration-300">
           {"{ SC }"}
         </div>
-        <span className="font-light text-zinc-800 dark:text-white transition-all duration-300 text-xs md:text-2xl">
+        <span className="font-light text-zinc-800 dark:text-white transition-all duration-300 text-sm md:text-2xl">
           SharCode
         </span>
       </div>
@@ -21,10 +21,13 @@ const Header = () => {
               <a
                 href={`mailto:${email}`}
                 aria-label={`Email ${email}`}
-                className="flex items-center gap-2 bg-white dark:bg-zinc-800 rounded-full py-1.5 px-4 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                className="flex items-center gap-2 bg-white dark:bg-zinc-800 rounded-full py-1.5 px-3 md:px-4 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 active:scale-95 transition-transform"
               >
-                <div className="w-4 h-2 rounded-full bg-emerald-500"></div>
-                <span className="text-xs md:text-sm font-medium text-emerald-600 transition-all duration-300">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
+                <span className="text-[11px] md:text-sm font-medium text-emerald-600 transition-all duration-300">
                   Available
                 </span>
               </a>

@@ -6,7 +6,7 @@ import NewHero from "@/components/home/hero/new-hero";
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-5/6 mx-auto">
+    <div className="min-h-screen w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12">
       <NewHero />
 
       <Work />

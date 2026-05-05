@@ -9,8 +9,8 @@ const NewHero = () => {
   return (
     <section>
       <Header />
-      <div className="min-h-[28rem] md:h-[38rem] rounded-3xl overflow-hidden flex flex-col md:flex-row items-center md:items-end justify-center md:justify-around bg-gradient-to-b from-transparent to-transparent dark:bg-gradient-to-b dark:from-transparent dark:to-transparent md:bg-gradient-to-b md:from-transparent md:to-zinc-100 md:dark:bg-gradient-to-b md:dark:from-transparent md:dark:to-zinc-900 my-8 md:my-16">
-        <div className="relative w-full md:w-auto flex justify-center items-end px-4 md:px-0 overflow-hidden md:overflow-visible rounded-3xl md:rounded-none bg-gradient-to-b from-zinc-50 to-zinc-100 dark:bg-gradient-to-b dark:from-zinc-800 dark:to-zinc-900 md:bg-gradient-to-b md:from-transparent md:to-transparent md:dark:bg-gradient-to-b md:dark:from-transparent md:dark:to-transparent">
+      <div className="min-h-[26rem] md:h-[38rem] rounded-3xl overflow-hidden flex flex-col md:flex-row items-center md:items-end justify-center md:justify-around bg-gradient-to-b from-transparent to-transparent dark:bg-gradient-to-b dark:from-transparent dark:to-transparent md:bg-gradient-to-b md:from-transparent md:to-zinc-100 md:dark:bg-gradient-to-b md:dark:from-transparent md:dark:to-zinc-900 my-6 md:my-16">
+        <div className="relative w-full md:w-auto flex justify-center items-end px-0 md:px-0 overflow-hidden md:overflow-visible rounded-3xl md:rounded-none bg-gradient-to-b from-zinc-50 to-zinc-100 dark:bg-gradient-to-b dark:from-zinc-800 dark:to-zinc-900 md:bg-gradient-to-b md:from-transparent md:to-transparent md:dark:bg-gradient-to-b md:dark:from-transparent md:dark:to-transparent">
           <div className="relative z-10">
             {/* Blurred shadow for light theme */}
             <div
@@ -53,23 +53,25 @@ const NewHero = () => {
               alt="Musharraf"
               width={1000}
               height={1000}
-              className="max-w-[280px] md:max-w-lg object-cover h-[24rem] md:h-[36rem] object-bottom relative"
+              className="max-w-[260px] sm:max-w-[300px] md:max-w-lg object-cover h-[22rem] sm:h-[26rem] md:h-[36rem] object-bottom relative"
               style={{ objectPosition: "center top" }}
+              priority
             />
           </div>
         </div>
-        <div className="flex flex-col justify-center gap-1 w-full md:w-1/2 h-full px-2 md:px-0 py-4 md:py-0  bg-white md:bg-transparent">
-          <h2 className="text-lg md:text-5xl font-moonWalk font-bold text-center md:text-left">
+        <div className="flex flex-col justify-center gap-2 w-full md:w-1/2 h-full px-5 sm:px-6 md:px-0 py-5 md:py-0 bg-white dark:bg-zinc-900 md:bg-transparent md:dark:bg-transparent">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-moonWalk font-bold text-center md:text-left tracking-tight">
             Musharraf Jamal
           </h2>
-          <p className="text-sm md:text-base text-zinc-500 dark:text-zinc-400 text-center md:text-left">
-            Web Developer | App Developer | UI/UX Designer
+          <p className="text-xs sm:text-sm md:text-base text-zinc-500 dark:text-zinc-400 text-center md:text-left">
+            Senior Software Engineer · Full Stack &amp; AI · Designer
           </p>
-          <hr className="border-zinc-300 dark:border-zinc-700 my-2" />
-          <p className="text-zinc-700 dark:text-zinc-200 font-light text-xl md:text-4xl text-center md:text-left">
-            Full Stack Developer with{" "}
-            <span className="font-medium">1.5+ Years</span> of experience
-            building scalable web applications and leading development team.
+          <hr className="border-zinc-300 dark:border-zinc-700 my-2 md:my-3" />
+          <p className="text-zinc-700 dark:text-zinc-200 font-light text-lg sm:text-xl md:text-4xl text-center md:text-left leading-snug">
+            Senior software engineer with{" "}
+            <span className="font-medium text-zinc-900 dark:text-white">2+ Years</span> of experience
+            building scalable, AI-powered full-stack platforms across web and
+            mobile.
           </p>
         </div>
       </div>
