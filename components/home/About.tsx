@@ -119,11 +119,11 @@ const About = () => {
               <MorphingPopoverTrigger asChild>
                 <button className="group relative flex sm:inline-flex items-center justify-center w-full sm:w-auto gap-2 px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-full font-medium overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-xl shadow-zinc-900/10 dark:shadow-white/10 outline-none">
                   <span className="relative z-10 flex items-center gap-2">
-                    Let's Talk <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    Let&apos;s Talk <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
                   <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center gap-2 text-white">
-                    Let's Talk <ArrowUpRight className="w-4 h-4 translate-x-0.5 -translate-y-0.5" />
+                    Let&apos;s Talk <ArrowUpRight className="w-4 h-4 translate-x-0.5 -translate-y-0.5" />
                   </span>
                 </button>
               </MorphingPopoverTrigger>
@@ -183,7 +183,7 @@ function WannaChatForm() {
           </div>
           <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">Message Sent!</h3>
           <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
-            Thank you for reaching out. I'll get back to you soon!
+            Thank you for reaching out. I&apos;ll get back to you soon!
           </p>
         </motion.div>
       ) : (

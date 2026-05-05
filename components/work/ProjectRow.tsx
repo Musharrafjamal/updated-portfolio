@@ -62,10 +62,11 @@ const ProjectRow = ({ project, index, total }: ProjectRowProps) => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`View ${title} project`}
-        className="group relative mt-6 block cursor-none overflow-hidden rounded-2xl bg-neutral-950 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 active:scale-[0.995] md:mt-8"
+        className="group relative mt-6 block cursor-none overflow-hidden rounded-2xl bg-neutral-950 transition-transform duration-700 hover:-translate-y-1 active:scale-[0.995] md:mt-8"
         style={
           {
             "--accent": accent,
+            transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
             boxShadow:
               "0 1px 2px rgba(0,0,0,0.06), 0 18px 40px -8px color-mix(in srgb, var(--accent) 32%, transparent), 0 38px 90px -16px color-mix(in srgb, var(--accent) 22%, transparent)",
           } as React.CSSProperties
@@ -79,7 +80,8 @@ const ProjectRow = ({ project, index, total }: ProjectRowProps) => {
           quality={95}
           priority={index === 0}
           sizes="(min-width: 1280px) 1216px, 100vw"
-          className="block h-auto w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.015]"
+          className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.015]"
+          style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
         />
       </Link>
 

@@ -71,7 +71,7 @@ function ContactForm() {
           </div>
           <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">Message Sent!</h3>
           <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
-            Thank you for reaching out. I'll get back to you soon!
+            Thank you for reaching out. I&apos;ll get back to you soon!
           </p>
         </motion.div>
       ) : (
