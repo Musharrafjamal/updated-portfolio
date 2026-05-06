@@ -6,7 +6,7 @@ One hero image per project lives in `/public`:
 
 - `/public/mockups/revizer.png` — Revizer
 - `/public/mockups/greenloom.png` — Greenloom
-- `/public/mockups/db-backup.png` — DB Backup Tool
+- `/public/mockups/snaplock.png` — Snaplock
 - `/public/mockups/mistribulao.png` — Mistribulao
 - `/public/mockups/millet.png` — Millet Fresh Field
 
@@ -34,14 +34,14 @@ One hero image per project lives in `/public`:
 - **Image:** `/greenloom.png`
 - **CTA:** Visit site → greenloom.ai
 
-### 3. DB Backup Tool (Open Source)
-- **URL:** https://github.com/Musharrafjamal
+### 3. Snaplock (Open Source)
+- **URL:** https://github.com/Musharrafjamal/snaplock
 - **Tagline:** End-to-End Database Backup & Migration for Startups and Indie Devs
 - **Description:** Open-source platform for managing database backups across MongoDB, PostgreSQL, MySQL, and Redis. Supports DB-to-DB migration, scheduled backups with N-day retention, encrypted push to AWS S3 / Cloudflare R2, and a unified cost + health dashboard across all client projects.
 - **Used by:** Greenmint Labs (greenmintlabs.com) and individual developers
 - **My Role:** Creator · full-stack + infrastructure
 - **Status:** Production · Open Source
-- **Image:** `/db-backup.png`
+- **Image:** `/snaplock.png`
 - **CTA:** View on GitHub
 
 ### 4. Mistribulao
@@ -66,7 +66,7 @@ One hero image per project lives in `/public`:
 
 ## Build Guidelines
 
-**Ordering rationale:** Founder projects first (Revizer, Greenloom, DB Backup Tool — strongest signals of ownership and depth), client/contributor projects after (Mistribulao, Millet Fresh Field — show breadth and shipping ability).
+**Ordering rationale:** Founder projects first (Revizer, Greenloom, Snaplock — strongest signals of ownership and depth), client/contributor projects after (Mistribulao, Millet Fresh Field — show breadth and shipping ability).
 
 **Per-project card should surface:**
 - Hero image (full-bleed or contained, your call based on layout)

@@ -50,9 +50,8 @@ export const projects: Project[] = [
     cta: { label: "Visit greenloom.ai", href: "https://greenloom.ai", variant: "primary" },
   },
   {
-    slug: "db-backup",
-    title: "DB Backup",
-    titleAccent: "Tool",
+    slug: "snaplock",
+    title: "Snaplock",
     tagline: "End-to-End Database Backup & Migration for Startups and Indie Devs",
     description:
       "Open-source platform for managing database backups across MongoDB, PostgreSQL, MySQL, and Redis. Supports DB-to-DB migration, scheduled backups with N-day retention, encrypted push to AWS S3 / Cloudflare R2, and a unified cost + health dashboard across all your client projects. Used by Greenmint Labs and individual developers.",
@@ -60,10 +59,10 @@ export const projects: Project[] = [
     roleKind: "Creator",
     status: "Production · Open Source",
     accent: "#3B82F6",
-    image: { src: "/mockups/db-backup.png", width: 1672, height: 941, alt: "DB Backup Tool" },
+    image: { src: "/mockups/snaplock.png", width: 1672, height: 941, alt: "Snaplock" },
     stack: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "S3 · R2"],
     platforms: null,
-    cta: { label: "View on GitHub", href: "https://github.com/Musharrafjamal", variant: "github" },
+    cta: { label: "View on GitHub", href: "https://github.com/Musharrafjamal/snaplock", variant: "github" },
   },
   {
     slug: "mistribulao",
