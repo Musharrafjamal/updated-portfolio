@@ -2,7 +2,7 @@
 
 Senior Software Engineer  |  Full Stack & AI Engineer  |  Designer
 
-musharrafjamal08@gmail.com  •  \+91 9334079373  • [X](https://x.com/musharraf_jamal)  • [Portfolio](https://musharraf.dev)  • [GitHub](https://github.com/musharrafjamal)  • [LinkedIn](https://linkedin.com/in/musharrafjamal)
+musharrafjamal08@gmail.com  •  \+91 9334079373  • [X](https://x.com/musharrafJamal8)  • [Portfolio](https://musharraf.dev)  • [GitHub](https://github.com/musharrafjamal)  • [LinkedIn](https://linkedin.com/in/musharrafjamal8)  • [Instagram](https://www.instagram.com/musharraf_codeverse)
 
 **PROFESSIONAL SUMMARY**
 

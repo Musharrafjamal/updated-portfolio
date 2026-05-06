@@ -18,12 +18,12 @@ const XLogo = ({ className }: { className?: string }) => (
 const socialLinks = [
   {
     icon: XLogo,
-    link: "https://x.com/musharraf_jamal",
+    link: "https://x.com/musharrafJamal8",
     label: "X",
   },
   {
     icon: Linkedin,
-    link: "https://linkedin.com/in/musharrafjamal",
+    link: "https://linkedin.com/in/musharrafjamal8",
     label: "LinkedIn",
   },
   {
@@ -33,7 +33,7 @@ const socialLinks = [
   },
   {
     icon: Instagram,
-    link: "https://instagram.com/musharrafjamal",
+    link: "https://www.instagram.com/musharraf_codeverse",
     label: "Instagram",
   },
 ];

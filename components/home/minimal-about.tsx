@@ -8,10 +8,10 @@ const About = () => {
   const [activeTab, setActiveTab] = useState("about");
   
   const socialLinks = [
-    { icon: <Twitter className="group-hover:text-blue-400" size={18} />, label: "X", link: "https://twitter.com/yourusername" },
-    { icon: <Github className="group-hover:text-purple-500" size={18} />, label: "Github", link: "https://github.com/yourusername" },
-    { icon: <Linkedin className="group-hover:text-blue-600" size={18} />, label: "LinkedIn", link: "https://linkedin.com/in/yourusername" },
-    { icon: <ExternalLink className="group-hover:text-green-500" size={18} />, label: "Portfolio", link: "https://yourportfolio.com" },
+    { icon: <Twitter className="group-hover:text-blue-400" size={18} />, label: "X", link: "https://x.com/musharrafJamal8" },
+    { icon: <Github className="group-hover:text-purple-500" size={18} />, label: "Github", link: "https://github.com/musharrafjamal" },
+    { icon: <Linkedin className="group-hover:text-blue-600" size={18} />, label: "LinkedIn", link: "https://linkedin.com/in/musharrafjamal8" },
+    { icon: <ExternalLink className="group-hover:text-green-500" size={18} />, label: "Portfolio", link: "https://musharraf.dev" },
   ];
 
   const tabs = [
