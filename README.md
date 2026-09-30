@@ -13,9 +13,9 @@ Open http://localhost:3030. For a production preview, run `npm run build` follow
 
 ## Design and motion
 
-The page combines Manrope with Instrument Serif, warm ivory surfaces, ink typography, and a lime accent. GSAP and ScrollTrigger drive the hero's masked name reveal, rotating details, scroll reveals, portrait depth, featured-project chapter transitions, reading progress, and a viewport-aware marquee. Lenis provides smooth wheel scrolling while retaining native touch scrolling.
+The page combines Manrope with Instrument Serif, warm ivory surfaces, ink typography, and a lime accent. GSAP and ScrollTrigger drive masked line reveals, a kinetic hero exit, reversible project image and text wipes, layered cover parallax, an about-text reading reveal, rotating craft orbits, drawn experience dividers, and a marquee that responds to scroll velocity. Lenis provides smooth wheel scrolling while retaining native touch scrolling. Entrance, scroll, and hover transforms use separate layers.
 
-The featured stage pins only on screens wider than 800px with sufficient height. Mobile and reduced-motion layouts present every project in a normal document flow. Inactive desktop chapters are inert and hidden from assistive technology. Native project dialogs manage focus and pause background scrolling; expandable experience, capability, and contact sections support keyboard interaction.
+The featured stage pins only on screens wider than 800px with sufficient height. Mobile and reduced-motion layouts present every project in a normal document flow. Inactive desktop chapters are inert and hidden from assistive technology. Native project dialogs manage focus and pause background scrolling. Experience details and the contact form are always visible; capability panels support keyboard interaction.
 
 ## Where to edit
 

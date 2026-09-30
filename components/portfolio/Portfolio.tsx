@@ -169,7 +169,6 @@ export default function Portfolio() {
   const root = useRef<HTMLDivElement>(null);
   const [activeChapter, setActiveChapter] = useState(0);
   const [activeCapability, setActiveCapability] = useState(0);
-  const [openExperience, setOpenExperience] = useState<number | null>(0);
   const [project, setProject] = useState<SelectedProject | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   usePortfolioMotion(root, setActiveChapter);
@@ -274,22 +273,26 @@ export default function Portfolio() {
               <span data-hero-line>
                 Jamal<span className="name-period">.</span>
               </span>
-              <Asterisk className="hero-asterisk" />
+              <span className="hero-asterisk-orbit" aria-hidden="true">
+                <Asterisk className="hero-asterisk" />
+              </span>
             </span>
           </h1>
           <div className="hero-portrait" data-hero-portrait>
-            <div className="portrait-frame">
-              <Image
-                src="/images/musharraf-editorial.webp"
-                alt="Editorial portrait of Musharraf Jamal"
-                width={1024}
-                height={1536}
-                priority
-                sizes="(max-width: 650px) 230px, 332px"
-              />
-              <span className="portrait-label">
-                A little curious. Always building.
-              </span>
+            <div className="portrait-reveal">
+              <div className="portrait-frame">
+                <Image
+                  src="/images/musharraf-editorial.webp"
+                  alt="Editorial portrait of Musharraf Jamal"
+                  width={1024}
+                  height={1536}
+                  priority
+                  sizes="(max-width: 650px) 230px, 332px"
+                />
+                <span className="portrait-label">
+                  A little curious. Always building.
+                </span>
+              </div>
             </div>
             <span className="portrait-note">
               the human
@@ -341,10 +344,17 @@ export default function Portfolio() {
               <span className="section-number">01 /</span> Selected work
             </span>
             <div className="section-heading-row">
-              <h2 id="work-title" data-reveal>
-                Less talk.
-                <br />
-                <em>More making.</em>
+              <h2
+                id="work-title"
+                aria-label="Less talk. More making."
+                data-motion-heading
+              >
+                <span className="motion-line">
+                  <span>Less talk.</span>
+                </span>
+                <span className="motion-line">
+                  <em>More making.</em>
+                </span>
               </h2>
               <p data-reveal>
                 A few things I’ve helped bring to life.
@@ -353,98 +363,105 @@ export default function Portfolio() {
               </p>
             </div>
           </div>
-          <div className="work-stage page-container">
-            <div className="work-stage-viewport">
-              {selectedProjects.slice(0, 3).map((item, index) => (
-                <article
-                  className={`project-chapter cover-${item.slug}`}
-                  id={`project-${item.slug}`}
-                  key={item.slug}
-                >
-                  <div className="project-copy">
-                    <span className="eyebrow project-category">
-                      {item.category}
-                    </span>
-                    <h3 className="project-title">
-                      {item.title}
-                      <span className="project-title-dot">.</span>
-                    </h3>
-                    <p className="project-summary">{item.shortDescription}</p>
-                    <ul className="project-highlights">
-                      {item.highlights.map((highlight) => (
-                        <li key={highlight}>
-                          <span />
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-                    <button
-                      className="project-explore text-button"
-                      data-magnetic
-                      onClick={() => setProject(item)}
-                    >
-                      Inside the project <Arrow />
-                    </button>
-                    <span className="project-role">{item.role}</span>
-                  </div>
-                  <button
-                    className="project-visual"
-                    data-project-hover
-                    onClick={() => setProject(item)}
-                    aria-label={`Explore ${item.title}`}
-                  >
-                    <div className="project-image-wrap">
-                      <Image
-                        className="project-cover"
-                        src={item.cover}
-                        alt={`${item.title} product cover — ${item.tagline}`}
-                        width={1536}
-                        height={1024}
-                        sizes="(max-width: 800px) 100vw, 65vw"
-                      />
-                    </div>
-                    <span className="project-image-label">
-                      <span>{item.status}</span>
-                      <Arrow />
-                    </span>
-                    <span className="project-visual-number" aria-hidden="true">
-                      0{index + 1}
-                    </span>
-                  </button>
-                </article>
-              ))}
-            </div>
-            <div className="chapter-toolbar">
-              <div
-                className="chapter-picker"
-                role="group"
-                aria-label="Choose featured project"
-              >
+          <div className="work-stage-shell page-container">
+            <div className="work-stage">
+              <div className="work-stage-viewport">
                 {selectedProjects.slice(0, 3).map((item, index) => (
-                  <button
-                    onClick={() => changeChapter(index)}
+                  <article
+                    className={`project-chapter cover-${item.slug}`}
+                    id={`project-${item.slug}`}
                     key={item.slug}
-                    className={activeChapter === index ? "is-active" : ""}
-                    aria-label={`Show ${item.title}`}
-                    aria-current={activeChapter === index ? "true" : undefined}
                   >
-                    <span className={`chapter-symbol symbol-${item.slug}`}>
-                      {item.title.slice(0, 1)}
-                    </span>
-                    <span className="chapter-picker-name">{item.title}</span>
-                  </button>
+                    <div className="project-copy">
+                      <span className="eyebrow project-category">
+                        {item.category}
+                      </span>
+                      <h3 className="project-title">
+                        {item.title}
+                        <span className="project-title-dot">.</span>
+                      </h3>
+                      <p className="project-summary">{item.shortDescription}</p>
+                      <ul className="project-highlights">
+                        {item.highlights.map((highlight) => (
+                          <li key={highlight}>
+                            <span />
+                            {highlight}
+                          </li>
+                        ))}
+                      </ul>
+                      <button
+                        className="project-explore text-button"
+                        data-magnetic
+                        onClick={() => setProject(item)}
+                      >
+                        Inside the project <Arrow />
+                      </button>
+                      <span className="project-role">{item.role}</span>
+                    </div>
+                    <button
+                      className="project-visual"
+                      data-project-hover
+                      onClick={() => setProject(item)}
+                      aria-label={`Explore ${item.title}`}
+                    >
+                      <div className="project-image-wrap">
+                        <Image
+                          className="project-cover"
+                          src={item.cover}
+                          alt={`${item.title} product cover — ${item.tagline}`}
+                          width={1536}
+                          height={1024}
+                          sizes="(max-width: 800px) 100vw, 65vw"
+                        />
+                      </div>
+                      <span className="project-image-label">
+                        <span>{item.status}</span>
+                        <Arrow />
+                      </span>
+                      <span
+                        className="project-visual-number"
+                        aria-hidden="true"
+                      >
+                        0{index + 1}
+                      </span>
+                    </button>
+                  </article>
                 ))}
               </div>
-              <div className="chapter-position">
-                <span aria-live="polite">0{activeChapter + 1}</span>
-                <span className="chapter-track">
-                  <span />
+              <div className="chapter-toolbar">
+                <div
+                  className="chapter-picker"
+                  role="group"
+                  aria-label="Choose featured project"
+                >
+                  {selectedProjects.slice(0, 3).map((item, index) => (
+                    <button
+                      onClick={() => changeChapter(index)}
+                      key={item.slug}
+                      className={activeChapter === index ? "is-active" : ""}
+                      aria-label={`Show ${item.title}`}
+                      aria-current={
+                        activeChapter === index ? "true" : undefined
+                      }
+                    >
+                      <span className={`chapter-symbol symbol-${item.slug}`}>
+                        {item.title.slice(0, 1)}
+                      </span>
+                      <span className="chapter-picker-name">{item.title}</span>
+                    </button>
+                  ))}
+                </div>
+                <div className="chapter-position">
+                  <span aria-live="polite">0{activeChapter + 1}</span>
+                  <span className="chapter-track">
+                    <span />
+                  </span>
+                  <span>03</span>
+                </div>
+                <span className="chapter-scroll-hint">
+                  Keep scrolling <Arrow direction="down" />
                 </span>
-                <span>03</span>
               </div>
-              <span className="chapter-scroll-hint">
-                Keep scrolling <Arrow direction="down" />
-              </span>
             </div>
           </div>
           <div className="more-work page-container">
@@ -457,7 +474,7 @@ export default function Portfolio() {
                 <article
                   className="supporting-project"
                   key={item.slug}
-                  data-reveal
+                  data-project-reveal
                 >
                   <button
                     className={`supporting-cover cover-${item.slug}`}
@@ -465,13 +482,15 @@ export default function Portfolio() {
                     data-project-hover
                     aria-label={`Explore ${item.title}`}
                   >
-                    <Image
-                      src={item.cover}
-                      alt={`${item.title} — ${item.tagline}`}
-                      width={1536}
-                      height={1024}
-                      sizes="(max-width: 800px) 100vw, 50vw"
-                    />
+                    <div className="supporting-image-wrap">
+                      <Image
+                        src={item.cover}
+                        alt={`${item.title} — ${item.tagline}`}
+                        width={1536}
+                        height={1024}
+                        sizes="(max-width: 800px) 100vw, 50vw"
+                      />
+                    </div>
                     <span className="supporting-cover-arrow">
                       <Arrow />
                     </span>
@@ -517,12 +536,20 @@ export default function Portfolio() {
           </span>
           <div className="about-grid">
             <div className="about-heading">
-              <h2 id="about-title" data-reveal>
-                Good products
-                <br />
-                start with
-                <br />
-                <em>good questions.</em>
+              <h2
+                id="about-title"
+                aria-label="Good products start with good questions."
+                data-motion-heading
+              >
+                <span className="motion-line">
+                  <span>Good products</span>
+                </span>
+                <span className="motion-line">
+                  <span>start with</span>
+                </span>
+                <span className="motion-line">
+                  <em>good questions.</em>
+                </span>
               </h2>
               <div className="about-signature" data-reveal>
                 <Asterisk />
@@ -534,9 +561,22 @@ export default function Portfolio() {
               </div>
             </div>
             <div className="about-copy">
-              <p className="about-lead" data-reveal>
-                I’m Musharraf, an engineer with a designer’s instinct. I like
-                making complicated things feel surprisingly simple.
+              <p className="about-lead" data-reading-reveal>
+                <span className="sr-only">
+                  I’m Musharraf, an engineer with a designer’s instinct. I like
+                  making complicated things feel surprisingly simple.
+                </span>
+                {"I’m Musharraf, an engineer with a designer’s instinct. I like making complicated things feel surprisingly simple."
+                  .split(" ")
+                  .map((word, index) => (
+                    <span
+                      className="reading-word"
+                      aria-hidden="true"
+                      key={`${word}-${index}`}
+                    >
+                      {word}{" "}
+                    </span>
+                  ))}
               </p>
               <p data-reveal>
                 For 2+ years, I’ve been building across web, mobile, and AI —
@@ -574,12 +614,21 @@ export default function Portfolio() {
           className="capabilities-section page-container"
           aria-labelledby="capabilities-title"
         >
-          <div className="capabilities-heading" data-reveal>
-            <span className="eyebrow">What I bring to the table</span>
-            <h2 id="capabilities-title">
-              Different tools.
-              <br />
-              <em>One thoughtful approach.</em>
+          <div className="capabilities-heading">
+            <span className="eyebrow" data-reveal>
+              What I bring to the table
+            </span>
+            <h2
+              id="capabilities-title"
+              aria-label="Different tools. One thoughtful approach."
+              data-motion-heading
+            >
+              <span className="motion-line">
+                <span>Different tools.</span>
+              </span>
+              <span className="motion-line">
+                <em>One thoughtful approach.</em>
+              </span>
             </h2>
           </div>
           <div className="capabilities-layout">
@@ -588,7 +637,7 @@ export default function Portfolio() {
                 <div
                   className={`capability-row ${activeCapability === index ? "is-active" : ""}`}
                   key={item.title}
-                  data-reveal
+                  data-capability-reveal
                 >
                   <button
                     onClick={() => setActiveCapability(index)}
@@ -621,7 +670,7 @@ export default function Portfolio() {
             </div>
             <div
               className={`craft-object craft-object-${capabilities[activeCapability].shape}`}
-              data-reveal
+              data-object-reveal
               aria-hidden="true"
             >
               <div className="object-grid" />
@@ -656,39 +705,41 @@ export default function Portfolio() {
           className="experience-section page-container"
           aria-labelledby="experience-title"
         >
-          <div className="experience-heading" data-reveal>
-            <span className="eyebrow">
+          <div className="experience-heading">
+            <span className="eyebrow" data-reveal>
               <span className="section-number">03 /</span> Along the way
             </span>
-            <h2 id="experience-title">
-              Always building.
-              <br />
-              <em>Always growing.</em>
+            <h2
+              id="experience-title"
+              aria-label="Always building. Always growing."
+              data-motion-heading
+            >
+              <span className="motion-line">
+                <span>Always building.</span>
+              </span>
+              <span className="motion-line">
+                <em>Always growing.</em>
+              </span>
             </h2>
           </div>
           <div className="experience-list">
             {experience.map((item, index) => (
               <article
-                className={`experience-item ${openExperience === index ? "is-open" : ""}`}
+                className="experience-item"
                 key={item.company}
-                data-reveal
+                data-experience-reveal
               >
-                <button
-                  className="experience-trigger"
-                  onClick={() =>
-                    setOpenExperience(openExperience === index ? null : index)
-                  }
-                  aria-expanded={openExperience === index}
-                  aria-controls={`experience-${index}`}
-                >
+                <div className="experience-trigger">
                   <span className="experience-period">{item.period}</span>
                   <span className="experience-name">
                     <span>{item.role}</span>
                     <span>{item.company}</span>
                   </span>
-                  <span className="experience-plus" aria-hidden="true" />
-                </button>
-                <div className="experience-expand" id={`experience-${index}`}>
+                  <span className="experience-index" aria-hidden="true">
+                    0{index + 1}
+                  </span>
+                </div>
+                <div className="experience-detail">
                   <div>
                     <p>{item.description}</p>
                     <div className="tool-tags">
