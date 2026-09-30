@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ContactSection from "./ContactSection";
+import SharcodeBrand from "./SharcodeBrand";
 import {
   capabilities,
   experience,
@@ -188,16 +189,9 @@ export default function Portfolio() {
         <a
           href="#top"
           className="wordmark"
-          aria-label="Musharraf Jamal, back to top"
+          aria-label="Sharcode, back to top"
         >
-          <span className="monogram">
-            m<span>.</span>
-          </span>
-          <span>
-            Musharraf
-            <br />
-            Jamal
-          </span>
+          <SharcodeBrand />
         </a>
         <nav
           id="main-navigation"
@@ -350,44 +344,53 @@ export default function Portfolio() {
                 key={item.slug}
                 data-project-reveal
               >
-                <button
-                  className="project-media"
-                  onClick={() => setProject(item)}
-                  aria-label={`Explore ${item.title}`}
-                >
-                  <Image
-                    src={item.cover}
-                    alt={`${item.title} — ${item.tagline}`}
-                    width={1536}
-                    height={1024}
-                    quality={90}
-                    sizes={
-                      index < 2
-                        ? "(max-width: 700px) 100vw, 50vw"
-                        : "(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                    }
-                  />
-                </button>
-                <div className="project-caption">
-                  <div className="project-card-meta">
-                    <span>
-                      {item.number} / {item.category}
+                <div className="project-scroll-scene">
+                  <button
+                    className="project-media"
+                    onClick={() => setProject(item)}
+                    aria-label={`Explore ${item.title}`}
+                  >
+                    <Image
+                      src={item.cover}
+                      alt={`${item.title} — ${item.tagline}`}
+                      width={1536}
+                      height={1024}
+                      quality={90}
+                      sizes={
+                        index < 2
+                          ? "(max-width: 700px) 100vw, 50vw"
+                          : "(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
+                      }
+                    />
+                    <span className="project-curtain" aria-hidden="true">
+                      <Asterisk />
+                      <span>{item.number}</span>
                     </span>
+                  </button>
+                  <div className="project-caption">
+                    <span className="project-caption-rule" aria-hidden="true" />
+                    <div className="project-card-meta">
+                      <span>
+                        {item.number} / {item.category}
+                      </span>
+                    </div>
+                    <div className="project-name-row">
+                      <h3>
+                        <span>
+                          {item.title}
+                          {item.titleAccent && ` ${item.titleAccent}`}
+                        </span>
+                      </h3>
+                      <button
+                        className="project-open"
+                        onClick={() => setProject(item)}
+                        aria-label={`Read about ${item.title}`}
+                      >
+                        <Arrow />
+                      </button>
+                    </div>
+                    <p>{item.shortDescription}</p>
                   </div>
-                  <div className="project-name-row">
-                    <h3>
-                      {item.title}
-                      {item.titleAccent && ` ${item.titleAccent}`}
-                    </h3>
-                    <button
-                      className="project-open"
-                      onClick={() => setProject(item)}
-                      aria-label={`Read about ${item.title}`}
-                    >
-                      <Arrow />
-                    </button>
-                  </div>
-                  <p>{item.shortDescription}</p>
                 </div>
               </article>
             ))}

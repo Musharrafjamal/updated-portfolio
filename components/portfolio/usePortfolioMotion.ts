@@ -76,13 +76,14 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
           gsap.from(heading.querySelectorAll(".motion-line > *"), {
             yPercent: 125,
             rotate: 4,
-            duration: 1.25,
+            duration: 1,
             stagger: 0.12,
             ease: "power4.out",
             scrollTrigger: {
               trigger: heading,
-              start: "top 88%",
-              toggleActions: "play none none reverse",
+              start: "top 92%",
+              end: "top 36%",
+              scrub: 0.65,
             },
           });
         });
@@ -105,21 +106,6 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
             },
           },
         );
-
-        select<HTMLElement>("[data-project-reveal]").forEach((card) => {
-          // Animate the card as a whole. Cover pixels stay fixed at their native ratio.
-          gsap.from(card, {
-            y: 90,
-            opacity: 0.2,
-            duration: 1.15,
-            ease: "power4.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 89%",
-              toggleActions: "play none none reverse",
-            },
-          });
-        });
 
         select<HTMLElement>("[data-capability-reveal]").forEach(
           (item, index) => {
@@ -338,6 +324,85 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
           clearTimeout(refreshTimer);
           preferenceCleanups.forEach((cleanup) => cleanup());
         };
+      },
+      element,
+    );
+
+    media.add(
+      {
+        desktop: "(min-width: 701px)",
+        threeColumns: "(min-width: 1001px)",
+        motion: "(prefers-reduced-motion: no-preference)",
+      },
+      (context) => {
+        if (!context.conditions?.motion) return;
+        const desktop = Boolean(context.conditions.desktop);
+        const columns = context.conditions.threeColumns ? 3 : 2;
+
+        select<HTMLElement>("[data-project-reveal]").forEach((card, index) => {
+          const scene = card.querySelector<HTMLElement>(".project-scroll-scene")!;
+          const curtain = card.querySelector(".project-curtain");
+          const column = index < 2 ? index : (index - 2) % columns;
+          // The trigger stays in normal flow. Only the complete composition moves;
+          // its image has no crop, zoom or hover transform.
+          const timeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: card,
+              start: "top 94%",
+              end: "bottom 12%",
+              scrub: desktop ? 0.7 : 0.4,
+              invalidateOnRefresh: true,
+            },
+          });
+          timeline
+            .fromTo(
+              scene,
+              { y: desktop ? 180 + column * 65 : 110 },
+              { y: 0, duration: 0.48, ease: "power3.out" },
+              0,
+            )
+            .fromTo(
+              curtain,
+              { y: 0, yPercent: 0 },
+              { y: 0, yPercent: -101, duration: 0.34, ease: "power2.inOut" },
+              0.09 + (desktop ? column * 0.035 : 0),
+            )
+            .fromTo(
+              card.querySelector(".project-caption-rule"),
+              { scaleX: 0 },
+              { scaleX: 1, duration: 0.32, ease: "power2.inOut" },
+              0.12,
+            )
+            .fromTo(
+              card.querySelector(".project-card-meta > span"),
+              { yPercent: 115 },
+              { yPercent: 0, duration: 0.24, ease: "power3.out" },
+              0.19,
+            )
+            .fromTo(
+              card.querySelector("h3 > span"),
+              { yPercent: 125 },
+              { yPercent: 0, duration: 0.28, ease: "power3.out" },
+              0.23,
+            )
+            .fromTo(
+              card.querySelector(".project-caption > p"),
+              { y: 20, opacity: 0.25 },
+              { y: 0, opacity: 1, duration: 0.24, ease: "power2.out" },
+              0.29,
+            )
+            .fromTo(
+              card.querySelector(".project-open"),
+              { y: 25, rotation: -45 },
+              { y: 0, rotation: 0, duration: 0.3, ease: "power3.out" },
+              0.24,
+            )
+            .to(
+              scene,
+              { y: desktop ? -55 : -24, duration: 0.3, ease: "none" },
+              0.7,
+            );
+        });
       },
       element,
     );

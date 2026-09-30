@@ -1,4 +1,4 @@
-# Musharraf Jamal — portfolio
+# Sharcode — Musharraf Jamal's portfolio
 
 An editorial portfolio built with the existing Next.js 14, React 18, and Tailwind 3 stack. The redesign lives on `codex/portfolio-reimagined`; `main` retains the previous portfolio.
 
@@ -13,13 +13,14 @@ Open http://localhost:3030. For a production preview, run `npm run build` follow
 
 ## Design and motion
 
-The page combines Manrope with Instrument Serif, warm ivory surfaces, ink typography, and a lime accent. GSAP and ScrollTrigger drive masked line reveals, a kinetic hero exit, gallery-card entrances, an about-text reading reveal, rotating craft orbits, drawn experience dividers, and a marquee that responds to scroll velocity. Lenis provides smooth wheel scrolling while retaining native touch scrolling.
+The page combines Manrope with Instrument Serif, warm ivory surfaces, ink typography, and a lime accent. A minimal SVG S mark and lowercase Sharcode wordmark identify the header, with a matching favicon. GSAP and ScrollTrigger drive scroll-linked masked headings, a kinetic hero exit, an about-text reading reveal, rotating craft orbits, drawn experience dividers, and a marquee that responds to scroll velocity. Lenis provides smooth wheel scrolling while retaining native touch scrolling.
 
-The gallery presents two featured projects above three smaller projects, then stacks on mobile. Every cover keeps its native 3:2 aspect ratio, including in the detail dialog. Artwork remains stationary on hover; only the outline and caption arrow respond. Short captions keep the main page focused, with detailed facts available in the native project dialogs. Dialogs manage focus and pause background scrolling. Experience details and the contact form are always visible; capability panels support keyboard interaction. Reduced-motion preferences remove decorative animations.
+The gallery presents two featured projects above three smaller projects, then stacks on mobile. Each card has a reversible scroll timeline: the complete composition lifts into place, a numbered curtain uncovers the artwork, caption rules draw, and titles reveal through masks. Cards hold steady for reading before drifting upward on exit. Every cover keeps its native 3:2 aspect ratio, including in the detail dialog. Artwork remains stationary on hover; only the outline and caption arrow respond. Keyboard focus settles and opens a card immediately. Short captions keep the main page focused, with detailed facts available in the native project dialogs. Dialogs manage focus and pause background scrolling. Experience details and the contact form are always visible; capability panels support keyboard interaction. Reduced-motion preferences remove decorative animations.
 
 ## Where to edit
 
 - `components/portfolio/Portfolio.tsx`: page sections and project dialogs.
+- `components/portfolio/SharcodeBrand.tsx`: reusable SVG mark and wordmark.
 - `components/portfolio/portfolio-data.ts`: curated presentation, capabilities, and experience.
 - `components/work/data.ts`: project facts, roles, technology, and destination URLs.
 - `components/portfolio/usePortfolioMotion.ts`: GSAP/Lenis behavior and cleanup.
