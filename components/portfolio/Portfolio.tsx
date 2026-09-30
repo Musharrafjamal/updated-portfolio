@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ContactSection from "./ContactSection";
 import SharcodeBrand from "./SharcodeBrand";
+import ProjectFilm from "./ProjectFilm";
 import {
   capabilities,
   experience,
@@ -186,11 +187,7 @@ export default function Portfolio() {
     <div ref={root} className="portfolio" id="top">
       <div className="reading-progress" aria-hidden="true" />
       <header className="site-header">
-        <a
-          href="#top"
-          className="wordmark"
-          aria-label="Sharcode, back to top"
-        >
+        <a href="#top" className="wordmark" aria-label="Sharcode, back to top">
           <SharcodeBrand />
         </a>
         <nav
@@ -213,9 +210,26 @@ export default function Portfolio() {
               <span className="nav-dot" />
             </a>
           ))}
+          <a
+            href="https://docs.google.com/document/d/1kAhpCs_0WL15mLLamYSsPfBZD_IMOBhNA_u8EWOQg6Y/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-resume"
+            onClick={() => setMenuOpen(false)}
+          >
+            Résumé <Arrow />
+          </a>
         </nav>
         <div className="header-right">
           <IndiaTime />
+          <a
+            href="https://docs.google.com/document/d/1kAhpCs_0WL15mLLamYSsPfBZD_IMOBhNA_u8EWOQg6Y/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="header-resume"
+          >
+            Résumé <Arrow />
+          </a>
           <a href="#contact" className="header-contact" data-magnetic>
             Let’s talk <Arrow />
           </a>
@@ -332,35 +346,35 @@ export default function Portfolio() {
             </div>
           </div>
           <div className="project-gallery page-container">
-            {selectedProjects.map((item, index) => (
+            {selectedProjects.map((item) => (
               <article
                 className={`project-card cover-${item.slug}`}
                 key={item.slug}
                 data-project-reveal
               >
                 <div className="project-scroll-scene">
-                  <button
-                    className="project-media"
-                    onClick={() => setProject(item)}
-                    aria-label={`Explore ${item.title}`}
-                  >
-                    <Image
-                      src={item.cover}
-                      alt={`${item.title} — ${item.tagline}`}
-                      width={1536}
-                      height={1024}
-                      quality={90}
-                      sizes={
-                        index < 2
-                          ? "(max-width: 700px) 100vw, 50vw"
-                          : "(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                      }
-                    />
-                    <span className="project-curtain" aria-hidden="true">
-                      <Asterisk />
-                      <span>{item.number}</span>
-                    </span>
-                  </button>
+                  {item.slug === "revizer" ? (
+                    <ProjectFilm />
+                  ) : (
+                    <button
+                      className="project-media"
+                      onClick={() => setProject(item)}
+                      aria-label={`Explore ${item.title}`}
+                    >
+                      <Image
+                        src={item.cover}
+                        alt={`${item.title} — ${item.tagline}`}
+                        width={1536}
+                        height={1024}
+                        quality={90}
+                        sizes="(max-width: 700px) 100vw, 50vw"
+                      />
+                      <span className="project-curtain" aria-hidden="true">
+                        <Asterisk />
+                        <span>{item.number}</span>
+                      </span>
+                    </button>
+                  )}
                   <div className="project-caption">
                     <span className="project-caption-rule" aria-hidden="true" />
                     <div className="project-card-meta">
@@ -564,31 +578,45 @@ export default function Portfolio() {
             <span className="eyebrow" data-reveal>
               <span className="section-number">03 /</span> Along the way
             </span>
-            <h2
-              id="experience-title"
-              aria-label="Always building. Always growing."
-              data-motion-heading
-            >
-              <span className="motion-line">
-                <span>Always building.</span>
-              </span>
-              <span className="motion-line">
-                <em>Always growing.</em>
-              </span>
-            </h2>
+            <div className="experience-title-row">
+              <h2
+                id="experience-title"
+                aria-label="Always building. Always growing."
+                data-motion-heading
+              >
+                <span className="motion-line">
+                  <span>Always building.</span>
+                </span>
+                <span className="motion-line">
+                  <em>Always growing.</em>
+                </span>
+              </h2>
+              <div className="experience-emblem" aria-hidden="true">
+                <span />
+                <Asterisk />
+              </div>
+            </div>
           </div>
           <div className="experience-list">
+            <div className="experience-spine" aria-hidden="true">
+              <span />
+            </div>
             {experience.map((item, index) => (
               <article
                 className="experience-item"
                 key={item.company}
                 data-experience-reveal
               >
+                <span className="experience-node" aria-hidden="true" />
                 <div className="experience-trigger">
                   <span className="experience-period">{item.period}</span>
                   <span className="experience-name">
-                    <span>{item.role}</span>
-                    <span>{item.company}</span>
+                    <span className="experience-role">
+                      <span>{item.role}</span>
+                    </span>
+                    <span className="experience-company">
+                      <span>{item.company}</span>
+                    </span>
                   </span>
                   <span className="experience-index" aria-hidden="true">
                     0{index + 1}

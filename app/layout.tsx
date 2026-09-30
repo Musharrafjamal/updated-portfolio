@@ -15,20 +15,49 @@ const instrument = Instrument_Serif({
   display: "swap",
 });
 
+const siteUrl = "https://sharcode.tech";
+const title = "Sharcode — Musharraf Jamal";
+const description =
+  "Engineer. Designer. Builder. Explore Musharraf Jamal's selected web, mobile and AI products — thoughtfully built from the first idea to the final interaction.";
+const socialImage = {
+  url: "/sharcode-social-card.png",
+  width: 1200,
+  height: 630,
+  type: "image/png",
+  alt: "Sharcode — Musharraf Jamal. Engineer. Designer. Builder.",
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://musharraf.dev"),
-  title: "Musharraf Jamal — Engineer & Designer",
-  description:
-    "Senior software engineer, full stack & AI builder, and designer. Thoughtful digital products, from the first idea to the final interaction.",
+  metadataBase: new URL(siteUrl),
+  applicationName: "Sharcode",
+  title,
+  description,
+  authors: [{ name: "Musharraf Jamal", url: siteUrl }],
+  creator: "Musharraf Jamal",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Musharraf Jamal — Engineer & Designer",
-    description:
-      "Code, craft, and a little curiosity. Explore selected web, mobile, and AI products.",
+    title,
+    description,
+    url: siteUrl,
+    siteName: "Sharcode",
     type: "website",
-    images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+    images: [socialImage],
   },
-  twitter: { card: "summary_large_image" },
-  icons: { icon: "/favicon.svg" },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [{ url: socialImage.url, alt: socialImage.alt }],
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.svg?v=2", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+    ],
+    shortcut: "/favicon-32x32.png",
+    apple: { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+  },
 };
 
 export default function RootLayout({

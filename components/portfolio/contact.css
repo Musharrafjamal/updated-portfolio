@@ -327,6 +327,26 @@
   line-height: 1.5;
 }
 
+.contact-delivery-fallback {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-top: 8px;
+}
+
+.contact-delivery-fallback a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  color: #20231f;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+
 .contact-message-meta {
   display: flex;
   align-items: flex-start;

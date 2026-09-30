@@ -12,10 +12,8 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
     const element = root.current;
     if (!element) return;
     const media = gsap.matchMedia();
-    const cleanups: (() => void)[] = [];
     const select = <T extends Element = HTMLElement>(selector: string) =>
       Array.from(element.querySelectorAll<T>(selector));
-    const header = element.querySelector<HTMLElement>(".site-header");
     let lenis: Lenis | undefined;
 
     media.add(
@@ -26,7 +24,7 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
           duration: 1.25,
           smoothWheel: true,
           syncTouch: false,
-          anchors: { offset: -105 },
+          anchors: { offset: -32 },
           prevent: (node) => node.closest("dialog") !== null,
         });
         const activeLenis = lenis;
@@ -189,29 +187,108 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
           const timeline = gsap.timeline({
             scrollTrigger: {
               trigger: item,
-              start: "top 86%",
-              toggleActions: "play none none reverse",
+              start: "top 90%",
+              end: "top 24%",
+              scrub: 0.65,
             },
           });
           timeline
             .fromTo(
               item,
               { "--line-progress": 0 },
-              { "--line-progress": 1, duration: 0.9, ease: "power3.inOut" },
+              { "--line-progress": 1, duration: 0.55, ease: "power3.inOut" },
             )
             .from(
-              item.querySelectorAll(
-                ".experience-period, .experience-name, .experience-index, .experience-detail",
-              ),
+              item.querySelector(".experience-period"),
               {
-                y: 55,
-                autoAlpha: 0,
-                duration: 1,
-                stagger: 0.09,
+                x: -32,
+                opacity: 0.2,
+                duration: 0.6,
                 ease: "power4.out",
               },
               0.1,
+            )
+            .from(
+              item.querySelector(".experience-role > span"),
+              { yPercent: 125, duration: 0.55, ease: "power3.out" },
+              0.1,
+            )
+            .from(
+              item.querySelector(".experience-company > span"),
+              { yPercent: 120, duration: 0.4, ease: "power3.out" },
+              0.22,
+            )
+            .from(
+              item.querySelector(".experience-index"),
+              {
+                y: 42,
+                rotation: -18,
+                opacity: 0.15,
+                duration: 0.65,
+                ease: "power3.out",
+              },
+              0.08,
+            )
+            .from(
+              item.querySelector(".experience-detail p"),
+              { y: 32, opacity: 0.15, duration: 0.5, ease: "power3.out" },
+              0.23,
+            )
+            .from(
+              item.querySelectorAll(".experience-detail .tool-tags > span"),
+              {
+                y: 18,
+                opacity: 0.2,
+                stagger: 0.045,
+                duration: 0.3,
+                ease: "power2.out",
+              },
+              0.32,
+            )
+            .from(
+              item.querySelector(".experience-node"),
+              {
+                scale: 0.35,
+                backgroundColor: "#f3f2ed",
+                duration: 0.5,
+                ease: "power2.out",
+              },
+              0.15,
             );
+        });
+        gsap.fromTo(
+          ".experience-spine > span",
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".experience-list",
+              start: "top 65%",
+              end: "bottom 50%",
+              scrub: 0.5,
+            },
+          },
+        );
+        gsap.to(".experience-emblem > svg", {
+          rotation: 360,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#experience",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        gsap.to(".experience-emblem > span", {
+          rotation: -180,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#experience",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
         });
 
         const marquee = element.querySelector<HTMLElement>(".marquee-track");
@@ -331,18 +408,18 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
     media.add(
       {
         desktop: "(min-width: 701px)",
-        threeColumns: "(min-width: 1001px)",
         motion: "(prefers-reduced-motion: no-preference)",
       },
       (context) => {
         if (!context.conditions?.motion) return;
         const desktop = Boolean(context.conditions.desktop);
-        const columns = context.conditions.threeColumns ? 3 : 2;
 
         select<HTMLElement>("[data-project-reveal]").forEach((card, index) => {
-          const scene = card.querySelector<HTMLElement>(".project-scroll-scene")!;
+          const scene = card.querySelector<HTMLElement>(
+            ".project-scroll-scene",
+          )!;
           const curtain = card.querySelector(".project-curtain");
-          const column = index < 2 ? index : (index - 2) % columns;
+          const column = index === 0 ? 0 : (index - 1) % 2;
           // The trigger stays in normal flow. Only the complete composition moves;
           // its image has no crop, zoom or hover transform.
           const timeline = gsap.timeline({
@@ -354,19 +431,20 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
               invalidateOnRefresh: true,
             },
           });
-          timeline
-            .fromTo(
-              scene,
-              { y: desktop ? 180 + column * 65 : 110 },
-              { y: 0, duration: 0.48, ease: "power3.out" },
-              0,
-            )
-            .fromTo(
+          timeline.fromTo(
+            scene,
+            { y: desktop ? 180 + column * 65 : 110 },
+            { y: 0, duration: 0.48, ease: "power3.out" },
+            0,
+          );
+          if (curtain)
+            timeline.fromTo(
               curtain,
               { y: 0, yPercent: 0 },
               { y: 0, yPercent: -101, duration: 0.34, ease: "power2.inOut" },
               0.09 + (desktop ? column * 0.035 : 0),
-            )
+            );
+          timeline
             .fromTo(
               card.querySelector(".project-caption-rule"),
               { scaleX: 0 },
@@ -546,12 +624,6 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
       element,
     );
 
-    const updateHeader = () =>
-      header?.classList.toggle("is-scrolled", window.scrollY > 25);
-    updateHeader();
-    window.addEventListener("scroll", updateHeader, { passive: true });
-    cleanups.push(() => window.removeEventListener("scroll", updateHeader));
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -593,7 +665,6 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
       media.revert();
       context.revert();
       observer.disconnect();
-      cleanups.forEach((cleanup) => cleanup());
       images.forEach((image) => image.removeEventListener("load", imageLoad));
     };
   }, [root]);

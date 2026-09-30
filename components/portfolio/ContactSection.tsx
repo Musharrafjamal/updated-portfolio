@@ -8,7 +8,7 @@ import {
   type MouseEvent,
 } from "react";
 import { ArrowUpRight, Check, Copy, Loader2 } from "lucide-react";
-import { sendEmail } from "@/app/actions/send-email";
+import { sendEmail, type EmailFailureCode } from "@/app/actions/send-email";
 import "./contact.css";
 
 const emailAddress = "musharrafjamal08@gmail.com";
@@ -27,6 +27,7 @@ export default function ContactSection() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
   const [responseMessage, setResponseMessage] = useState("");
+  const [errorCode, setErrorCode] = useState<EmailFailureCode | null>(null);
   const [copyStatus, setCopyStatus] = useState<
     "idle" | "copied" | "unavailable"
   >("idle");
@@ -70,6 +71,7 @@ export default function ContactSection() {
     if (status === "error" || status === "success") {
       setStatus("idle");
       setResponseMessage("");
+      setErrorCode(null);
     }
   }
 
@@ -95,6 +97,7 @@ export default function ContactSection() {
 
     setStatus("sending");
     setResponseMessage("");
+    setErrorCode(null);
     try {
       const result = await sendEmail({ email, message });
       if (result.success) {
@@ -103,9 +106,11 @@ export default function ContactSection() {
       } else {
         setStatus("error");
         setResponseMessage(result.message);
+        setErrorCode(result.code);
       }
     } catch {
       setStatus("error");
+      setErrorCode("DELIVERY_FAILED");
       setResponseMessage(
         "Message couldn’t be sent. Retry or email me directly.",
       );
@@ -338,9 +343,23 @@ export default function ContactSection() {
                   </div>
                 </fieldset>
                 {status === "error" && (
-                  <p className="contact-response-error" role="alert">
-                    {responseMessage}
-                  </p>
+                  <div className="contact-delivery-error">
+                    <p className="contact-response-error" role="alert">
+                      {responseMessage}
+                    </p>
+                    {(errorCode === "NOT_CONFIGURED" ||
+                      errorCode === "DELIVERY_FAILED") && (
+                      <div className="contact-delivery-fallback">
+                        <a
+                          href={`mailto:${emailAddress}?subject=${encodeURIComponent("Portfolio message")}&body=${encodeURIComponent(`Reply email: ${formData.email}\n\n${formData.message}`)}`}
+                        >
+                          Open email draft{" "}
+                          <ArrowUpRight size={15} aria-hidden="true" />
+                        </a>
+                        <a href={`mailto:${emailAddress}`}>{emailAddress}</a>
+                      </div>
+                    )}
+                  </div>
                 )}
               </form>
             </div>

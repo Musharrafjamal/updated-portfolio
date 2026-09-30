@@ -3,7 +3,7 @@ import { projects } from "@/components/work/data";
 export const selectedProjects = projects.map((project, index) => ({
   ...project,
   number: String(index + 1).padStart(2, "0"),
-  cover: `/projects/${project.slug}-cover${project.slug === "greenloom" ? "-v2" : ""}.webp`,
+  cover: `/projects/${project.slug}-cover${project.slug === "greenloom" ? "-v3" : ""}.webp`,
   category: [
     "AI study",
     "AI finance",
@@ -13,14 +13,18 @@ export const selectedProjects = projects.map((project, index) => ({
   ][index],
   shortDescription: [
     "Voice-led revision from notes, built for active recall.",
-    "AI reconciliation connecting payments, payouts, and your books.",
+    "AI finance that explains mismatches and keeps approvals human.",
     "Automated backups, encrypted storage, and database migrations.",
     "Book trusted mechanics for car repairs at your doorstep.",
     "An organic millet storefront, from farm to table.",
   ][index],
   highlights: [
     ["Voice-led active recall", "PDFs, notes & images", "Spaced repetition"],
-    ["Payment reconciliation", "Exception review", "Audit-ready workflows"],
+    [
+      "Daily reconciliation",
+      "Human-approved ERP posting",
+      "Audit trail & company memory",
+    ],
     [
       "PostgreSQL & MongoDB",
       "Encrypted S3 / R2 storage",
