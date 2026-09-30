@@ -227,7 +227,7 @@ img {
 .hero {
   position: relative;
   padding-top: 167px;
-  min-height: 850px;
+  padding-bottom: 40px;
 }
 .hero-kicker {
   display: flex;
@@ -370,22 +370,8 @@ img {
 .round-arrow > svg {
   height: 19px;
 }
-.hero-footnote {
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid var(--line);
-  padding: 21px 0;
-  margin-top: 118px;
-  font-size: 9px;
-  color: var(--muted);
-  letter-spacing: 0.02em;
-}
-.hero-footnote > span:last-child {
-  display: flex;
-  gap: 23px;
-}
 .work-section {
-  padding-top: 102px;
+  padding-top: 40px;
 }
 .section-heading {
   padding-bottom: 62px;
@@ -1264,9 +1250,6 @@ img {
     top: 430px;
     right: 30px;
   }
-  .hero {
-    min-height: 930px;
-  }
 }
 @media (max-width: 1200px) {
   .page-container {
@@ -1279,7 +1262,6 @@ img {
     gap: 20px;
   }
   .hero {
-    min-height: 760px;
     padding-top: 155px;
   }
   .hero-portrait {
@@ -1298,9 +1280,6 @@ img {
   .portrait-note {
     left: -103px;
     font-size: 18px;
-  }
-  .hero-footnote {
-    margin-top: 125px;
   }
   .about-grid {
     gap: 55px;
@@ -1351,11 +1330,8 @@ img {
     margin-top: 26px;
     gap: 17px;
   }
-  .hero-footnote {
-    margin-top: 65px;
-  }
   .work-section {
-    padding-top: 80px;
+    padding-top: 40px;
   }
   .section-heading-row > p {
     width: 230px;
@@ -1474,6 +1450,8 @@ img {
   }
   .hero {
     padding-top: 121px;
+    /* Keep the floating portrait and its caption clear of selected work. */
+    min-height: calc(290px + 78vw);
   }
   .hero-kicker {
     margin-bottom: 31px;
@@ -1557,22 +1535,8 @@ img {
     width: 44px;
     height: 44px;
   }
-  .hero-footnote {
-    margin-top: 82px;
-    font-size: 8px;
-    gap: 20px;
-    line-height: 1.6;
-    padding-top: 18px;
-  }
-  .hero-footnote > span:first-child {
-    max-width: 170px;
-  }
-  .hero-footnote > span:last-child {
-    gap: 12px;
-    align-items: center;
-  }
   .work-section {
-    padding-top: 58px;
+    padding-top: 24px;
   }
   .section-heading {
     padding-bottom: 30px;
@@ -1734,9 +1698,6 @@ img {
   }
 }
 @media (max-width: 390px) {
-  .hero-footnote {
-    margin-top: 80px;
-  }
   .hero-bottom {
     margin-top: 31px;
   }

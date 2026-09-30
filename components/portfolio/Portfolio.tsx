@@ -302,12 +302,6 @@ export default function Portfolio() {
               </span>
             </a>
           </div>
-          <div className="hero-footnote" data-hero-reveal>
-            <span>Web · Mobile · AI</span>
-            <span>
-              Scroll to discover <span aria-hidden="true">↓</span>
-            </span>
-          </div>
         </section>
 
         <section
