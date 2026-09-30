@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Musharraf Jamal — portfolio
 
-## Getting Started
+An editorial portfolio built with the existing Next.js 14, React 18, and Tailwind 3 stack. The redesign lives on `codex/portfolio-reimagined`; `main` retains the previous portfolio.
 
-First, run the development server:
+## Local preview
 
-```bash
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3030. For a production preview, run `npm run build` followed by `npm start` (also port 3030).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design and motion
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The page combines Manrope with Instrument Serif, warm ivory surfaces, ink typography, and a lime accent. GSAP and ScrollTrigger drive the hero's masked name reveal, rotating details, scroll reveals, portrait depth, featured-project chapter transitions, reading progress, and a viewport-aware marquee. Lenis provides smooth wheel scrolling while retaining native touch scrolling.
 
-## Learn More
+The featured stage pins only on screens wider than 800px with sufficient height. Mobile and reduced-motion layouts present every project in a normal document flow. Inactive desktop chapters are inert and hidden from assistive technology. Native project dialogs manage focus and pause background scrolling; expandable experience, capability, and contact sections support keyboard interaction.
 
-To learn more about Next.js, take a look at the following resources:
+## Where to edit
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `components/portfolio/Portfolio.tsx`: page sections and project dialogs.
+- `components/portfolio/portfolio-data.ts`: curated presentation, capabilities, and experience.
+- `components/work/data.ts`: project facts, roles, technology, and destination URLs.
+- `components/portfolio/usePortfolioMotion.ts`: GSAP/Lenis behavior and cleanup.
+- `app/globals.css`: responsive page design and interaction states.
+- `components/portfolio/ContactSection.tsx` and `contact.css`: contact experience.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The contact form uses the existing SMTP server action. Configure the variables in `.env.example` in `.env.local` or the deployment environment. Client and server both validate input; missing credentials produce an actionable email fallback. No external email was sent during verification.
 
-## Deploy on Vercel
+## Artwork
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Five product covers are stored in `public/projects/`, and the new identity-preserving editorial portrait is `public/images/musharraf-editorial.webp`. All are optimized WebP assets. The original portrait and mockups remain available. Covers are art-directed product presentations; project dialogs link to the live/source products.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The built-in image generation tool created the artwork. Prompts and source notes are preserved in:
+
+- `output/imagegen/prompts.md`
+- `output/imagegen/secondary-prompts.md`
+- `output/imagegen/portrait-prompt.md`
+
+Project research corrected Greenloom's current payment-reconciliation positioning, Snaplock's documented PostgreSQL/MongoDB backup support, and Revizer's stack using the existing résumé.
+
+## Checks
+
+```sh
+npx tsc --noEmit
+npm run lint
+npm run build
+```
+
+Browser verification covers desktop/mobile layouts, chapter selection, project modal and Escape behavior, mobile navigation, contact validation/focus, reduced-motion fallback, image loading, horizontal overflow, and console errors. Local screenshots are kept in the ignored `output/playwright/` folder.

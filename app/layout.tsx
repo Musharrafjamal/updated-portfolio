@@ -1,44 +1,34 @@
-import { Poppins, Satisfy, Merienda, Caveat } from "next/font/google";
-import { ThemeProvider } from "@/provider/ThemeProvider";
-import { Toaster } from "sonner";
+import type { Metadata } from "next";
+import { Manrope, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import { DefaultTabs } from "@/components/ui/others/tabs/tabs";
-import localFont from "next/font/local";
-import { CursorProvider } from "../contexts/CursorContext";
-import { CustomCursor } from "../components/ui/cursor/CustomCursor";
 
-const poppins = Poppins({
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-sans",
+  display: "swap",
 });
-
-const satisfy = Satisfy({
+const instrument = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-satisfy",
-});
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-caveat",
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
 });
 
-const merienda = Merienda({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-merienda",
-});
-const moonWalk = localFont({
-  src: "../public/fonts/moon-walk.otf",
-  variable: "--font-moon-walk",
-});
-
-export const metadata = {
-  title: "Musharraf",
-  description: "Team Lead, Developer, and Designer",
-  icons: {
-    icon: "/favicon.svg",
+export const metadata: Metadata = {
+  metadataBase: new URL("https://musharraf.dev"),
+  title: "Musharraf Jamal — Engineer & Designer",
+  description:
+    "Senior software engineer, full stack & AI builder, and designer. Thoughtful digital products, from the first idea to the final interaction.",
+  openGraph: {
+    title: "Musharraf Jamal — Engineer & Designer",
+    description:
+      "Code, craft, and a little curiosity. Explore selected web, mobile, and AI products.",
+    type: "website",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
   },
+  twitter: { card: "summary_large_image" },
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({
@@ -47,19 +37,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <body
-        className={`${poppins.className} ${satisfy.variable} ${caveat.variable} ${merienda.variable} ${moonWalk.variable} relative cursor-default`}
-      >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <CursorProvider>
-            {/* <Navbar /> */}
-            <DefaultTabs />
-            <main>{children}</main>
-            <Toaster position="top-center" richColors />
-            <CustomCursor />
-          </CursorProvider>
-        </ThemeProvider>
+    <html lang="en">
+      <body className={`${manrope.variable} ${instrument.variable}`}>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
+        {children}
       </body>
     </html>
   );

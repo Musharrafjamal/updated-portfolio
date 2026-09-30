@@ -38,3 +38,7 @@ next-env.d.ts
 # local tooling artifacts
 .claude/
 .superpowers/
+.playwright-cli/
+output/playwright/
+output/imagegen/*source*.png
+output/imagegen/*source*.webp
