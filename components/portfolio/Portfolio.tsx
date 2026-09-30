@@ -116,6 +116,7 @@ function ProjectDialog({
           <div className={`dialog-cover cover-${project.slug}`}>
             <Image
               src={project.cover}
+              quality={90}
               alt={`${project.title} — editorial product presentation`}
               width={1536}
               height={1024}
@@ -167,11 +168,10 @@ function ProjectDialog({
 
 export default function Portfolio() {
   const root = useRef<HTMLDivElement>(null);
-  const [activeChapter, setActiveChapter] = useState(0);
   const [activeCapability, setActiveCapability] = useState(0);
   const [project, setProject] = useState<SelectedProject | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  usePortfolioMotion(root, setActiveChapter);
+  usePortfolioMotion(root);
 
   useEffect(() => {
     const close = (event: KeyboardEvent) => {
@@ -181,18 +181,9 @@ export default function Portfolio() {
     return () => window.removeEventListener("keydown", close);
   }, []);
 
-  const changeChapter = (index: number) =>
-    window.dispatchEvent(
-      new CustomEvent("portfolio:chapter", { detail: index }),
-    );
-
   return (
     <div ref={root} className="portfolio" id="top">
       <div className="reading-progress" aria-hidden="true" />
-      <div className="project-cursor" aria-hidden="true">
-        <Arrow />
-        <span>Explore</span>
-      </div>
       <header className="site-header">
         <a
           href="#top"
@@ -254,11 +245,7 @@ export default function Portfolio() {
           aria-labelledby="hero-title"
         >
           <div className="hero-kicker" data-hero-reveal>
-            <span className="eyebrow">
-              A mind for engineering.
-              <br />
-              An eye for design.
-            </span>
+            <span className="eyebrow">Engineer & designer</span>
             <span className="hero-occupation">
               Senior software engineer
               <br />
@@ -289,9 +276,7 @@ export default function Portfolio() {
                   priority
                   sizes="(max-width: 650px) 230px, 332px"
                 />
-                <span className="portrait-label">
-                  A little curious. Always building.
-                </span>
+                <span className="portrait-label">Always building.</span>
               </div>
             </div>
             <span className="portrait-note">
@@ -311,23 +296,20 @@ export default function Portfolio() {
           <div className="hero-bottom" data-hero-reveal>
             <div className="hero-intro">
               <p>
-                Complex ideas.
+                Engineer by trade.
                 <br />
-                <em>Thoughtfully simple</em> products.
+                <em>Designer at heart.</em>
               </p>
-              <span>
-                From the first line of code to the last little detail.
-              </span>
             </div>
             <a href="#work" className="hero-work-link" data-magnetic>
-              <span>Explore selected work</span>
+              <span>Selected work</span>
               <span className="round-arrow">
                 <Arrow direction="down" />
               </span>
             </a>
           </div>
           <div className="hero-footnote" data-hero-reveal>
-            <span>Independent thinking. Collaborative building.</span>
+            <span>Web · Mobile · AI</span>
             <span>
               Scroll to discover <span aria-hidden="true">↓</span>
             </span>
@@ -346,172 +328,69 @@ export default function Portfolio() {
             <div className="section-heading-row">
               <h2
                 id="work-title"
-                aria-label="Less talk. More making."
+                aria-label="Made with care."
                 data-motion-heading
               >
                 <span className="motion-line">
-                  <span>Less talk.</span>
+                  <span>Made with</span>
                 </span>
                 <span className="motion-line">
-                  <em>More making.</em>
+                  <em>care.</em>
                 </span>
               </h2>
-              <p data-reveal>
-                A few things I’ve helped bring to life.
-                <br />
-                Built with care. Made for real people.
-              </p>
+              <span className="work-index" data-reveal>
+                {String(selectedProjects.length).padStart(2, "0")} PROJECTS
+              </span>
             </div>
           </div>
-          <div className="work-stage-shell page-container">
-            <div className="work-stage">
-              <div className="work-stage-viewport">
-                {selectedProjects.slice(0, 3).map((item, index) => (
-                  <article
-                    className={`project-chapter cover-${item.slug}`}
-                    id={`project-${item.slug}`}
-                    key={item.slug}
-                  >
-                    <div className="project-copy">
-                      <span className="eyebrow project-category">
-                        {item.category}
-                      </span>
-                      <h3 className="project-title">
-                        {item.title}
-                        <span className="project-title-dot">.</span>
-                      </h3>
-                      <p className="project-summary">{item.shortDescription}</p>
-                      <ul className="project-highlights">
-                        {item.highlights.map((highlight) => (
-                          <li key={highlight}>
-                            <span />
-                            {highlight}
-                          </li>
-                        ))}
-                      </ul>
-                      <button
-                        className="project-explore text-button"
-                        data-magnetic
-                        onClick={() => setProject(item)}
-                      >
-                        Inside the project <Arrow />
-                      </button>
-                      <span className="project-role">{item.role}</span>
-                    </div>
-                    <button
-                      className="project-visual"
-                      data-project-hover
-                      onClick={() => setProject(item)}
-                      aria-label={`Explore ${item.title}`}
-                    >
-                      <div className="project-image-wrap">
-                        <Image
-                          className="project-cover"
-                          src={item.cover}
-                          alt={`${item.title} product cover — ${item.tagline}`}
-                          width={1536}
-                          height={1024}
-                          sizes="(max-width: 800px) 100vw, 65vw"
-                        />
-                      </div>
-                      <span className="project-image-label">
-                        <span>{item.status}</span>
-                        <Arrow />
-                      </span>
-                      <span
-                        className="project-visual-number"
-                        aria-hidden="true"
-                      >
-                        0{index + 1}
-                      </span>
-                    </button>
-                  </article>
-                ))}
-              </div>
-              <div className="chapter-toolbar">
-                <div
-                  className="chapter-picker"
-                  role="group"
-                  aria-label="Choose featured project"
+          <div className="project-gallery page-container">
+            {selectedProjects.map((item, index) => (
+              <article
+                className={`project-card cover-${item.slug}`}
+                key={item.slug}
+                data-project-reveal
+              >
+                <button
+                  className="project-media"
+                  onClick={() => setProject(item)}
+                  aria-label={`Explore ${item.title}`}
                 >
-                  {selectedProjects.slice(0, 3).map((item, index) => (
-                    <button
-                      onClick={() => changeChapter(index)}
-                      key={item.slug}
-                      className={activeChapter === index ? "is-active" : ""}
-                      aria-label={`Show ${item.title}`}
-                      aria-current={
-                        activeChapter === index ? "true" : undefined
-                      }
-                    >
-                      <span className={`chapter-symbol symbol-${item.slug}`}>
-                        {item.title.slice(0, 1)}
-                      </span>
-                      <span className="chapter-picker-name">{item.title}</span>
-                    </button>
-                  ))}
-                </div>
-                <div className="chapter-position">
-                  <span aria-live="polite">0{activeChapter + 1}</span>
-                  <span className="chapter-track">
-                    <span />
-                  </span>
-                  <span>03</span>
-                </div>
-                <span className="chapter-scroll-hint">
-                  Keep scrolling <Arrow direction="down" />
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="more-work page-container">
-            <div className="more-work-label" data-reveal>
-              <span className="eyebrow">And there’s more</span>
-              <span>Different problems. The same care.</span>
-            </div>
-            <div className="supporting-projects">
-              {selectedProjects.slice(3).map((item) => (
-                <article
-                  className="supporting-project"
-                  key={item.slug}
-                  data-project-reveal
-                >
-                  <button
-                    className={`supporting-cover cover-${item.slug}`}
-                    onClick={() => setProject(item)}
-                    data-project-hover
-                    aria-label={`Explore ${item.title}`}
-                  >
-                    <div className="supporting-image-wrap">
-                      <Image
-                        src={item.cover}
-                        alt={`${item.title} — ${item.tagline}`}
-                        width={1536}
-                        height={1024}
-                        sizes="(max-width: 800px) 100vw, 50vw"
-                      />
-                    </div>
-                    <span className="supporting-cover-arrow">
-                      <Arrow />
+                  <Image
+                    src={item.cover}
+                    alt={`${item.title} — ${item.tagline}`}
+                    width={1536}
+                    height={1024}
+                    quality={90}
+                    sizes={
+                      index < 2
+                        ? "(max-width: 700px) 100vw, 50vw"
+                        : "(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
+                    }
+                  />
+                </button>
+                <div className="project-caption">
+                  <div className="project-card-meta">
+                    <span>
+                      {item.number} / {item.category}
                     </span>
-                  </button>
-                  <div className="supporting-project-meta">
-                    <div>
-                      <span className="eyebrow">{item.category}</span>
-                      <h3>
-                        <button onClick={() => setProject(item)}>
-                          {item.title}
-                          {item.titleAccent && ` ${item.titleAccent}`}
-                          <Arrow />
-                        </button>
-                      </h3>
-                    </div>
-                    <span className="supporting-number">{item.number}</span>
+                  </div>
+                  <div className="project-name-row">
+                    <h3>
+                      {item.title}
+                      {item.titleAccent && ` ${item.titleAccent}`}
+                    </h3>
+                    <button
+                      className="project-open"
+                      onClick={() => setProject(item)}
+                      aria-label={`Read about ${item.title}`}
+                    >
+                      <Arrow />
+                    </button>
                   </div>
                   <p>{item.shortDescription}</p>
-                </article>
-              ))}
-            </div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -538,35 +417,28 @@ export default function Portfolio() {
             <div className="about-heading">
               <h2
                 id="about-title"
-                aria-label="Good products start with good questions."
+                aria-label="Code. Craft. Curiosity."
                 data-motion-heading
               >
                 <span className="motion-line">
-                  <span>Good products</span>
+                  <span>Code. Craft.</span>
                 </span>
                 <span className="motion-line">
-                  <span>start with</span>
-                </span>
-                <span className="motion-line">
-                  <em>good questions.</em>
+                  <em>Curiosity.</em>
                 </span>
               </h2>
               <div className="about-signature" data-reveal>
                 <Asterisk />
-                <span>
-                  Curiosity is part
-                  <br />
-                  of the process.
-                </span>
+                <span>From idea to interaction.</span>
               </div>
             </div>
             <div className="about-copy">
               <p className="about-lead" data-reading-reveal>
                 <span className="sr-only">
-                  I’m Musharraf, an engineer with a designer’s instinct. I like
-                  making complicated things feel surprisingly simple.
+                  I build thoughtful digital products, from first idea to final
+                  interaction.
                 </span>
-                {"I’m Musharraf, an engineer with a designer’s instinct. I like making complicated things feel surprisingly simple."
+                {"I build thoughtful digital products, from first idea to final interaction."
                   .split(" ")
                   .map((word, index) => (
                     <span
@@ -578,16 +450,6 @@ export default function Portfolio() {
                     </span>
                   ))}
               </p>
-              <p data-reveal>
-                For 2+ years, I’ve been building across web, mobile, and AI —
-                connecting thoughtful interfaces with the systems that make them
-                work. Sometimes that means founding a product. Sometimes it
-                means helping a team ship something better.
-              </p>
-              <p data-reveal>
-                I care about the whole experience: how it looks, how it works,
-                and how it feels when someone actually uses it.
-              </p>
               <div className="about-facts" data-reveal>
                 <div>
                   <span className="eyebrow">Currently</span>
@@ -598,12 +460,8 @@ export default function Portfolio() {
                   </span>
                 </div>
                 <div>
-                  <span className="eyebrow">My approach</span>
-                  <span>
-                    Think clearly.
-                    <br />
-                    Build thoughtfully.
-                  </span>
+                  <span className="eyebrow">Experience</span>
+                  <span>2+ years building products</span>
                 </div>
               </div>
             </div>
@@ -757,7 +615,7 @@ export default function Portfolio() {
         <ContactSection />
       </main>
       <footer className="site-footer page-container">
-        <span>Made with intent. And a little GSAP.</span>
+        <span>Built by Musharraf.</span>
         <a href="#top" className="back-top" data-magnetic>
           Back to top <Arrow />
         </a>

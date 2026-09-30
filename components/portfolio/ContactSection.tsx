@@ -82,11 +82,10 @@ export default function ContactSection() {
     const nextErrors: FieldErrors = {};
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
-      nextErrors.email = "A valid email helps me get back to you.";
+      nextErrors.email = "Enter a valid email address.";
     }
     if (message.length < 10 || message.length > 5000) {
-      nextErrors.message =
-        "Share a little more — between 10 and 5,000 characters.";
+      nextErrors.message = "Use between 10 and 5,000 characters.";
     }
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) {
@@ -108,7 +107,7 @@ export default function ContactSection() {
     } catch {
       setStatus("error");
       setResponseMessage(
-        "The message couldn’t be sent. Try again, or reach me directly by email.",
+        "Message couldn’t be sent. Retry or email me directly.",
       );
     }
   }
@@ -122,8 +121,7 @@ export default function ContactSection() {
       <div className="contact-shell">
         <div className="contact-section-meta" data-reveal>
           <span>
-            <span className="contact-meta-dot" /> A conversation is a good
-            start.
+            <span className="contact-meta-dot" /> Contact
           </span>
           <span className="contact-meta-index">04 / GET IN TOUCH</span>
         </div>
@@ -166,19 +164,9 @@ export default function ContactSection() {
 
         <div className="contact-body-grid" data-contact-body>
           <div className="contact-conversation-row" data-contact-intro>
-            <span className="contact-small-label">A GOOD PLACE TO BEGIN</span>
-            <h3 className="contact-invitation">
-              Your next idea.
-              <br />
-              Our first hello.
-            </h3>
-            <p>
-              Tell me about your next idea.
-              <br />
-              Let’s make something worth putting into the world.
-            </p>
+            <h3 className="contact-invitation">Say hello.</h3>
             <div className="contact-email-group">
-              <span className="contact-small-label">PREFER EMAIL?</span>
+              <span className="contact-small-label">EMAIL</span>
               <div className="contact-email-row">
                 <a
                   href={`mailto:${emailAddress}`}
@@ -225,8 +213,7 @@ export default function ContactSection() {
             <div className="contact-form-panel-inner">
               <div className="contact-form-heading">
                 <div>
-                  <span className="contact-small-label">SEND A MESSAGE</span>
-                  <h3 id="contact-form-title">What are you imagining?</h3>
+                  <h3 id="contact-form-title">Send a message.</h3>
                 </div>
                 <ArrowUpRight aria-hidden="true" />
               </div>
@@ -241,9 +228,7 @@ export default function ContactSection() {
                   </span>
                   <div>
                     <h4>Message received.</h4>
-                    <p>
-                      Thanks for reaching out. I’ll get back to you by email.
-                    </p>
+                    <p>I’ll get back to you by email.</p>
                   </div>
                 </div>
               )}
@@ -298,14 +283,14 @@ export default function ContactSection() {
                     data-contact-field
                   >
                     <label htmlFor="contact-message">
-                      What are you thinking? <span>*</span>
+                      Message <span>*</span>
                     </label>
                     <textarea
                       ref={messageRef}
                       id="contact-message"
                       name="message"
                       rows={4}
-                      placeholder="A project, a collaboration, or just a hello…"
+                      placeholder="Tell me about your project…"
                       value={formData.message}
                       onChange={(event) =>
                         updateField("message", event.target.value)
@@ -315,9 +300,7 @@ export default function ContactSection() {
                       required
                       aria-invalid={Boolean(errors.message)}
                       aria-describedby={
-                        errors.message
-                          ? "contact-message-error"
-                          : "contact-message-hint"
+                        errors.message ? "contact-message-error" : undefined
                       }
                     />
                     <div className="contact-message-meta">
@@ -329,18 +312,13 @@ export default function ContactSection() {
                         >
                           {errors.message}
                         </p>
-                      ) : (
-                        <p id="contact-message-hint">
-                          A few details are all it takes.
-                        </p>
-                      )}
+                      ) : null}
                       <span aria-hidden="true">
                         {formData.message.length.toLocaleString()} / 5,000
                       </span>
                     </div>
                   </div>
                   <div className="contact-submit-row" data-contact-field>
-                    <p>A project, a collaboration, or just a hello.</p>
                     <button type="submit" className="contact-submit-button">
                       <span>
                         {status === "sending"

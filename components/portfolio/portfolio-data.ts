@@ -3,20 +3,20 @@ import { projects } from "@/components/work/data";
 export const selectedProjects = projects.map((project, index) => ({
   ...project,
   number: String(index + 1).padStart(2, "0"),
-  cover: `/projects/${project.slug}-cover.webp`,
+  cover: `/projects/${project.slug}-cover${project.slug === "greenloom" ? "-v2" : ""}.webp`,
   category: [
-    "AI learning · Mobile & web",
-    "AI finance · Web platform",
-    "Open source · Infrastructure",
-    "On-demand services · Web & mobile",
-    "Organic commerce · Web",
+    "AI study",
+    "AI finance",
+    "Open source",
+    "Car care",
+    "Organic commerce",
   ][index],
   shortDescription: [
-    "A study companion that listens. Turn your notes into voice-led revision, built around active recall.",
-    "From scattered payments to a clear picture. AI-powered reconciliation that connects payouts to the books.",
-    "A calmer way to protect your data. Automated backups, encrypted storage, and restores in one place.",
-    "Car care, without the detour. Bringing trusted mechanics and everyday repairs to your doorstep.",
-    "Good food, closer to its roots. An organic millet storefront connecting the farm to the table.",
+    "Voice-led revision from notes, built for active recall.",
+    "AI reconciliation connecting payments, payouts, and your books.",
+    "Automated backups, encrypted storage, and database migrations.",
+    "Book trusted mechanics for car repairs at your doorstep.",
+    "An organic millet storefront, from farm to table.",
   ][index],
   highlights: [
     ["Voice-led active recall", "PDFs, notes & images", "Spaced repetition"],
@@ -43,7 +43,7 @@ export const experience = [
     role: "Senior Software Engineer",
     period: "Oct 2025 — Present",
     description:
-      "Engineering full-stack applications with a focus on performance, scale, and security. Owning the MongoDB schemas and APIs behind core business features, and working across the team to take new ideas into production.",
+      "Builds full-stack applications, owns MongoDB schemas and APIs, and delivers production features with a focus on performance, scale, and security.",
     tags: ["Full stack", "Architecture", "Product delivery"],
   },
   {
@@ -51,7 +51,7 @@ export const experience = [
     role: "Team Lead",
     period: "Feb — Sep 2025",
     description:
-      "Led end-to-end development of a service-provider marketplace. Managed engineers and designers, built secure authentication, and introduced automation across delivery workflows.",
+      "Led a service-provider marketplace team, managing engineers and designers while building secure authentication and automating delivery workflows across the product.",
     tags: ["Team leadership", "Marketplace", "Automation"],
   },
   {
@@ -59,7 +59,7 @@ export const experience = [
     role: "Software Development Engineer",
     period: "Feb 2024 — Jan 2025",
     description:
-      "Grew from intern to SDE, shipping responsive applications and REST APIs. Improved load times and report generation, integrated payments, and built an automated testing framework adopted by the team.",
+      "Shipped web applications and APIs, improved performance, integrated payments, and established an automated testing framework after progressing from intern to SDE.",
     tags: ["Web applications", "Performance", "Testing"],
   },
 ];
@@ -70,27 +70,25 @@ export const capabilities = [
     title: "Interfaces with intention",
     label: "Frontend & design",
     description:
-      "Fast, responsive web experiences. Every layout, state, and small interaction considered.",
+      "Responsive interfaces, considered down to the last interaction.",
     tools: ["React", "Next.js", "TypeScript", "Tailwind", "Figma"],
-    detail: "From the first wireframe to the smallest hover state.",
+    detail: "Design through the final interaction.",
     shape: "interface",
   },
   {
     number: "02",
     title: "Products in your pocket",
     label: "Mobile engineering",
-    description:
-      "Native-feeling apps that make complex workflows feel natural, on the devices people use every day.",
+    description: "Native-feeling apps for everyday workflows.",
     tools: ["React Native", "Expo", "Firebase", "WebSockets"],
-    detail: "The same care, from a wide screen to one hand.",
+    detail: "Built for one hand.",
     shape: "mobile",
   },
   {
     number: "03",
     title: "Intelligence that helps",
     label: "AI & backend systems",
-    description:
-      "Useful AI, reliable APIs, and thoughtful infrastructure. Built to solve the actual problem.",
+    description: "Useful AI, reliable APIs, and infrastructure that holds up.",
     tools: [
       "Node.js",
       "NestJS",
@@ -99,7 +97,7 @@ export const capabilities = [
       "PostgreSQL",
       "Docker",
     ],
-    detail: "A clear interface. A capable system behind it.",
+    detail: "Clear interfaces. Capable systems.",
     shape: "systems",
   },
 ];

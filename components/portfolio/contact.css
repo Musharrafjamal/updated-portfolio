@@ -152,7 +152,7 @@
 }
 
 .contact-email-group {
-  margin-top: clamp(36px, 4vw, 60px);
+  margin-top: 24px;
   max-width: 100%;
 }
 
@@ -343,6 +343,7 @@
 
 .contact-message-meta > span {
   flex-shrink: 0;
+  margin-left: auto;
   font-variant-numeric: tabular-nums;
 }
 

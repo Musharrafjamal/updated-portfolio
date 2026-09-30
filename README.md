@@ -13,9 +13,9 @@ Open http://localhost:3030. For a production preview, run `npm run build` follow
 
 ## Design and motion
 
-The page combines Manrope with Instrument Serif, warm ivory surfaces, ink typography, and a lime accent. GSAP and ScrollTrigger drive masked line reveals, a kinetic hero exit, reversible project image and text wipes, layered cover parallax, an about-text reading reveal, rotating craft orbits, drawn experience dividers, and a marquee that responds to scroll velocity. Lenis provides smooth wheel scrolling while retaining native touch scrolling. Entrance, scroll, and hover transforms use separate layers.
+The page combines Manrope with Instrument Serif, warm ivory surfaces, ink typography, and a lime accent. GSAP and ScrollTrigger drive masked line reveals, a kinetic hero exit, gallery-card entrances, an about-text reading reveal, rotating craft orbits, drawn experience dividers, and a marquee that responds to scroll velocity. Lenis provides smooth wheel scrolling while retaining native touch scrolling.
 
-The featured stage pins only on screens wider than 800px with sufficient height. Mobile and reduced-motion layouts present every project in a normal document flow. Inactive desktop chapters are inert and hidden from assistive technology. Native project dialogs manage focus and pause background scrolling. Experience details and the contact form are always visible; capability panels support keyboard interaction.
+The gallery presents two featured projects above three smaller projects, then stacks on mobile. Every cover keeps its native 3:2 aspect ratio, including in the detail dialog. Artwork remains stationary on hover; only the outline and caption arrow respond. Short captions keep the main page focused, with detailed facts available in the native project dialogs. Dialogs manage focus and pause background scrolling. Experience details and the contact form are always visible; capability panels support keyboard interaction. Reduced-motion preferences remove decorative animations.
 
 ## Where to edit
 
@@ -37,6 +37,7 @@ The built-in image generation tool created the artwork. Prompts and source notes
 - `output/imagegen/prompts.md`
 - `output/imagegen/secondary-prompts.md`
 - `output/imagegen/portrait-prompt.md`
+- `output/imagegen/greenloom-v2-prompt.md` (cleaner replacement Greenloom cover)
 
 Project research corrected Greenloom's current payment-reconciliation positioning, Snaplock's documented PostgreSQL/MongoDB backup support, and Revizer's stack using the existing résumé.
 
@@ -48,4 +49,4 @@ npm run lint
 npm run build
 ```
 
-Browser verification covers desktop/mobile layouts, chapter selection, project modal and Escape behavior, mobile navigation, contact validation/focus, reduced-motion fallback, image loading, horizontal overflow, and console errors. Local screenshots are kept in the ignored `output/playwright/` folder.
+Browser verification covers desktop/mobile layouts, full-cover visibility and stationary hover, project modal and Escape behavior, mobile navigation, contact validation/focus, reduced-motion fallback, image loading, horizontal overflow, and console errors. Local screenshots are kept in the ignored `output/playwright/` folder.
