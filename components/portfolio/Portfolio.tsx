@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import ContactSection from "./ContactSection";
 import SharcodeBrand from "./SharcodeBrand";
 import ProjectFilm from "./ProjectFilm";
@@ -13,9 +13,11 @@ import {
   selectedProjects,
   type SelectedProject,
 } from "./portfolio-data";
-const PortfolioMotion = dynamic(() => import("./PortfolioMotion"), {
-  ssr: false,
-});
+const PortfolioMotion = dynamic<{ root: RefObject<HTMLDivElement> }>(
+  // Decorative motion must not take down the page if its download fails.
+  () => import("./PortfolioMotion").catch(() => ({ default: () => null })),
+  { ssr: false },
+);
 
 export function Arrow({
   className = "",
