@@ -20,7 +20,7 @@ const title = "Sharcode — Musharraf Jamal";
 const description =
   "Engineer. Designer. Builder. Explore Musharraf Jamal's selected web, mobile and AI products — thoughtfully built from the first idea to the final interaction.";
 const socialImage = {
-  url: "/sharcode-social-card.png",
+  url: "/sharcode-social-card-v2.png",
   width: 1200,
   height: 630,
   type: "image/png",
@@ -51,12 +51,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg?v=2", type: "image/svg+xml" },
-      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon.svg?v=3", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png?v=3", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png?v=3", type: "image/png", sizes: "16x16" },
     ],
-    shortcut: "/favicon-32x32.png",
-    apple: { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+    shortcut: "/favicon-32x32.png?v=3",
+    apple: {
+      url: "/apple-touch-icon.png?v=3",
+      type: "image/png",
+      sizes: "180x180",
+    },
   },
 };
 

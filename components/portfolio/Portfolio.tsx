@@ -61,20 +61,6 @@ function Asterisk({ className = "" }: { className?: string }) {
   );
 }
 
-function IndiaTime() {
-  const [time, setTime] = useState("INDIA · IST");
-  useEffect(() => {
-    const update = () =>
-      setTime(
-        `INDIA · ${new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date())}`,
-      );
-    update();
-    const timer = setInterval(update, 60000);
-    return () => clearInterval(timer);
-  }, []);
-  return <span className="local-time">{time}</span>;
-}
-
 function ProjectDialog({
   project,
   onClose,
@@ -221,7 +207,6 @@ export default function Portfolio() {
           </a>
         </nav>
         <div className="header-right">
-          <IndiaTime />
           <a
             href="https://docs.google.com/document/d/1kAhpCs_0WL15mLLamYSsPfBZD_IMOBhNA_u8EWOQg6Y/edit?usp=sharing"
             target="_blank"
@@ -376,7 +361,6 @@ export default function Portfolio() {
                     </button>
                   )}
                   <div className="project-caption">
-                    <span className="project-caption-rule" aria-hidden="true" />
                     <div className="project-card-meta">
                       <span>
                         {item.number} / {item.category}

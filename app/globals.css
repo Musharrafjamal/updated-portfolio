@@ -143,10 +143,7 @@ img {
 }
 .sharcode-mark {
   flex-shrink: 0;
-  transition: transform 350ms var(--ease);
-}
-.wordmark:hover .sharcode-mark {
-  transform: rotate(-12deg);
+  transition: transform 250ms var(--ease);
 }
 .wordmark:focus-visible {
   border-radius: 3px;
@@ -189,11 +186,6 @@ img {
   display: flex;
   align-items: center;
   gap: 30px;
-}
-.local-time {
-  font-size: 9px;
-  letter-spacing: 0.09em;
-  font-variant-numeric: tabular-nums;
 }
 .header-contact {
   display: flex;
@@ -470,6 +462,26 @@ img {
   object-fit: contain;
   pointer-events: none;
 }
+.film-playback-toggle {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.film-playback-toggle:active {
+  scale: 1;
+}
+.project-film:has(.film-playback-toggle:focus-visible) {
+  outline: 2px solid #65743d;
+  outline-offset: 6px;
+}
+.film-playback-toggle:focus-visible {
+  outline: none;
+}
 .film-control {
   position: absolute;
   right: 24px;
@@ -483,10 +495,11 @@ img {
   background: #20231fcc;
   color: white;
   opacity: 0.65;
+  pointer-events: none;
   transition: opacity 200ms;
 }
 .project-film:hover .film-control,
-.project-film:focus-visible .film-control,
+.project-film:focus-within .film-control,
 .project-film.is-paused .film-control {
   opacity: 1;
 }
@@ -518,17 +531,22 @@ img {
   line-height: 0.72;
   letter-spacing: -0.08em;
 }
+.project-film .project-film-cover {
+  z-index: 2;
+  padding: clamp(18px, 3vw, 42px);
+  background: #d98a4e;
+  color: #fff3e4;
+}
+.project-film-cover > img {
+  object-fit: contain;
+}
+.project-film-cover > .film-cover-index {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 16px #70391030;
+}
 .project-caption {
   position: relative;
-}
-.project-caption-rule {
-  position: absolute;
-  top: -10px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--line);
-  transform-origin: left;
 }
 .project-card-meta {
   margin-top: 22px;
@@ -610,13 +628,13 @@ img {
 .project-card:focus-within .project-curtain {
   transform: translateY(-101%) !important;
 }
-.project-card:focus-within .project-caption-rule {
-  transform: scaleX(1) !important;
-}
 .project-card:focus-within .project-caption > p {
   opacity: 1 !important;
 }
 @media (hover: hover) and (pointer: fine) {
+  .wordmark:hover .sharcode-mark {
+    transform: translateY(-1px) rotate(-5deg);
+  }
   .project-media:hover {
     outline-color: #a4ae8e;
   }
@@ -1402,9 +1420,6 @@ img {
 @media (max-width: 900px) {
   .site-header {
     gap: 16px;
-  }
-  .local-time {
-    display: none;
   }
   .wordmark {
     min-width: 0;

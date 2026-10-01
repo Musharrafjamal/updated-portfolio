@@ -446,12 +446,6 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
             );
           timeline
             .fromTo(
-              card.querySelector(".project-caption-rule"),
-              { scaleX: 0 },
-              { scaleX: 1, duration: 0.32, ease: "power2.inOut" },
-              0.12,
-            )
-            .fromTo(
               card.querySelector(".project-card-meta > span"),
               { yPercent: 115 },
               { yPercent: 0, duration: 0.24, ease: "power3.out" },

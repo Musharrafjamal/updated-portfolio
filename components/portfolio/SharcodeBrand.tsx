@@ -25,20 +25,27 @@ export default function SharcodeBrand({
         className="sharcode-mark"
         width="30"
         height="30"
-        viewBox="0 0 36 36"
+        viewBox="0 0 42 42"
         fill="none"
         aria-hidden="true"
         focusable="false"
       >
-        <rect width="36" height="36" rx="10" fill="#20231f" />
-        <g
-          stroke="#f3f2ed"
-          strokeWidth="1.9"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M15.2 13.1c-.9-.8-2-1.2-3.3-1.2-2 0-3.4 1.1-3.4 2.7 0 1.6 1.3 2.5 3.3 3l1.1.3c2 .5 3.1 1.6 3.1 3.1 0 2-1.6 3.3-3.9 3.3-1.6 0-3.1-.6-4.1-1.7" />
-          <path d="M27.2 13.8c-1-1.2-2.3-1.9-3.9-1.9-3.4 0-5.5 2.5-5.5 6.2s2.1 6.2 5.5 6.2c1.6 0 2.9-.7 3.9-1.9" />
+        <g transform="translate(1.5 0)">
+          <path
+            d="M34 3H15C8.4 3 4 7.4 4 14c0 4.8 3 8.3 8 10l11 3.8c1.6.6 2.4 1.4 2.4 2.6 0 1.2-1.1 2-2.9 2H7L3 39h21c7.2 0 12-4.5 12-11 0-4.8-3.2-8.2-8.3-9.9L17 14.5c-1.6-.5-2.4-1.3-2.4-2.5 0-1.2 1.1-2 2.9-2h12.3L34 3Z"
+            fill="#20231f"
+          />
+          <path
+            className="sharcode-accent"
+            d="m25.6 21.8 7.2 2.5-5.8 4.5c.7-3.1.2-5.3-1.4-7Z"
+            fill="var(--sharcode-accent, #d6f46a)"
+          />
+          <path
+            d="m12 21.6 10.8 3.7"
+            stroke="var(--paper, #f3f2ed)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
         </g>
       </svg>
       <span

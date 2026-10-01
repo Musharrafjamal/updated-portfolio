@@ -1,17 +1,25 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Pause, Play } from "lucide-react";
+
+const filmPoster = "/videos/revizer/product-film-poster.webp";
 
 export default function ProjectFilm() {
   const film = useRef<HTMLVideoElement>(null);
   const userPaused = useRef(false);
   const userStarted = useRef(false);
   const [playing, setPlaying] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+  const [cover, setCover] = useState("/projects/revizer-film-cover.webp");
 
   useEffect(() => {
     const video = film.current;
     if (!video) return;
+    setHydrated(true);
+    // Playback is driven by visibility rather than the browser's autoplay flag.
+    video.autoplay = false;
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let visible = false;
     const syncPlayback = () => {
@@ -30,10 +38,8 @@ export default function ProjectFilm() {
     observer.observe(video);
     const onPreference = () => {
       userStarted.current = false;
-      video.autoplay = !preference.matches;
       syncPlayback();
     };
-    video.autoplay = !preference.matches;
     preference.addEventListener("change", onPreference);
     document.addEventListener("visibilitychange", syncPlayback);
     return () => {
@@ -58,31 +64,53 @@ export default function ProjectFilm() {
   }
 
   return (
-    <button
-      type="button"
+    <div
       className={`project-media project-film ${playing ? "is-playing" : "is-paused"}`}
-      onClick={togglePlayback}
-      aria-label={`${playing ? "Pause" : "Play"} Revizer product film`}
     >
       <video
         ref={film}
         muted
         loop
         playsInline
-        poster="/videos/revizer/product-film-poster.webp"
+        poster={filmPoster}
         preload="metadata"
+        controls={!hydrated}
+        style={{ pointerEvents: hydrated ? "none" : "auto" }}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
-        aria-hidden="true"
+        aria-hidden={hydrated || undefined}
+        aria-label={hydrated ? undefined : "Revizer product film"}
       >
         <source
           src="/videos/revizer/product-film-landscape.mp4"
           type="video/mp4"
         />
       </video>
-      <span className="film-control" aria-hidden="true">
-        {playing ? <Pause size={17} /> : <Play size={17} />}
+      {hydrated && (
+        <button
+          type="button"
+          className="film-playback-toggle"
+          onClick={togglePlayback}
+          aria-label={`${playing ? "Pause" : "Play"} Revizer product film`}
+        >
+          <span className="film-control" aria-hidden="true">
+            {playing ? <Pause size={17} /> : <Play size={17} />}
+          </span>
+        </button>
+      )}
+      <span className="project-curtain project-film-cover" aria-hidden="true">
+        <Image
+          src={cover}
+          alt=""
+          fill
+          quality={90}
+          sizes="100vw"
+          onError={() => {
+            if (cover !== filmPoster) setCover(filmPoster);
+          }}
+        />
+        <span className="film-cover-index">01</span>
       </span>
-    </button>
+    </div>
   );
 }
