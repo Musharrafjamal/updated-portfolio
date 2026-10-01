@@ -168,7 +168,7 @@ export default function ContactSection() {
             type="button"
             className="contact-talk-button"
             aria-controls="contact-form-panel"
-            aria-label="Go to the contact form"
+            aria-label="Let’s talk — go to the contact form"
             onClick={focusForm}
             data-magnetic
             data-contact-cta

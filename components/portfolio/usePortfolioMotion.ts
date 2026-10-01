@@ -42,7 +42,7 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
             )
             .from(
               ".portrait-reveal",
-              { y: 85, rotate: 16, scale: 0.82, autoAlpha: 0, duration: 1.4 },
+              { y: 85, rotate: 16, scale: 0.82, duration: 1.4 },
               0.4,
             )
             .from(

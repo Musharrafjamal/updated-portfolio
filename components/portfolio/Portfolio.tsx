@@ -356,7 +356,7 @@ export default function Portfolio() {
                     <button
                       className="project-media"
                       onClick={() => setProject(item)}
-                      aria-label={`Explore ${item.title}`}
+                      aria-label={`Explore ${item.title} — ${item.number}`}
                       aria-haspopup="dialog"
                     >
                       <PortfolioImage
