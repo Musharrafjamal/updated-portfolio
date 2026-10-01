@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import ContactSection from "./ContactSection";
-import SharcodeBrand from "./SharcodeBrand";
+import PersonalBrand from "./PersonalBrand";
 import ProjectFilm from "./ProjectFilm";
 import PortfolioImage from "./PortfolioImage";
 import { portrait } from "./portfolio-media";
@@ -180,8 +180,8 @@ export default function Portfolio() {
       <PortfolioMotion root={root} />
       <div className="reading-progress" aria-hidden="true" />
       <header className="site-header">
-        <a href="#top" className="wordmark" aria-label="Sharcode, back to top">
-          <SharcodeBrand />
+        <a href="#top" className="wordmark" aria-label="Musharraf Jamal, back to top">
+          <PersonalBrand />
         </a>
         <nav
           id="main-navigation"

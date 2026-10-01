@@ -1,4 +1,4 @@
-# Sharcode — Musharraf Jamal's portfolio
+# Musharraf Jamal's portfolio
 
 An editorial portfolio built with the existing Next.js 14, React 18, and Tailwind 3 stack. The redesign is published from `main`. The previous portfolio is preserved on the local and remote branch `codex/backup-main-2026-10-01` (commit `59ad014`).
 
@@ -13,7 +13,7 @@ Open http://localhost:3030. For a production preview, run `npm run build` follow
 
 ## Design and motion
 
-The page combines Manrope with Instrument Serif, warm ivory surfaces, ink typography, and a lime accent. A folded ribbon S mark and lowercase Sharcode wordmark identify the header, with matching SVG/PNG favicons and an Apple icon. Navigation stays in normal document flow. The résumé link uses the original portfolio's Google document. GSAP and ScrollTrigger drive scroll-linked masked headings, a kinetic hero exit, an about-text reading reveal, rotating craft orbits, and a marquee that responds to scroll velocity. The experience timeline fills as you scroll, with drawn dividers, masked roles, moving markers and a rotating emblem. Lenis provides smooth wheel scrolling while retaining native touch scrolling.
+The page combines Manrope with Instrument Serif, warm ivory surfaces, ink typography, and a lime accent. A connected MJ monogram with a lime folded corner and personal name wordmark identify the header, with matching SVG/PNG favicons and an Apple icon. Navigation stays in normal document flow. The résumé link uses the original portfolio's Google document. GSAP and ScrollTrigger drive scroll-linked masked headings, a kinetic hero exit, an about-text reading reveal, rotating craft orbits, and a marquee that responds to scroll velocity. The experience timeline fills as you scroll, with drawn dividers, masked roles, moving markers and a rotating emblem. Lenis provides smooth wheel scrolling while retaining native touch scrolling.
 
 Revizer leads the gallery in an asymmetric 16:9 film/content row, followed by four projects in a 2×2 grid. The complete film remains visible beside top-aligned content. Clicking the video, titles, or descriptions opens project details; separate compact play/pause and mute controls manage playback. Playback pauses offscreen, in a hidden tab, or behind any project dialog, and preserves manual pause and mute choices.
 
@@ -21,14 +21,17 @@ Each card has a reversible scroll timeline: the complete composition lifts into 
 
 ## Sharing
 
-Metadata uses the verified public domain `https://sharcode.tech`, including canonical and Open Graph URLs and a Twitter large-image card. The generated social banner is `public/sharcode-social-card-v3.jpg`, a 1200×630 JPEG with the portrait, Sharcode identity and domain. Its fresh URL avoids reusing the prior banner's cached URL. These assets and metadata become publicly available when this branch is deployed; actual link previews depend on each social platform's surfaces and caching. The 65 KB JPEG can also be shared directly.
+Metadata uses the verified public domain `https://musharrafjamal.com`, including canonical and Open Graph URLs and a Twitter large-image card. The generated social banner is `public/musharraf-jamal-social-v1.jpg`, a 1200×630 JPEG with the portrait, MJ personal identity and domain. Its fresh URL avoids reusing the prior banner's cached URL. These assets and metadata become publicly available when this branch is deployed; actual link previews depend on each social platform's surfaces and caching. The 67 KB JPEG can also be shared directly.
+
+The Vercel project `portfolio` serves `musharrafjamal.com` from its Production environment. `www.musharrafjamal.com` permanently redirects to the root address with HTTP 308. Cloudflare manages DNS with automatic TTL and DNS-only CNAME records for `@` and `www`, both targeting `1979cc5bbdd0f08c.vercel-dns-017.com`. Cloudflare flattens the root CNAME; Vercel manages HTTPS certificates. The robots file and sitemap use the same root domain.
 
 ## Where to edit
 
 - `components/portfolio/Portfolio.tsx`: page sections and project dialogs.
-- `components/portfolio/SharcodeBrand.tsx`: reusable SVG mark and wordmark.
+- `components/portfolio/PersonalBrand.tsx`: reusable SVG mark and wordmark.
 - `components/portfolio/ProjectFilm.tsx`: Revizer playback and visibility behavior.
 - `app/layout.tsx`: domain, page metadata and social previews.
+- `lib/site.ts`, `app/robots.ts`, and `app/sitemap.ts`: shared site identity and crawl URLs.
 - `components/portfolio/portfolio-data.ts`: curated presentation, capabilities, and experience.
 - `components/work/data.ts`: project facts, roles, technology, and destination URLs.
 - `components/portfolio/usePortfolioMotion.ts`: GSAP/Lenis behavior and cleanup.
@@ -58,17 +61,17 @@ The built-in image generation tool created the artwork. Prompts and source notes
 - `output/imagegen/portrait-prompt.md`
 - `output/imagegen/greenloom-v2-prompt.md` (cleaner replacement Greenloom cover)
 - `output/imagegen/greenloom-v3-prompt.md` (current cube logo and audit-trail presentation)
-- `output/imagegen/sharcode-social-prompt.md` (social sharing banner)
+- `output/imagegen/musharraf-jamal-social-prompt.md` (current personal identity social sharing banner)
 
 Project research corrected Greenloom's current payment-reconciliation positioning and visual identity from its [live website](https://greenloom.ai/en), Snaplock's documented PostgreSQL/MongoDB backup support, and Revizer's stack using the existing résumé.
 
 ## Performance and loading
 
 - Active portrait and project artwork use compressed WebP sources, static imports, responsive `next/image` sizing, and embedded blur previews. Next negotiates AVIF/WebP, preserves image dimensions, and caches generated variants. Only the hero portrait is prioritized; dialog artwork loads on opening.
-- The social banner is 65 KB (previously 1.09 MB). The portrait source is 35 KB (previously 122 KB).
+- The social banner is 67 KB (previously 1.09 MB). The portrait source is 35 KB (previously 122 KB).
 - The Revizer film has a 4.3 MB 1080p/60 fps desktop version and a 2.5 MB 720p/30 fps mobile version, both with stereo audio, H.264/AAC, and fast-start metadata. Versioned URLs have immutable cache headers and support HTTP range streaming. The original source remains for compatibility.
 - No video source is attached before the film enters view. Browsers reporting Data Saver or a 2G/3G connection, and reduced-motion users, load it only after pressing Play. A poster stays visible until a decoded frame is ready; delayed buffering shows a status indicator, and network failures expose Retry while project details remain available.
-- Motion code is loaded separately from the initial interactive page bundle (107 KB, previously 156 KB). Delayed motion code does not replay the hero entrance over content already being read. Image-triggered scroll measurements are batched per animation frame.
+- Motion code is loaded separately from the initial interactive page bundle (106 KB, previously 156 KB). Delayed motion code does not replay the hero entrance over content already being read. Image-triggered scroll measurements are batched per animation frame.
 - The form keeps its draft after network errors, detects offline submission, disables duplicate sends, and provides feedback after eight seconds of waiting. A network timeout never creates a false delivery confirmation.
 - Original unused artwork and prior social banners remain available for compatibility and are not referenced by the current page.
 

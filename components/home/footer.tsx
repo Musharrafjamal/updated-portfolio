@@ -63,7 +63,7 @@ const Footer = () => {
           className="text-center text-zinc-600 dark:text-zinc-400"
         >
           <p className="text-sm">
-            © {new Date().getFullYear()} SharCode. All rights reserved.
+            © {new Date().getFullYear()} Musharraf Jamal. All rights reserved.
           </p>
         </motion.div>
       </div>

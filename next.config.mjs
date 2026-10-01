@@ -20,6 +20,7 @@ const nextConfig = {
       "/videos/revizer/product-film-hd-v1.mp4",
       "/videos/revizer/product-film-mobile-v1.mp4",
       "/sharcode-social-card-v3.jpg",
+      "/musharraf-jamal-social-v1.jpg",
     ].map((source) => ({
       source,
       headers: [

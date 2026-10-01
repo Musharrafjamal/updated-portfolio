@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import { site } from "@/lib/site";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -15,21 +16,21 @@ const instrument = Instrument_Serif({
   display: "swap",
 });
 
-const siteUrl = "https://sharcode.tech";
-const title = "Sharcode — Musharraf Jamal";
+const siteUrl = site.url;
+const title = "Musharraf Jamal — Engineer, Designer & Builder";
 const description =
   "Engineer. Designer. Builder. Explore Musharraf Jamal's selected web, mobile and AI products — thoughtfully built from the first idea to the final interaction.";
 const socialImage = {
-  url: "/sharcode-social-card-v3.jpg",
+  url: site.socialImage,
   width: 1200,
   height: 630,
   type: "image/jpeg",
-  alt: "Sharcode — Musharraf Jamal. Engineer. Designer. Builder.",
+  alt: "Musharraf Jamal. Engineer. Designer. Builder. musharrafjamal.com",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  applicationName: "Sharcode",
+  applicationName: site.name,
   title,
   description,
   authors: [{ name: "Musharraf Jamal", url: siteUrl }],
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: siteUrl,
-    siteName: "Sharcode",
+    siteName: site.name,
     type: "website",
     images: [socialImage],
   },
@@ -51,13 +52,13 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg?v=3", type: "image/svg+xml" },
-      { url: "/favicon-32x32.png?v=3", type: "image/png", sizes: "32x32" },
-      { url: "/favicon-16x16.png?v=3", type: "image/png", sizes: "16x16" },
+      { url: "/favicon.svg?v=4", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png?v=4", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png?v=4", type: "image/png", sizes: "16x16" },
     ],
-    shortcut: "/favicon-32x32.png?v=3",
+    shortcut: "/favicon-32x32.png?v=4",
     apple: {
-      url: "/apple-touch-icon.png?v=3",
+      url: "/apple-touch-icon.png?v=4",
       type: "image/png",
       sizes: "180x180",
     },

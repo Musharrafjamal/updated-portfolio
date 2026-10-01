@@ -11,7 +11,7 @@ const Header = () => {
           {"{ SC }"}
         </div>
         <span className="font-light text-zinc-800 dark:text-white transition-all duration-300 text-sm md:text-2xl">
-          SharCode
+          Musharraf Jamal
         </span>
       </div>
       <div className="flex items-center gap-2">

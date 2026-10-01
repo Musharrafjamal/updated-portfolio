@@ -171,7 +171,7 @@ img {
   min-width: 180px;
   flex-shrink: 0;
 }
-.sharcode-mark {
+.personal-mark {
   flex-shrink: 0;
   transition: transform 250ms var(--ease);
 }
@@ -822,26 +822,26 @@ img {
   line-height: 1.7;
   max-width: 29ch;
 }
-/* Focus keeps the entire composition readable, including during a resize. */
-.project-card:focus-within .project-scroll-scene,
-.project-card:focus-within .project-card-meta > span,
-.project-card:focus-within h3 > span,
-.project-card:focus-within .project-caption > p,
-.project-card:focus-within .project-open,
-.project-card:focus-within .revizer-features,
-.project-card:focus-within .revizer-visit {
+/* Keyboard focus reveals the composition without moving a pointer click target. */
+.project-card:has(:focus-visible) .project-scroll-scene,
+.project-card:has(:focus-visible) .project-card-meta > span,
+.project-card:has(:focus-visible) h3 > span,
+.project-card:has(:focus-visible) .project-caption > p,
+.project-card:has(:focus-visible) .project-open,
+.project-card:has(:focus-visible) .revizer-features,
+.project-card:has(:focus-visible) .revizer-visit {
   transform: none !important;
 }
-.project-card:focus-within .project-curtain {
+.project-card:has(:focus-visible) .project-curtain {
   transform: translateY(-101%) !important;
 }
-.project-card:focus-within .project-caption > p,
-.project-card:focus-within .revizer-features,
-.project-card:focus-within .revizer-visit {
+.project-card:has(:focus-visible) .project-caption > p,
+.project-card:has(:focus-visible) .revizer-features,
+.project-card:has(:focus-visible) .revizer-visit {
   opacity: 1 !important;
 }
 @media (hover: hover) and (pointer: fine) {
-  .wordmark:hover .sharcode-mark {
+  .wordmark:hover .personal-mark {
     transform: translateY(-1px) rotate(-5deg);
   }
   .project-media:hover {
@@ -1748,12 +1748,17 @@ img {
   }
   .wordmark {
     min-width: 0;
-    --sharcode-brand-gap: 7px;
-    --sharcode-word-size: 16px;
+    --personal-brand-gap: 7px;
+    --personal-word-size: 13px;
   }
-  .sharcode-mark {
+  .personal-mark {
     width: 27px;
     height: 27px;
+  }
+  .personal-word {
+    display: grid;
+    gap: 2px;
+    line-height: 1;
   }
   .header-right {
     margin-left: auto;
