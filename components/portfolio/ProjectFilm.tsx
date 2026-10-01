@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 
 const filmPoster = "/videos/revizer/product-film-poster.webp";
 
@@ -11,6 +11,7 @@ export default function ProjectFilm() {
   const userPaused = useRef(false);
   const userStarted = useRef(false);
   const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(true);
   const [hydrated, setHydrated] = useState(false);
   const [cover, setCover] = useState("/projects/revizer-film-cover.webp");
 
@@ -63,13 +64,20 @@ export default function ProjectFilm() {
     }
   }
 
+  function toggleMute() {
+    const video = film.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setMuted(video.muted);
+  }
+
   return (
     <div
       className={`project-media project-film ${playing ? "is-playing" : "is-paused"}`}
     >
       <video
         ref={film}
-        muted
+        muted={muted}
         loop
         playsInline
         poster={filmPoster}
@@ -78,6 +86,7 @@ export default function ProjectFilm() {
         style={{ pointerEvents: hydrated ? "none" : "auto" }}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
+        onVolumeChange={(event) => setMuted(event.currentTarget.muted)}
         aria-hidden={hydrated || undefined}
         aria-label={hydrated ? undefined : "Revizer product film"}
       >
@@ -87,16 +96,47 @@ export default function ProjectFilm() {
         />
       </video>
       {hydrated && (
-        <button
-          type="button"
-          className="film-playback-toggle"
-          onClick={togglePlayback}
-          aria-label={`${playing ? "Pause" : "Play"} Revizer product film`}
-        >
-          <span className="film-control" aria-hidden="true">
-            {playing ? <Pause size={17} /> : <Play size={17} />}
+        <>
+          <button
+            type="button"
+            className="film-playback-toggle"
+            onClick={togglePlayback}
+            tabIndex={-1}
+            aria-hidden="true"
+          />
+          <span
+            className="film-controls"
+            role="group"
+            aria-label="Revizer video controls"
+          >
+            <button
+              type="button"
+              className="film-control"
+              onClick={togglePlayback}
+              aria-label={`${playing ? "Pause" : "Play"} Revizer product film`}
+              title={playing ? "Pause" : "Play"}
+            >
+              {playing ? (
+                <Pause size={15} aria-hidden="true" />
+              ) : (
+                <Play size={15} aria-hidden="true" />
+              )}
+            </button>
+            <button
+              type="button"
+              className="film-control film-mute-toggle"
+              onClick={toggleMute}
+              aria-label={`${muted ? "Unmute" : "Mute"} Revizer product film`}
+              title={muted ? "Unmute" : "Mute"}
+            >
+              {muted ? (
+                <VolumeX size={15} aria-hidden="true" />
+              ) : (
+                <Volume2 size={15} aria-hidden="true" />
+              )}
+            </button>
           </span>
-        </button>
+        </>
       )}
       <span className="project-curtain project-film-cover" aria-hidden="true">
         <Image

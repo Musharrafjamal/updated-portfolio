@@ -488,28 +488,42 @@ img {
 .film-playback-toggle:active {
   scale: 1;
 }
-.project-film:has(.film-playback-toggle:focus-visible) {
-  outline: 2px solid #65743d;
-  outline-offset: 6px;
-}
-.film-playback-toggle:focus-visible {
-  outline: none;
+.film-controls {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
 }
 .film-control {
-  position: absolute;
-  right: 24px;
-  bottom: 24px;
+  position: relative;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
   border: 1px solid #ffffff38;
   border-radius: 50%;
   background: #20231fcc;
   color: white;
   opacity: 0.65;
-  pointer-events: none;
-  transition: opacity 200ms;
+  transition:
+    opacity 200ms,
+    background-color 200ms;
+}
+/* Keep a comfortable target around the smaller visible circles. */
+.film-control::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+}
+.film-control:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+.film-control:hover {
+  background: #20231f;
 }
 .project-film:hover .film-control,
 .project-film:focus-within .film-control,
@@ -545,7 +559,7 @@ img {
   letter-spacing: -0.08em;
 }
 .project-film .project-film-cover {
-  z-index: 2;
+  z-index: 3;
   padding: clamp(18px, 3vw, 42px);
   background: #d98a4e;
   color: #fff3e4;
@@ -748,7 +762,7 @@ img {
   .revizer-visit {
     margin-top: 16px;
   }
-  .film-control {
+  .film-controls {
     right: 12px;
     bottom: 12px;
   }
