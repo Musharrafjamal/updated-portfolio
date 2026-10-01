@@ -6,7 +6,15 @@ import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 
 const filmPoster = "/videos/revizer/product-film-poster.webp";
 
-export default function ProjectFilm() {
+type ProjectFilmProps = {
+  onOpenDetails: () => void;
+  detailsOpen: boolean;
+};
+
+export default function ProjectFilm({
+  onOpenDetails,
+  detailsOpen,
+}: ProjectFilmProps) {
   const film = useRef<HTMLVideoElement>(null);
   const userPaused = useRef(false);
   const userStarted = useRef(false);
@@ -25,7 +33,13 @@ export default function ProjectFilm() {
     let visible = false;
     const syncPlayback = () => {
       const allowed = !preference.matches || userStarted.current;
-      if (visible && !document.hidden && allowed && !userPaused.current) {
+      if (
+        visible &&
+        !document.hidden &&
+        !detailsOpen &&
+        allowed &&
+        !userPaused.current
+      ) {
         void video.play().catch(() => setPlaying(!video.paused));
       } else video.pause();
     };
@@ -49,11 +63,11 @@ export default function ProjectFilm() {
       document.removeEventListener("visibilitychange", syncPlayback);
       video.pause();
     };
-  }, []);
+  }, [detailsOpen]);
 
   function togglePlayback() {
     const video = film.current;
-    if (!video) return;
+    if (!video || detailsOpen) return;
     if (video.paused) {
       userPaused.current = false;
       userStarted.current = true;
@@ -84,7 +98,13 @@ export default function ProjectFilm() {
         preload="metadata"
         controls={!hydrated}
         style={{ pointerEvents: hydrated ? "none" : "auto" }}
-        onPlay={() => setPlaying(true)}
+        onPlay={(event) => {
+          if (detailsOpen) {
+            event.currentTarget.pause();
+            return;
+          }
+          setPlaying(true);
+        }}
         onPause={() => setPlaying(false)}
         onVolumeChange={(event) => setMuted(event.currentTarget.muted)}
         aria-hidden={hydrated || undefined}
@@ -99,10 +119,10 @@ export default function ProjectFilm() {
         <>
           <button
             type="button"
-            className="film-playback-toggle"
-            onClick={togglePlayback}
-            tabIndex={-1}
-            aria-hidden="true"
+            className="film-detail-trigger"
+            onClick={onOpenDetails}
+            aria-label="Explore Revizer"
+            aria-haspopup="dialog"
           />
           <span
             className="film-controls"

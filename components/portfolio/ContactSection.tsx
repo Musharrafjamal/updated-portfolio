@@ -175,9 +175,9 @@ export default function ContactSection() {
               <div className="contact-email-row">
                 <a
                   href={`mailto:${emailAddress}`}
-                  className="contact-email-link"
+                  className="contact-email-link text-link"
                 >
-                  {emailAddress}
+                  <span className="text-link-label">{emailAddress}</span>
                 </a>
                 <button
                   type="button"
@@ -351,12 +351,22 @@ export default function ContactSection() {
                       errorCode === "DELIVERY_FAILED") && (
                       <div className="contact-delivery-fallback">
                         <a
+                          className="text-link"
                           href={`mailto:${emailAddress}?subject=${encodeURIComponent("Portfolio message")}&body=${encodeURIComponent(`Reply email: ${formData.email}\n\n${formData.message}`)}`}
                         >
-                          Open email draft{" "}
+                          <span className="text-link-label">
+                            Open email draft
+                          </span>
                           <ArrowUpRight size={15} aria-hidden="true" />
                         </a>
-                        <a href={`mailto:${emailAddress}`}>{emailAddress}</a>
+                        <a
+                          className="text-link"
+                          href={`mailto:${emailAddress}`}
+                        >
+                          <span className="text-link-label">
+                            {emailAddress}
+                          </span>
+                        </a>
                       </div>
                     )}
                   </div>
@@ -377,12 +387,13 @@ export default function ContactSection() {
             {socialLinks.map((social) => (
               <a
                 key={social.label}
+                className="text-link"
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${social.label} (opens in a new tab)`}
               >
-                <span>{social.label}</span>
+                <span className="text-link-label">{social.label}</span>
                 <ArrowUpRight size={14} aria-hidden="true" />
               </a>
             ))}

@@ -200,10 +200,10 @@ export default function Portfolio() {
             href="https://docs.google.com/document/d/1kAhpCs_0WL15mLLamYSsPfBZD_IMOBhNA_u8EWOQg6Y/edit?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="mobile-resume"
+            className="mobile-resume text-link"
             onClick={() => setMenuOpen(false)}
           >
-            Résumé <Arrow />
+            <span className="text-link-label">Résumé</span> <Arrow />
           </a>
         </nav>
         <div className="header-right">
@@ -211,9 +211,9 @@ export default function Portfolio() {
             href="https://docs.google.com/document/d/1kAhpCs_0WL15mLLamYSsPfBZD_IMOBhNA_u8EWOQg6Y/edit?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="header-resume"
+            className="header-resume text-link"
           >
-            Résumé <Arrow />
+            <span className="text-link-label">Résumé</span> <Arrow />
           </a>
           <a href="#contact" className="header-contact" data-magnetic>
             Let’s talk <Arrow />
@@ -294,8 +294,8 @@ export default function Portfolio() {
                 <em>Designer at heart.</em>
               </p>
             </div>
-            <a href="#work" className="hero-work-link" data-magnetic>
-              <span>Selected work</span>
+            <a href="#work" className="hero-work-link text-link" data-magnetic>
+              <span className="text-link-label">Selected work</span>
               <span className="round-arrow">
                 <Arrow direction="down" />
               </span>
@@ -339,12 +339,16 @@ export default function Portfolio() {
               >
                 <div className="project-scroll-scene">
                   {item.slug === "revizer" ? (
-                    <ProjectFilm />
+                    <ProjectFilm
+                      onOpenDetails={() => setProject(item)}
+                      detailsOpen={project !== null}
+                    />
                   ) : (
                     <button
                       className="project-media"
                       onClick={() => setProject(item)}
                       aria-label={`Explore ${item.title}`}
+                      aria-haspopup="dialog"
                     >
                       <Image
                         src={item.cover}
@@ -361,6 +365,13 @@ export default function Portfolio() {
                     </button>
                   )}
                   <div className="project-caption">
+                    <button
+                      type="button"
+                      className="project-content-trigger"
+                      onClick={() => setProject(item)}
+                      aria-label={`Read about ${item.title}`}
+                      aria-haspopup="dialog"
+                    />
                     <div className="project-card-meta">
                       <span>
                         {item.number} / {item.category}
@@ -373,13 +384,9 @@ export default function Portfolio() {
                           {item.titleAccent && ` ${item.titleAccent}`}
                         </span>
                       </h3>
-                      <button
-                        className="project-open"
-                        onClick={() => setProject(item)}
-                        aria-label={`Read about ${item.title}`}
-                      >
+                      <span className="project-open" aria-hidden="true">
                         <Arrow />
-                      </button>
+                      </span>
                     </div>
                     <p>{item.shortDescription}</p>
                     {item.slug === "revizer" && (
@@ -393,13 +400,13 @@ export default function Portfolio() {
                           ))}
                         </ul>
                         <a
-                          className="revizer-visit"
+                          className="revizer-visit text-link"
                           href={item.cta.href}
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="Visit Revizer (opens in a new tab)"
                         >
-                          <span>Visit Revizer</span>
+                          <span className="text-link-label">Visit Revizer</span>
                           <Arrow />
                         </a>
                       </>
@@ -647,8 +654,8 @@ export default function Portfolio() {
       </main>
       <footer className="site-footer page-container">
         <span>Built by Musharraf.</span>
-        <a href="#top" className="back-top" data-magnetic>
-          Back to top <Arrow />
+        <a href="#top" className="back-top text-link" data-magnetic>
+          <span className="text-link-label">Back to top</span> <Arrow />
         </a>
       </footer>
       <ProjectDialog project={project} onClose={() => setProject(null)} />
