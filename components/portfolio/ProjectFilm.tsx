@@ -104,7 +104,7 @@ export default function ProjectFilm() {
           alt=""
           fill
           quality={90}
-          sizes="100vw"
+          sizes="(max-width: 700px) 100vw, (max-width: 1600px) 70vw, 1000px"
           onError={() => {
             if (cover !== filmPoster) setCover(filmPoster);
           }}

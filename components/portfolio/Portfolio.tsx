@@ -382,6 +382,28 @@ export default function Portfolio() {
                       </button>
                     </div>
                     <p>{item.shortDescription}</p>
+                    {item.slug === "revizer" && (
+                      <>
+                        <ul
+                          className="revizer-features"
+                          aria-label="Revizer features"
+                        >
+                          {item.highlights.map((highlight) => (
+                            <li key={highlight}>{highlight}</li>
+                          ))}
+                        </ul>
+                        <a
+                          className="revizer-visit"
+                          href={item.cta.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Visit Revizer (opens in a new tab)"
+                        >
+                          <span>Visit Revizer</span>
+                          <Arrow />
+                        </a>
+                      </>
+                    )}
                   </div>
                 </div>
               </article>

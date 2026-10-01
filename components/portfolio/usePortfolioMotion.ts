@@ -474,6 +474,23 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
               { y: desktop ? -55 : -24, duration: 0.3, ease: "none" },
               0.7,
             );
+          const features = card.querySelector(".revizer-features");
+          const visit = card.querySelector(".revizer-visit");
+          if (features && visit) {
+            timeline
+              .fromTo(
+                features,
+                { y: 18, opacity: 0.25 },
+                { y: 0, opacity: 1, duration: 0.26, ease: "power2.out" },
+                0.32,
+              )
+              .fromTo(
+                visit,
+                { y: 18, opacity: 0.25 },
+                { y: 0, opacity: 1, duration: 0.26, ease: "power2.out" },
+                0.37,
+              );
+          }
         });
       },
       element,

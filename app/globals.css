@@ -427,9 +427,22 @@ img {
 }
 .project-card.cover-revizer {
   grid-column: 1 / -1;
+  --film-max-width: calc((100svh - 96px) * 16 / 9);
 }
 .project-scroll-scene {
   position: relative;
+}
+.cover-revizer .project-scroll-scene {
+  display: grid;
+  grid-template-columns: minmax(0, 2.6fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 64px);
+  width: 100%;
+  max-width: calc(var(--film-max-width) * 3.6 / 2.6 + 64px);
+  margin-inline: auto;
+}
+.cover-revizer .project-film {
+  max-width: var(--film-max-width);
 }
 .project-media {
   position: relative;
@@ -578,19 +591,53 @@ img {
   margin-bottom: -0.12em;
 }
 .cover-revizer h3 {
-  font-size: clamp(36px, 4vw, 56px);
+  font-size: clamp(36px, 3.6vw, 52px);
 }
 .cover-revizer .project-caption {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 32px;
+  min-width: 0;
 }
 .cover-revizer .project-card-meta {
-  grid-column: 1 / -1;
+  margin-top: 0;
 }
-.cover-revizer .project-caption > p {
-  align-self: center;
-  max-width: none;
+.cover-revizer .project-name-row {
+  margin-top: 15px;
+}
+.revizer-features {
+  display: grid;
+  gap: 9px;
+  padding: 0;
+  margin: 24px 0 0;
+  list-style: none;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.revizer-features > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.revizer-features > li::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #cd742d;
+  flex-shrink: 0;
+}
+.revizer-visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 28px;
+  min-height: 44px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.revizer-visit > svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 220ms var(--ease);
 }
 .project-open {
   display: grid;
@@ -617,18 +664,28 @@ img {
   color: var(--muted);
   max-width: 38ch;
 }
+.cover-revizer .project-caption > p {
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 29ch;
+}
 /* Focus keeps the entire composition readable, including during a resize. */
 .project-card:focus-within .project-scroll-scene,
 .project-card:focus-within .project-card-meta > span,
 .project-card:focus-within h3 > span,
 .project-card:focus-within .project-caption > p,
-.project-card:focus-within .project-open {
+.project-card:focus-within .project-open,
+.project-card:focus-within .revizer-features,
+.project-card:focus-within .revizer-visit {
   transform: none !important;
 }
 .project-card:focus-within .project-curtain {
   transform: translateY(-101%) !important;
 }
-.project-card:focus-within .project-caption > p {
+.project-card:focus-within .project-caption > p,
+.project-card:focus-within .revizer-features,
+.project-card:focus-within .revizer-visit {
   opacity: 1 !important;
 }
 @media (hover: hover) and (pointer: fine) {
@@ -643,6 +700,9 @@ img {
     border-color: var(--lime);
   }
   .project-card:hover .project-open > svg {
+    transform: translate(2px, -2px);
+  }
+  .revizer-visit:hover > svg {
     transform: translate(2px, -2px);
   }
 }
@@ -665,8 +725,28 @@ img {
   .project-card.cover-revizer {
     grid-column: 1;
   }
-  .cover-revizer .project-caption {
-    display: block;
+  .cover-revizer .project-scroll-scene {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    max-width: none;
+  }
+  .cover-revizer .project-film {
+    max-width: none;
+  }
+  .cover-revizer .project-name-row {
+    margin-top: 7px;
+  }
+  .cover-revizer .project-caption > p {
+    margin-top: 10px;
+    max-width: 38ch;
+    font-size: 13px;
+  }
+  .revizer-features {
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .revizer-visit {
+    margin-top: 16px;
   }
   .film-control {
     right: 12px;
