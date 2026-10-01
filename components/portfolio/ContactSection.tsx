@@ -31,10 +31,18 @@ export default function ContactSection() {
   const [copyStatus, setCopyStatus] = useState<
     "idle" | "copied" | "unavailable"
   >("idle");
+  const [slowSubmission, setSlowSubmission] = useState(false);
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const formPanelRef = useRef<HTMLDivElement>(null);
   const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    setSlowSubmission(false);
+    if (status !== "sending") return;
+    const timeout = setTimeout(() => setSlowSubmission(true), 8000);
+    return () => clearTimeout(timeout);
+  }, [status]);
 
   useEffect(
     () => () => {
@@ -92,6 +100,15 @@ export default function ContactSection() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length) {
       (nextErrors.email ? emailRef : messageRef).current?.focus();
+      return;
+    }
+
+    if (!navigator.onLine) {
+      setStatus("error");
+      setErrorCode("DELIVERY_FAILED");
+      setResponseMessage(
+        "You’re offline. Your message is kept here—try again when connected.",
+      );
       return;
     }
 
@@ -342,6 +359,11 @@ export default function ContactSection() {
                     </button>
                   </div>
                 </fieldset>
+                {status === "sending" && slowSubmission && (
+                  <p className="contact-slow-message" role="status">
+                    Taking a little longer. Please keep this tab open.
+                  </p>
+                )}
                 {status === "error" && (
                   <div className="contact-delivery-error">
                     <p className="contact-response-error" role="alert">

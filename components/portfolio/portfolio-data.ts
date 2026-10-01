@@ -1,9 +1,10 @@
 import { projects } from "@/components/work/data";
+import { projectCovers } from "./portfolio-media";
 
 export const selectedProjects = projects.map((project, index) => ({
   ...project,
   number: String(index + 1).padStart(2, "0"),
-  cover: `/projects/${project.slug}-cover${project.slug === "greenloom" ? "-v3" : ""}.webp`,
+  cover: projectCovers[project.slug],
   category: [
     "AI study",
     "AI finance",

@@ -32,28 +32,29 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
         const tick = (time: number) => activeLenis.raf(time * 1000);
         gsap.ticker.add(tick);
 
-        gsap
-          .timeline({ defaults: { ease: "power4.out" } })
-          .from(
-            "[data-hero-line]",
-            { yPercent: 112, duration: 1.25, stagger: 0.13 },
-            0.1,
-          )
-          .from(
-            ".portrait-reveal",
-            { y: 85, rotate: 16, scale: 0.82, autoAlpha: 0, duration: 1.4 },
-            0.4,
-          )
-          .from(
-            ".hero-asterisk",
-            { rotate: -160, scale: 0.65, opacity: 0, duration: 1.4 },
-            0.3,
-          )
-          .from(
-            "[data-hero-reveal]",
-            { y: 35, opacity: 0, duration: 1, stagger: 0.12 },
-            0.5,
-          );
+        if (performance.now() < 2500 && window.scrollY < 80)
+          gsap
+            .timeline({ defaults: { ease: "power4.out" } })
+            .from(
+              "[data-hero-line]",
+              { yPercent: 112, duration: 1.25, stagger: 0.13 },
+              0.1,
+            )
+            .from(
+              ".portrait-reveal",
+              { y: 85, rotate: 16, scale: 0.82, autoAlpha: 0, duration: 1.4 },
+              0.4,
+            )
+            .from(
+              ".hero-asterisk",
+              { rotate: -160, scale: 0.65, opacity: 0, duration: 1.4 },
+              0.3,
+            )
+            .from(
+              "[data-hero-reveal]",
+              { y: 35, opacity: 0, duration: 1, stagger: 0.12 },
+              0.5,
+            );
 
         select<HTMLElement>("[data-reveal]").forEach((item) => {
           gsap.from(item, {
@@ -89,7 +90,7 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
         gsap.fromTo(
           "[data-reading-reveal] .reading-word",
           {
-            color: "#727967",
+            color: "#666e5c",
           },
           {
             color: "#20231f",
@@ -202,7 +203,7 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
               item.querySelector(".experience-period"),
               {
                 x: -32,
-                opacity: 0.2,
+                opacity: 1,
                 duration: 0.6,
                 ease: "power4.out",
               },
@@ -223,7 +224,7 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
               {
                 y: 42,
                 rotation: -18,
-                opacity: 0.15,
+                opacity: 1,
                 duration: 0.65,
                 ease: "power3.out",
               },
@@ -231,14 +232,14 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
             )
             .from(
               item.querySelector(".experience-detail p"),
-              { y: 32, opacity: 0.15, duration: 0.5, ease: "power3.out" },
+              { y: 32, duration: 0.5, ease: "power3.out" },
               0.23,
             )
             .from(
               item.querySelectorAll(".experience-detail .tool-tags > span"),
               {
                 y: 18,
-                opacity: 0.2,
+                opacity: 1,
                 stagger: 0.045,
                 duration: 0.3,
                 ease: "power2.out",
@@ -459,7 +460,7 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
             )
             .fromTo(
               card.querySelector(".project-caption > p"),
-              { y: 20, opacity: 0.25 },
+              { y: 20, opacity: 1 },
               { y: 0, opacity: 1, duration: 0.24, ease: "power2.out" },
               0.29,
             )
@@ -480,13 +481,13 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
             timeline
               .fromTo(
                 features,
-                { y: 18, opacity: 0.25 },
+                { y: 18, opacity: 1 },
                 { y: 0, opacity: 1, duration: 0.26, ease: "power2.out" },
                 0.32,
               )
               .fromTo(
                 visit,
-                { y: 18, opacity: 0.25 },
+                { y: 18, opacity: 1 },
                 { y: 0, opacity: 1, duration: 0.26, ease: "power2.out" },
                 0.37,
               );
@@ -665,17 +666,22 @@ export function usePortfolioMotion(root: RefObject<HTMLDivElement>) {
         },
       });
     }, element);
-    const imageLoad = () => ScrollTrigger.refresh();
+    let refreshFrame = 0;
+    const imageLoad = () => {
+      cancelAnimationFrame(refreshFrame);
+      refreshFrame = requestAnimationFrame(() => ScrollTrigger.refresh());
+    };
     const images = select<HTMLImageElement>("img");
     images.forEach((image) => image.addEventListener("load", imageLoad));
     document.fonts.ready.then(() => {
-      if (element.isConnected) ScrollTrigger.refresh();
+      if (element.isConnected) imageLoad();
     });
 
     return () => {
       media.revert();
       context.revert();
       observer.disconnect();
+      cancelAnimationFrame(refreshFrame);
       images.forEach((image) => image.removeEventListener("load", imageLoad));
     };
   }, [root]);

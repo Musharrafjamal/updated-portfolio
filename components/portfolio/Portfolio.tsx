@@ -1,17 +1,21 @@
 "use client";
 
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import ContactSection from "./ContactSection";
 import SharcodeBrand from "./SharcodeBrand";
 import ProjectFilm from "./ProjectFilm";
+import PortfolioImage from "./PortfolioImage";
+import { portrait } from "./portfolio-media";
 import {
   capabilities,
   experience,
   selectedProjects,
   type SelectedProject,
 } from "./portfolio-data";
-import { usePortfolioMotion } from "./usePortfolioMotion";
+const PortfolioMotion = dynamic(() => import("./PortfolioMotion"), {
+  ssr: false,
+});
 
 export function Arrow({
   className = "",
@@ -102,13 +106,14 @@ function ProjectDialog({
             <span /> <span />
           </button>
           <div className={`dialog-cover cover-${project.slug}`}>
-            <Image
+            <PortfolioImage
               src={project.cover}
-              quality={90}
+              fallbackLabel={project.title}
               alt={`${project.title} — editorial product presentation`}
               width={1536}
               height={1024}
-              sizes="(max-width: 800px) 100vw, 850px"
+              sizes="(max-width: 800px) calc(100vw - 32px), 850px"
+              loading="eager"
             />
           </div>
           <div className="dialog-copy">
@@ -159,7 +164,6 @@ export default function Portfolio() {
   const [activeCapability, setActiveCapability] = useState(0);
   const [project, setProject] = useState<SelectedProject | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  usePortfolioMotion(root);
 
   useEffect(() => {
     const close = (event: KeyboardEvent) => {
@@ -171,6 +175,7 @@ export default function Portfolio() {
 
   return (
     <div ref={root} className="portfolio" id="top">
+      <PortfolioMotion root={root} />
       <div className="reading-progress" aria-hidden="true" />
       <header className="site-header">
         <a href="#top" className="wordmark" aria-label="Sharcode, back to top">
@@ -261,8 +266,10 @@ export default function Portfolio() {
           <div className="hero-portrait" data-hero-portrait>
             <div className="portrait-reveal">
               <div className="portrait-frame">
-                <Image
-                  src="/images/musharraf-editorial.webp"
+                <PortfolioImage
+                  src={portrait}
+                  fallbackLabel="Musharraf Jamal"
+                  fallbackDescription="Engineer. Designer. Builder."
                   alt="Editorial portrait of Musharraf Jamal"
                   width={1024}
                   height={1536}
@@ -350,13 +357,13 @@ export default function Portfolio() {
                       aria-label={`Explore ${item.title}`}
                       aria-haspopup="dialog"
                     >
-                      <Image
+                      <PortfolioImage
                         src={item.cover}
+                        fallbackLabel={item.title}
                         alt={`${item.title} — ${item.tagline}`}
                         width={1536}
                         height={1024}
-                        quality={90}
-                        sizes="(max-width: 700px) 100vw, 50vw"
+                        sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1600px) calc(50vw - 80px), 720px"
                       />
                       <span className="project-curtain" aria-hidden="true">
                         <Asterisk />

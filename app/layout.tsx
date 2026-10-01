@@ -20,10 +20,10 @@ const title = "Sharcode — Musharraf Jamal";
 const description =
   "Engineer. Designer. Builder. Explore Musharraf Jamal's selected web, mobile and AI products — thoughtfully built from the first idea to the final interaction.";
 const socialImage = {
-  url: "/sharcode-social-card-v2.png",
+  url: "/sharcode-social-card-v3.jpg",
   width: 1200,
   height: 630,
-  type: "image/png",
+  type: "image/jpeg",
   alt: "Sharcode — Musharraf Jamal. Engineer. Designer. Builder.",
 };
 

@@ -312,6 +312,12 @@
   font-size: 12px;
   line-height: 1.5;
 }
+.contact-slow-message {
+  margin-top: 16px;
+  color: #59604f;
+  font-size: 12px;
+  line-height: 1.5;
+}
 
 .contact-delivery-fallback {
   display: flex;
